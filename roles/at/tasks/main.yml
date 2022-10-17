@@ -1,8 +1,6 @@
 ---
-- hosts: all
-  become: yes # Run this playbook as sudo
-  tasks:
-    - name: Ensure 'at' is installed
-      apt: 
-        name: at
-        state: latest
+- name: Ensure 'at' is installed
+  become: true
+  apt:
+    name: at
+    state: latest
