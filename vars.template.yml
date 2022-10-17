@@ -1,0 +1,7 @@
+---
+time_zone_file: <time_zone>
+user_name: <user_name>
+docker_hub_username: <docker_hub_user>
+docker_hub_password: <docker_hub_pass>
+location_state_abbr: <current_state_location>
+location_city: <current_city_location>

@@ -13,3 +13,5 @@
       tag: "git"
     - role: docker
       tag: "docker"
+    - role: southwest-checkin
+      tag: "southwest-checkin"
