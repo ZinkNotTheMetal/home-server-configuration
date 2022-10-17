@@ -1,0 +1,22 @@
+---
+- name: "Install git"
+  become: true
+  apt:
+    name: git
+    state: latest
+
+- name: "Install npm"
+  become: true
+  apt:
+    name: nodejs
+    state: latest
+
+- name: "Node version & NPM version"
+  shell: "npm -v && node -v"
+  register: versioninfo
+
+- name: Version Info
+  debug:
+    msg: "Version info {{ versioninfo.stdout_lines }}"
+  when: versioninfo is changed
+# Pull git if needed - https://www.middlewareinventory.com/blog/ansible-git-example/

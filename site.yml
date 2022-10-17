@@ -7,3 +7,9 @@
       tag: "apt"
     - role: system-config
       tag: "system-config"
+    - role: at
+      tag: "at"
+    - role: git
+      tag: "git"
+    - role: docker
+      tag: "docker"

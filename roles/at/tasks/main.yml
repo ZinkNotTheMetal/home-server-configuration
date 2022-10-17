@@ -4,5 +4,5 @@
   tasks:
     - name: Ensure 'at' is installed
       apt: 
-        name: "at"
-        state: present
+        name: at
+        state: latest
