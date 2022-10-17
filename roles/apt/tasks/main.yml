@@ -5,20 +5,10 @@
     update_cache: yes
     upgrade: dist
 
-- name: "Install 'sudo'"
-  become: true
-  apt:
-    name: sudo
-    state: latest
+- include: sudo.yml
 
-- name: "Install zsh and shell completions"
-  become: true
-  apt:
-    name: ["zsh", "bash-completion"]
-    state: latest
+- include: zsh.yml
 
-- name: "Install htop"
-  become: true
-  apt:
-    name: htop
-    state: latest
+- include: htop.yml
+
+- include: curl.yml

@@ -1,0 +1,6 @@
+---
+- name: "Install 'sudo'"
+  become: true
+  apt:
+    name: sudo
+    state: latest
