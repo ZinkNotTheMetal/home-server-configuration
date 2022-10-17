@@ -5,3 +5,15 @@
     shell: /bin/zsh
     state: present
   become: yes
+
+- name: Ensure that the .zprofile is loaded
+  copy:
+    src: .zprofile
+    dest: /home/william/.zprofile
+    owner: root
+    group: root
+
+- name: Create '.config' folder
+  file:
+    path: /home/william/.config
+    state: directory
