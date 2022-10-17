@@ -1,5 +1,6 @@
 ---
 - name: Ensure the user '{{ user_name }}' has zsh shell by default.
+  become: true
   user:
     name: "{{ user_name }}"
     shell: /bin/zsh
@@ -7,6 +8,7 @@
   become: yes
 
 - name: Ensure that the .zprofile is loaded
+  become: true
   copy:
     src: .zprofile
     dest: /home/william/.zprofile
@@ -14,6 +16,7 @@
     group: root
 
 - name: Create '.config' folder
+  become: true
   file:
     path: /home/william/.config
     state: directory
