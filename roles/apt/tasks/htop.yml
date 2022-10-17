@@ -1,5 +1,5 @@
 ---
-- name: "Install htop"
+- name: Install htop
   become: true
   apt:
     name: htop

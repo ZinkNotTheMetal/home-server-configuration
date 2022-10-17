@@ -8,16 +8,10 @@
 - name: Install NodeJS (latest)
   become: true
   apt:
-    name: nodejs
+    name: ["nodejs", "npm"]
     state: latest
 
-- name: Install NPM
-  become: true
-  apt:
-    name: npm
-    state: latest
-
-- name: "Node version & NPM version"
+- name: Node version & NPM version
   shell: "npm -v && node -v"
   register: versioninfo
 
