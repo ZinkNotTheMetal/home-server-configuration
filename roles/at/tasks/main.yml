@@ -3,4 +3,4 @@
   become: yes # Run this playbook as sudo
   tasks:
     - name: Ensure at is installed
-      apt: name=at state=latest
+      apt: { name: "at", state: present }

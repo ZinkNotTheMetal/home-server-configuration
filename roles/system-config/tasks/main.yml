@@ -1,0 +1,14 @@
+- name: "Ensure /etc/sudoers.d exists"
+  file:
+    path: "/etc/sudoers.d"
+    state: directory
+    owner: root
+    group: root
+
+- name: "Set the timezone"
+  file:
+    src: "/usr/share/zoneinfo/{{ time_zone_file }}"
+    dest: "/etc/localtime"
+    state: link
+    owner: root
+    group: root
