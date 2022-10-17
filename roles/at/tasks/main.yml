@@ -2,5 +2,7 @@
 - hosts: all
   become: yes # Run this playbook as sudo
   tasks:
-    - name: Ensure at is installed
-      apt: { name: "at", state: present }
+    - name: Ensure 'at' is installed
+      apt: 
+        name: "at"
+        state: present

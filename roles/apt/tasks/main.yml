@@ -6,11 +6,13 @@
     upgrade: dist
 
 - name: "Install 'sudo'"
+  become: true
   apt:
     name: sudo
     state: present
 
 - name: "Install zsh and shell completions"
+  become: true
   apt:
     name: ["zsh", "bash-completion"]
     state: present
