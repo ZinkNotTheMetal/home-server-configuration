@@ -5,10 +5,16 @@
     name: git
     state: latest
 
-- name: "Install npm"
+- name: Install NodeJS (latest)
   become: true
   apt:
     name: nodejs
+    state: latest
+
+- name: Install NPM
+  become: true
+  apt:
+    name: npm
     state: latest
 
 - name: "Node version & NPM version"

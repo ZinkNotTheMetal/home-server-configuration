@@ -5,10 +5,10 @@
     update_cache: yes
     upgrade: dist
 
-- include: sudo.yml
+- import_tasks: sudo.yml
 
-- include: zsh.yml
+- import_tasks: zsh.yml
 
-- include: htop.yml
+- import_tasks: htop.yml
 
-- include: curl.yml
+- import_tasks: curl.yml
