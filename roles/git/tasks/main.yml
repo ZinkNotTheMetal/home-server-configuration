@@ -5,7 +5,7 @@
     name: git
     state: latest
 
-- name: Install NodeJS (latest)
+- name: Install NodeJS (stable)
   become: true
   apt:
     name: ["nodejs", "npm"]

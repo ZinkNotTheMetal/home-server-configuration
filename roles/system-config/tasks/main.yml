@@ -12,5 +12,4 @@
     state: link
     owner: root
     group: root
-
-include_tasks: shell-config.yml
+# include_tasks: shell-config.yml
