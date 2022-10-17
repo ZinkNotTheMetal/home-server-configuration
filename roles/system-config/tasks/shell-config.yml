@@ -1,7 +1,7 @@
 ---
 - name: Ensure the user '{{ user_name }}' has zsh shell by default.
   user:
-    name: { { user_name } }
+    name: "{{ user_name }}"
     shell: /bin/zsh
     state: present
   become: yes
