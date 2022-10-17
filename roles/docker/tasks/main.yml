@@ -22,7 +22,7 @@
     state: latest
     update_cache: yes
 
-- name: Add Docker GPG apt Key
+- name: Add signing key
   apt_key:
     url: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg"
     state: present
@@ -37,10 +37,11 @@
 - name: Update apt and install docker-ce
   become: true
   apt:
-    pkg:
-      - docker-ce
-      - docker-ce-cli
-      - containerd.io
+    name:
+      - docker
+      - docker.io
+      - docker-compose
+      - docker-registry
     state: latest
     update_cache: true
 #- name: Add ansible user to docker group

@@ -13,4 +13,4 @@
     owner: root
     group: root
 
-- include_tasks: shell-config.yml
+- import_tasks: shell-config.yml
