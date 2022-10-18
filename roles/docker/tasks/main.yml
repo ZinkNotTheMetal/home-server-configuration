@@ -50,8 +50,9 @@
   service:
     name: docker
     state: started
-#- name: Add ansible user to docker group
-#  user:
-#    name: ansible
-#    groups: docker
-#    append: yes
+
+- name: Add ansible user to docker group
+  user:
+    name: "{{ user_name }}"
+    groups: docker
+    append: yes
