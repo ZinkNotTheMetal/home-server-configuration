@@ -16,33 +16,33 @@
     path: /home/william/Southwest-Check-In
     state: directory
 
-#- name: Find shell files to move
-#  find:
-#    paths: /home/william/git/Southwest.AutomaticCheckIn/scripts/
-#    file_type: file
-#    patterns: "*.sh"
-#    use_regex: no
-#    recurse: no
-#  register: script_files_to_move
-#  when: not swac_scripts.stat.exists
+- name: Find shell files to move
+  find:
+    paths: /home/william/git/Southwest.AutomaticCheckIn/scripts/
+    file_type: file
+    patterns: "*.sh"
+    use_regex: no
+    recurse: no
+  register: script_files_to_move
+  when: not swac_scripts.stat.exists
 
-#- name: Move all shell files
-#  copy:
-#    src: "{{ item }}"
-#    dest: /home/william/Southwest-Check-In
-#    remote_src: yes
-#  with_items:
-#    - "{{ script_files_to_move.files }}"
-#  when: not swac_scripts.stat.exists
-
-- name: Move shell files to Southwest directory
+- name: Move all shell files
   copy:
-    src: "{{ items }}"
+    src: "{{ item }}"
     dest: /home/william/Southwest-Check-In
     remote_src: yes
-  with_fileglob:
-    - "/home/william/git/Southwest.AutomaticCheckIn/scripts /*.sh"
+  with_items:
+    - "{{ script_files_to_move.files }}"
   when: not swac_scripts.stat.exists
+
+#- name: Move shell files to Southwest directory
+#  copy:
+#    src: "{{ items }}"
+#    dest: /home/william/Southwest-Check-In
+#    remote_src: yes
+#  with_fileglob:
+#    - "/home/william/git/Southwest.AutomaticCheckIn/scripts /*.sh"
+#  when: not swac_scripts.stat.exists
 
 - name: Move template file
   copy:
@@ -74,6 +74,5 @@
 
 - name: Remove git files
   file:
-    path: /home/william/git/Southwest.AutomaticCheckIn
+    path: /home/william/git
     state: absent
-  when: not swac_scripts.stat.exists
