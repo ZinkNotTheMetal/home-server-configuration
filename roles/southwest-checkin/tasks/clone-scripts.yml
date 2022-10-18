@@ -11,6 +11,11 @@
     accept_hostkey: yes
   when: not swac_scripts.stat.exists
 
+- name: Create 'Southwest Check-in' folder
+  file:
+    path: /home/william/Southwest-Check-In
+    state: directory
+
 - name: Move shell files
   copy:
     src: /home/william/git/Southwest.AutomaticCheckIn/scripts/
