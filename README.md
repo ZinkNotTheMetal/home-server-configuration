@@ -26,3 +26,8 @@
 4. Put your private ssh_key into Github - from step 3, publish your id_rsa.pub into Github
 
 5. Generate a private access token for DockerHub and place in dockerhub
+
+6. Run 
+```
+ansible-playbook site.yml
+```
