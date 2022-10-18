@@ -19,4 +19,19 @@ VPN_USERNAME: <vpn_username>
 VPN_PASSWORD: <vpn_password>
 
 # PiHole Configuration
-pi_hole_password: wo-sGC7?,!QpRV^=q8M6
+pi_hole_password: <pi_hole_web_password>
+
+# Plex Configuration
+# - https://www.plex.tv/claim/ - code expires quickly
+plex_claim_token: <plex_claim_token>
+
+# SWAG - DNS / Certificate Configuration
+dns_to_renew: <dns_to_renew>
+dns_token: <dns_token>
+dns_provider: <dns_provider>
+contact_email: <contact_email>
+
+# Containers need to be within the docker_network_ip_outside range
+ha_container_ip: <custom_ha_ip>
+plex_container_ip: <custom_plex_ip>
+pi_hole_container_ip: <custom_pi_hole_ip>

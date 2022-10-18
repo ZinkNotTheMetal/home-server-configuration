@@ -6,6 +6,7 @@
     restart_policy: unless-stopped
     networks:
       - name: port-freedom
+        ipv4_address: "{{ pi_hole_container_ip }}"
     pull: true
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"

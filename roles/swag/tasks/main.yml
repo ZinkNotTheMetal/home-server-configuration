@@ -1,0 +1,27 @@
+---
+- name: Run 'swag' - Docker Container
+  docker_container:
+    name: dns-cert-manager
+    image: ghcr.io/linuxserver/swag
+    restart_policy: unless-stopped
+    network:
+      - name: bridge
+    pull: true
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "/docker/dns-cert-manager:/config"
+      - "/etc/timezone:/etc/timezone:ro"
+    environment:
+      PUID: "1000"
+      PGID: "1000"
+      TZ: "{{ time_zone }}"
+      URL: "{{ dns_to_renew }}"
+      SUBDOMAINS: wildcard
+      VALIDATION: "{{ dns_provider }}"
+      DUCKDNSTOKEN: "{{ dns_token }}"
+      EMAIL: "{{ contact_email }}"
+    ports:
+      - 443:443
+      - 80:80
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"

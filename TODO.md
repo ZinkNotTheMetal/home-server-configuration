@@ -8,6 +8,7 @@
 3. Configure this for root user (remove the become:true)
 4. Fix the stupid ass script problem
 5. SSH?
+6. OpenVPN not working on test env
 
 - name: Update sshd configuration safely, avoid locking yourself out
   ansible.builtin.template:
@@ -25,3 +26,5 @@ https://stackoverflow.com/questions/62010666/ansible-how-to-set-docker-container
 ## github
 
 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
+
+Figure out forwarding IPVLAN on Google-Wifi
