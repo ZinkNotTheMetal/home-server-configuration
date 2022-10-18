@@ -11,7 +11,7 @@
     name: port-freedom
     driver: ipvlan
     driver_options:
-      parent: "{{ pysical_interfces_cmd.stdout_lines[0]}}"
+      parent: "{{ physical_interfaces_cmd.stdout_lines[0] }}"
       ipvlan_mode: l3
     ipam_config:
       - subnet: "{{ docker_network_ip_outside }}/24"
