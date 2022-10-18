@@ -4,14 +4,14 @@
     name: dns-cert-manager
     image: ghcr.io/linuxserver/swag
     restart_policy: unless-stopped
-    network:
+    networks:
       - name: bridge
     pull: true
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "/docker/dns-cert-manager:/config"
       - "/etc/timezone:/etc/timezone:ro"
-    environment:
+    env:
       PUID: "1000"
       PGID: "1000"
       TZ: "{{ time_zone }}"
