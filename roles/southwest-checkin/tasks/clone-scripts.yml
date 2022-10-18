@@ -1,15 +1,9 @@
 ---
-- name: Check if Automatic Southwest Check-in scripts exists
-  stat:
-    path: /home/william/Southwest.AutomaticCheckIn/scripts
-  register: swac_scripts
-
 - name: Clone Automatic Southwest check-in (scripts)
   git:
     repo: git@github.com:ZinkNotTheMetal/Southwest.AutomaticCheckIn.git
     dest: /home/william/git/Southwest.AutomaticCheckIn
     accept_hostkey: yes
-  when: not swac_scripts.stat.exists
 
 - name: Create 'Southwest Check-in' folder
   file:
@@ -23,21 +17,18 @@
     remote_src: yes
   with_fileglob:
     - "/home/william/git/Southwest.AutomaticCheckIn/scripts *.sh"
-  when: not swac_scripts.stat.exists
 
 - name: Move template file
   copy:
     src: /home/william/git/Southwest.AutomaticCheckIn/template.env
     dest: /home/william/Southwest-Check-In/template.env
     remote_src: yes
-  when: not swac_scripts.stat.exists
 
 - name: Move docker-compose file
   copy:
     src: /home/william/git/Southwest.AutomaticCheckIn/docker-compose.yaml
     dest: /home/william/Southwest-Check-In/docker-compose.yml
     remote_src: yes
-  when: not swac_scripts.stat.exists
 
 - name: Get all .sh files
   find:

@@ -17,16 +17,16 @@
 
 - name: Ensure that upsd.users is loaded
   become: true
-  copy:
-    src: upsd.users.j2
+  template:
+    src: upsd.users
     dest: /etc/nut/upsd.users
     owner: root
     group: root
 
 - name: Ensure that upsmon.conf is loaded
   become: true
-  copy:
-    src: upsmon.conf.j2
+  template:
+    src: upsmon.conf
     dest: /etc/nut/upsd.conf
     owner: root
     group: root
