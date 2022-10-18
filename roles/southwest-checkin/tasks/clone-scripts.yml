@@ -30,7 +30,7 @@
     dest: /home/william/Southwest-Check-In
     remote_src: yes
   with_items:
-    - "{{ script_files_to_move.stdout_lines }}"
+    - "{{ script_files_to_move.files }}"
 
 - name: Move shell files
   copy:
@@ -67,7 +67,7 @@
     dest: "{{ item }}"
     mode: a+x
   with_items:
-    - "{{ files_to_execute.stdout_lines }}"
+    - "{{ files_to_execute.files }}"
 
 - name: Remove git files
   file:
