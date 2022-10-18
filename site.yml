@@ -18,7 +18,15 @@
     #    - role: nut
     #      tag: "nut"
     # Applications - Docker
-    #- role: watchtower
-    #  tag: "watchtower"
+    - role: watchtower
+      tag:
+        - watchtower
+        - application
     - role: portainer
-      tag: "portainer"
+      tag:
+        - portainer
+        - application
+    - role: transmission-openvpn
+      tag:
+        - transmission-openvpn
+        - application 

@@ -11,3 +11,9 @@ docker_network_ip_inside: <ip range of only inside allowed traffic>
 # NUT Configuration
 ups_monitor_username: <mon_username>
 ups_monitor_password: <mon_password>
+
+# Transmission / Open VPN Configuration
+VPN_PROVIDER: <vpn_provider>
+VPN_COUNTRY: <vpn_country>
+VPN_USERNAME: <vpn_username>
+VPN_PASSWORD: <vpn_password>

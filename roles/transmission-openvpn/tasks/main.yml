@@ -1,0 +1,23 @@
+---
+- name: Run 'transmission-openvpn' - Docker Container
+  docker_container:
+    name: transmission-openvpn
+    image: haugene/transmission-openvpn
+    restart_policy: unless-stopped
+    networks:
+      - name: bridge
+    pull: true
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "/docker/transmission:/data"
+      - "/etc/timezone:/etc/timezone:ro"
+    env:
+      OPENVPN_PROVIDER: "{{ vpn_provider }}"
+      OPENVPN_CONFIG: "{{ vpn_country }}"
+      OPENVPN_USERNAME: "{{ vpn_username }}"
+      OPENVPN_PASSWORD: "{{ vpn_password }}"
+      LOCAL_NETWORK: "192.168.0.0/16"
+    ports:
+      - 9091:9091
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
