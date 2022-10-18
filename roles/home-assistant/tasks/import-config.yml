@@ -1,0 +1,14 @@
+---
+- name: Create home-assistant data volume
+  become: true
+  file:
+    path: "/docker/home-assistant/config"
+    state: directory
+    mode: "0755"
+    owner: root
+
+- name: Import HomeAssistant Configuration from git
+  git:
+    repo: "{{ homeassistant_git }}"
+    dest: /docker/home-assistant/config
+    accept_hostkey: yes

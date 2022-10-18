@@ -1,1 +1,25 @@
 ---
+- import_tasks: import-config.yml
+
+- name: Run 'Node-Red' - Docker Container
+  docker_container:
+    name: node-red
+    image: nodered/node-red
+    restart_policy: unless-stopped
+    networks:
+      - name: port-freedom
+        ipv4_address: "{{ node_red_container_ip }}"
+    pull: true
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "/docker/node-red/config:/data"
+      - "/etc/localtime:/etc/localtime:ro"
+    env:
+      - TZ: "{{ time_zone }}"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://{{ node_red_container_ip }}:1880"]
+      interval: 30s
+      timeout: 10s
+      retries: 6
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"

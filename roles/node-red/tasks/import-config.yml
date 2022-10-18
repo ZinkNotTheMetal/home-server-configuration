@@ -1,0 +1,14 @@
+---
+- name: Create home-assistant data volume
+  become: true
+  file:
+    path: "/docker/node-red/config"
+    state: directory
+    mode: "0755"
+    owner: root
+
+- name: Import Node-Red Configuration from git
+  git:
+    repo: "{{ node_red_git }}"
+    dest: /docker/node-red/config
+    accept_hostkey: yes

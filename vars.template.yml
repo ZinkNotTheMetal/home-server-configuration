@@ -12,11 +12,16 @@ docker_network_ip_inside: <ip range of only inside allowed traffic>
 ups_monitor_username: <mon_username>
 ups_monitor_password: <mon_password>
 
+# git links
+southwest_ssh_git: ""
+homeassistant_git: ""
+node_red_git: ""
+
 # Transmission / Open VPN Configuration
-VPN_PROVIDER: <vpn_provider>
-VPN_COUNTRY: <vpn_country>
-VPN_USERNAME: <vpn_username>
-VPN_PASSWORD: <vpn_password>
+vpn_provider: <vpn_provider>
+vpn_provider: <vpn_country>
+vpn_username: <vpn_username>
+vpn_password: <vpn_password>
 
 # PiHole Configuration
 pi_hole_password: <pi_hole_web_password>

@@ -1,10 +1,12 @@
 ---
+- import_tasks: import-config.yml
+
 - name: Run 'HomeAssistant' - Docker Container
   docker_container:
     name: home-assistant
     image: homeassistant/home-assistant
     restart_policy: unless-stopped
-    network:
+    networks:
       - name: port-freedom
         ipv4_address: "{{ ha_container_ip }}"
     pull: true
@@ -15,7 +17,7 @@
     devices:
       - /dev/ttyACM0:/dev/ttyACM0:rwm
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://127.0.0.1:8123"]
+      test: ["CMD", "curl", "-f", "http://{{ ha_container_ip }}:8123"]
       interval: 30s
       timeout: 10s
       retries: 6
