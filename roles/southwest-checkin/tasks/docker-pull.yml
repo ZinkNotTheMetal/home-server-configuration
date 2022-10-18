@@ -7,5 +7,5 @@
 
 - name: Pull Southwest Automatic check-in image
   docker_image:
-    name: zinknotthemetal/southwest-automatic-checkin:lateset
+    name: zinknotthemetal/southwest-automatic-checkin:latest
     source: pull
