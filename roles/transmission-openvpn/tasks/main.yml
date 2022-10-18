@@ -18,8 +18,8 @@
       OPENVPN_PASSWORD: "{{ vpn_password }}"
       GLOBAL_APPLY_PERMISSIONS: "true"
       CREATE_TUN_DEVICE: "true"
-      PUID: 1000
-      PGID: 1000
+      PUID: "1000"
+      PGID: "1000"
       HEALTH_CHECK_HOST: "google.com"
       SELFHEAL: "false"
       LOCAL_NETWORK: "192.168.0.0/16"
