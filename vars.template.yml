@@ -7,3 +7,7 @@ location_state_abbr: <current_state_location>
 location_city: <current_city_location>
 docker_network_ip_outside: <ip range of outside allowed traffic>
 docker_network_ip_inside: <ip range of only inside allowed traffic>
+
+# NUT Configuration
+ups_monitor_username: <mon_username>
+ups_monitor_password: <mon_password>
