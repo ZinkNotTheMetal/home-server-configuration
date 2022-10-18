@@ -2,7 +2,7 @@
 - name: Run 'Pi-Hole' - Docker Container
   docker_container:
     name: pihole
-    image: pihole/pihole:latest
+    image: pihole/pihole
     restart_policy: unless-stopped
     networks:
       - name: port-freedom
@@ -14,46 +14,5 @@
     env:
       TZ: "{{ time_zone }}"
       WEBPASSWORD: "{{ pi_hole_password }}"
-      OPENVPN_PROVIDER: "{{ vpn_provider }}"
-      OPENVPN_CONFIG: "{{ vpn_country }}"
-      OPENVPN_USERNAME: "{{ vpn_username }}"
-      OPENVPN_PASSWORD: "{{ vpn_password }}"
-      GLOBAL_APPLY_PERMISSIONS: "true"
-      CREATE_TUN_DEVICE: "true"
-      PUID: 1000
-      PGID: 1000
-      HEALTH_CHECK_HOST: "google.com"
-      SELFHEAL: "false"
-      LOCAL_NETWORK: "192.168.0.0/16"
-      PUID: 
-    ports:
-      - 8118:8118
-      - 9091:9091
     labels:
       com.centurylinklabs.watchtower.enable: "true"
-
-
-version: "3"
-
-# TODO @WZ:
-# - put on it's own IP
-# - put nginx infront of it
-# - skip env file
-
-services:
-  pihole:
-    container_name: pihole
-    image: pihole/pihole:latest
-    restart: unless-stopped
-    ports:
-      - "53:53/tcp"
-      - "53:53/udp"
-      - "80:80/tcp"
-    environment:
-      TZ: ${TIMEZONE}
-      WEBPASSWORD: ${WEB_PASSWORD}
-    volumes:
-      - "/docker/pihole/etc:/etc/pihole"
-      - "/docker/pihole/etc-dnsmasq.d:/etc/dnsmasq.d"
-    labels:
-      - "com.centurylinklabs.watchtower.enable=true"
