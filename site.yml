@@ -3,14 +3,14 @@
   vars_files:
     - "vars.yml"
   roles:
-#    - role: apt
-#      tag: "apt"
-#    - role: system-config
-#      tag: "system-config"
-#    - role: git
-#      tag: "git"
-#    - role: docker
-#      tag: "docker"
+    - role: apt
+      tag: "apt"
+    - role: system-config
+      tag: "system-config"
+    - role: git
+      tag: "git"
+    - role: docker
+      tag: "docker"
     - role: southwest-checkin
       tag: "southwest-checkin"
     - role: at
