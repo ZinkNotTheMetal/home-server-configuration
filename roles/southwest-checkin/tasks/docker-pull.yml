@@ -4,7 +4,5 @@
     username: "{{ docker_hub_username }}"
     password: "{{ docker_hub_password }}"
     reauthorize: yes
-
-- name: Pull Southwest Automatic check-in image
-  docker_pull:
 #- name: Pull Southwest Automatic check-in image
+#  docker_pull:
