@@ -18,7 +18,7 @@
 
 - name: Move shell files
   copy:
-    src: /home/william/git/Southwest.AutomaticCheckIn/scripts/
+    src: /home/william/git/Southwest.AutomaticCheckIn/scripts
     dest: /home/william/Southwest-Check-In
   when: not swac_scripts.stat.exists
 
