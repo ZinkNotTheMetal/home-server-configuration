@@ -16,6 +16,22 @@
     path: /home/william/Southwest-Check-In
     state: directory
 
+- name: Find shell files to move
+  find:
+    paths: /home/william/git/Southwest.AutomaticCheckIn/scripts
+    patterns: "*.sh"
+    file_type: file
+  register: script_files_to_move
+  when: not swac_scripts.stat.exists
+
+- name: Move all shell files
+  copy:
+    src: "{{ item }}"
+    dest: /home/william/Southwest-Check-In
+    remote_src: yes
+  with_items:
+    - "{{ script_files_to_move.stdout_lines }}"
+
 - name: Move shell files
   copy:
     src: /home/william/git/Southwest.AutomaticCheckIn/scripts/
@@ -34,15 +50,15 @@
 
 - name: Move docker-compose file
   copy:
-    src: /home/william/git/Southwest.AutomaticCheckIn/docker-compose.yml
+    src: /home/william/git/Southwest.AutomaticCheckIn/docker-compose.yaml
     dest: /home/william/Southwest-Check-In/docker-compose.yml
     remote_src: yes
   when: not swac_scripts.stat.exists
 
 - name: Get all .sh files
   find:
-    paths: /home/Southwest-Check-In
-    patterns: '*.sh'
+    paths: /home/william/Southwest-Check-In
+    patterns: "*.sh"
     file_type: file
   register: files_to_execute
 
