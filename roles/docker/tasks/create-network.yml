@@ -8,5 +8,5 @@
       parent: eth0
       ipvlan_mode: l3
     ipam_config:
-      subnet: "{{ docker_network_ip_outside }}/24"
-      subnet: "{{ docker_network_ip_inside }}/24"
+      - subnet: "{{ docker_network_ip_outside }}/24"
+      - subnet: "{{ docker_network_ip_inside }}/24"
