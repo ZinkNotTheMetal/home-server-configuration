@@ -19,4 +19,3 @@
   debug:
     msg: "Version info {{ versioninfo.stdout_lines }}"
   when: versioninfo is changed
-# Pull git if needed - https://www.middlewareinventory.com/blog/ansible-git-example/

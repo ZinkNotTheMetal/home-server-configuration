@@ -3,9 +3,10 @@
   become: true
   docker_network:
     name: port-freedom
-    ipam_config:
-      - subnet: 192.168.87.0/24
-      - subnet: 192.168.99.0/24
+    driver: ipvlan
     driver_options:
       parent: eth0
       ipvlan_mode: l3
+    ipam_config:
+      subnet: "{{ docker_network_ip_outside }}/24"
+      subnet: "{{ docker_network_ip_inside }}/24"

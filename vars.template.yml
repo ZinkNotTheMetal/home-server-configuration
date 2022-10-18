@@ -5,3 +5,5 @@ docker_hub_username: <docker_hub_user>
 docker_hub_password: <docker_hub_pass>
 location_state_abbr: <current_state_location>
 location_city: <current_city_location>
+docker_network_ip_outside: <ip range of outside allowed traffic>
+docker_network_ip_inside: <ip range of only inside allowed traffic>
