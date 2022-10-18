@@ -9,3 +9,8 @@
   docker_image:
     name: zinknotthemetal/southwest-automatic-checkin:latest
     source: pull
+
+- name: Pull firefox for Southwest Automatic check-in
+  docker_image:
+    name: selenium/standalone-firefox:3.141.59
+    source: pull

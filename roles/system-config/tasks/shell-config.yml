@@ -27,3 +27,11 @@
     dest: /home/william/.config/aliasrc
     owner: root
     group: root
+
+- name: Ensure that .zshrc file is loaded
+  become: true
+  copy:
+    src: .zshrc
+    dest: /home/william/.config/zshrc
+    owner: root
+    group: root

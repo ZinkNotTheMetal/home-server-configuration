@@ -1,7 +1,0 @@
----
-- name: Setup transmission folder
-  file:
-    path: /opt/transmission
-    state: directory
-    mode: '0755'
-    owner: "{{ user_name }}"

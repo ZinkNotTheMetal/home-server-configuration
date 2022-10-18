@@ -12,3 +12,5 @@
 - import_tasks: htop.yml
 
 - import_tasks: curl.yml
+
+- import_tasks: net-tools.yml
