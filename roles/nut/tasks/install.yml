@@ -1,0 +1,6 @@
+---
+- name: Install NUT (Network UPS Tools)
+  become: true
+  apt:
+    name: nut
+    state: latest

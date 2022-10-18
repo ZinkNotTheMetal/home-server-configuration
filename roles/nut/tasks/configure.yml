@@ -1,0 +1,8 @@
+---
+- name: Ensure that the .zprofile is loaded
+  become: true
+  copy:
+    src: eaton.conf
+    dest: /etc/nut/ups.conf
+    owner: root
+    group: root

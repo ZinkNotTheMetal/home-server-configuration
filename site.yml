@@ -15,3 +15,5 @@
       tag: "southwest-checkin"
     - role: at
       tag: "at"
+    - role: nut
+      tag: "nut"
