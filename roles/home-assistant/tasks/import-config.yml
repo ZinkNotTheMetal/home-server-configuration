@@ -4,11 +4,10 @@
   file:
     path: "/docker/home-assistant/config"
     state: directory
-    mode: "0755"
+    mode: "0777"
     owner: root
 
 - name: Import HomeAssistant Configuration from git
-  become: true
   git:
     repo: "{{ homeassistant_git }}"
     dest: /docker/home-assistant/config
