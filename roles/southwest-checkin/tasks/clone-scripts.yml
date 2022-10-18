@@ -1,0 +1,15 @@
+---
+- name: Check if Automatic Southwest Check-in scripts exists
+  stat:
+    path: /home/william/Southwest.AutomaticCheckIn/scripts
+  register: swac_scripts_result
+
+- name: Clone Automatic Southwest check-in (scripts)
+  git:
+    repo: git@github.com:ZinkNotTheMetal/Southwest.AutomaticCheckIn.git
+    dest: /home/william/git/Southwest.AutomaticCheckIn
+    accept_hostkey: yes
+  when: not swac_scripts_result.stats.exists
+
+# copy scripts and template
+# remove folder

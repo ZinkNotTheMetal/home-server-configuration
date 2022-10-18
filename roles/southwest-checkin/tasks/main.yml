@@ -1,23 +1,4 @@
 ---
-- name: Check if Automatic Southwest Check-in scripts exists
-  stat:
-    path: /home/william/Southwest.AutomaticCheckIn/scripts
-  register: swac_scripts_result
-
-- name: Clone Automatic Southwest check-in (scripts)
-  git:
-    repo: https://github.com/ZinkNotTheMetal/Southwest.AutomaticCheckIn.git
-    dest: /home/william/Southwest.AutomaticCheckIn
-    accept_hostkey: yes
+- import_tasks: clone-scripts.yml
 
 - import_tasks: docker-pull.yml
-#- name: Check if Automatic Southwest check-in exists
-#    stat:
-#    path: /home/william/Southwest.AutomaticCheckIn
-#  register: swac_result
-
-#- name: Clone Automatic Southwest check-in (scripts)
-#  git:
-#    repo=https://github.com/ZinkNotTheMetal/Southwest.AutomaticCheckIn.git
-#    dest=/home/william/Southwest.AutomaticCheckIn
-#  when: not swac_result.exists
