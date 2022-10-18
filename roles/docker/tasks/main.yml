@@ -19,8 +19,8 @@
   docker_network:
     name: port-freedom
     ipam_config:
-      - subnet: 192.168.87.0/24
-      - subnet: 192.168.99.0/24
+      subnet: 192.168.87.0/24
+      subnet: 192.168.99.0/24
     driver_options:
       parent: eth0
       ipvlan_mode: l3
