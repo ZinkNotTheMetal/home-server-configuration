@@ -13,7 +13,7 @@
 - name: Move shell files to Southwest directory
   copy:
     src: "{{ items }}"
-    dest: /home/william/Southwest-Check-In/
+    dest: /home/william/Southwest-Check-In
     remote_src: yes
   with_fileglob:
     - "/home/william/git/Southwest.AutomaticCheckIn/scripts *.sh"
