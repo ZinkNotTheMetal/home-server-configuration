@@ -17,5 +17,8 @@
     #      tag: "at"
     #    - role: nut
     #      tag: "nut"
-    - role: watchtower
-      tag: "watchtower"
+    # Applications - Docker
+    #- role: watchtower
+    #  tag: "watchtower"
+    - role: portainer
+      tag: "portainer"
