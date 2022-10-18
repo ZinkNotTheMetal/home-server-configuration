@@ -1,5 +1,5 @@
 ---
-time_zone_file: <time_zone>
+time_zone: <time_zone>
 user_name: <user_name>
 docker_hub_username: <docker_hub_user>
 docker_hub_password: <docker_hub_pass>
@@ -17,3 +17,6 @@ VPN_PROVIDER: <vpn_provider>
 VPN_COUNTRY: <vpn_country>
 VPN_USERNAME: <vpn_username>
 VPN_PASSWORD: <vpn_password>
+
+# PiHole Configuration
+pi_hole_password: wo-sGC7?,!QpRV^=q8M6

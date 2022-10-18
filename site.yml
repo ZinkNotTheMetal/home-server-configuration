@@ -30,3 +30,7 @@
       tag:
         - transmission-openvpn
         - application 
+    - role: pi-hole
+      tag:
+        - pi-hole
+        - application

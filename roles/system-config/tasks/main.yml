@@ -5,9 +5,9 @@
     owner: root
     group: root
 
-- name: Set the {{ time_zone_file }} timezone
+- name: Set the {{ time_zone }} timezone
   file:
-    src: "/usr/share/zoneinfo/{{ time_zone_file }}"
+    src: "/usr/share/zoneinfo/{{ time_zone }}"
     dest: "/etc/localtime"
     state: link
     owner: root
