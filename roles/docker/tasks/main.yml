@@ -45,6 +45,7 @@
       - docker-registry
     state: latest
     update_cache: true
+
 #- name: Add ansible user to docker group
 #  user:
 #    name: ansible

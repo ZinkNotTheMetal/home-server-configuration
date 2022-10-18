@@ -21,7 +21,7 @@ Memory.............: `cat /proc/meminfo | grep MemFree | awk {'print $2'}`kB (Fr
 Load Averages......: ${one}, ${five}, ${fifteen} (1, 5, 15 min)
 Running Processes..: `ps ax | wc -l | tr -d " "`
 IP Addresses.......: `ip a | grep glo | awk '{print $2}' | head -1 | cut -f1 -d/` and `wget -q -O - http://icanhazip.com/ | tail`
-Weather............: `curl -s "http://rss.accuweather.com/rss/liveweather_rss.asp?locCode=TN|Nashville" | sed -n '/Currently:/ s/.*: \(.*\): \([0-9]*\)\([CF]\).*/\2°\3, \1/p'`
+Weather............: `curl -s "http://rss.accuweather.com/rss/liveweather_rss.asp?locCode={{ location_state_abbr }}|{{ location_city }}" | sed -n '/Currently:/ s/.*: \(.*\): \([0-9]*\)\([CF]\).*/\2°\3, \1/p'`
 
 $(tput sgr0)"
 apt-get --just-print upgrade 2>&1 | perl -ne 'if (/Inst\s([\w,\-,\d,\.,~,:,\+]+)\s\[([\w,\-,\d,\.,~,:,\+]+)\]\s\(([\w,\-,\d,\.,~,:,\+]+)\)? /i) {print "PROGRAM: $1 INSTALLED: $2 AVAILABLE: $3\n"}'

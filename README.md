@@ -23,3 +23,4 @@
       ssh-copy-id -i ~/.ssh/id_rsa.pub <user>@<ipaddr>
       ```
 
+4. Put your private ssh_key into Github - from step 3, publish your id_rsa.pub into Github

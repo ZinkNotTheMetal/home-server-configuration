@@ -8,9 +8,9 @@
   git:
     repo: https://github.com/ZinkNotTheMetal/Southwest.AutomaticCheckIn.git
     dest: /home/william/Southwest.AutomaticCheckIn
-    clone: yes
-    update: yes
+    accept_hostkey: yes
 
+- import_tasks: docker-pull.yml
 #- name: Check if Automatic Southwest check-in exists
 #    stat:
 #    path: /home/william/Southwest.AutomaticCheckIn
