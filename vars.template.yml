@@ -35,3 +35,4 @@ contact_email: <contact_email>
 ha_container_ip: <custom_ha_ip>
 plex_container_ip: <custom_plex_ip>
 pi_hole_container_ip: <custom_pi_hole_ip>
+node_red_container_ip: <node_red_ip>

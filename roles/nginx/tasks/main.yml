@@ -1,1 +1,22 @@
 ---
+- import_tasks: move-files.yml
+
+- name: Run 'nginx' - Docker Container
+  docker_container:
+    name: nginx_reverse_proxy
+    image: nginx
+    restart_policy: unless-stopped
+    networks:
+      - host
+    pull: true
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "/docker/nginx/default.conf:/etc/nginx/nginx.conf"
+      - "/docker/nginx/includes/:/etc/nginx/includes/"
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/docker/dns-cert-manager/keys/letsencrypt:/cert"
+    ports:
+      - 80:80
+      - 443:443
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"

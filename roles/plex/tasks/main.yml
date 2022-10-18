@@ -14,7 +14,7 @@
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "/docker/plex:/config"
       - "/etc/timezone:/etc/timezone:ro"
-    environment:
+    env:
       PUID: "1000"
       PGID: "1000"
       VERSION: "docker"
