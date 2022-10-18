@@ -52,6 +52,7 @@
     state: started
 
 - name: Add ansible user to docker group
+  become: true
   user:
     name: "{{ user_name }}"
     groups: docker
