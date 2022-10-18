@@ -8,6 +8,7 @@
     owner: root
 
 - name: Import HomeAssistant Configuration from git
+  become: true
   git:
     repo: "{{ homeassistant_git }}"
     dest: /docker/home-assistant/config
