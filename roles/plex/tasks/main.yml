@@ -6,7 +6,7 @@
     name: plex
     image: lscr.io/linuxserver/plex
     restart_policy: unless-stopped
-    network:
+    networks:
       - name: port-freedom
         ipv4_address: "{{ plex_container_ip }}"
     pull: true
@@ -18,7 +18,6 @@
       PUID: "1000"
       PGID: "1000"
       VERSION: "docker"
-      # https://www.plex.tv/claim/ - code expires quickly
       PLEX_CLAIM: "{{ plex_claim_token }}"
     labels:
       com.centurylinklabs.watchtower.enable: "true"
