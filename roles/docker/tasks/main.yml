@@ -46,6 +46,10 @@
     state: latest
     update_cache: true
 
+- name: Docker is running
+  service:
+    name: docker
+    state: started
 #- name: Add ansible user to docker group
 #  user:
 #    name: ansible

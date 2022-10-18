@@ -1,6 +1,11 @@
 # TODO
 
-1. Clone private git repo from Github
+1. Move scripts
+  * docker-compose.yml
+  * all .sh
+  * MMMMM-D.env (copy if needed)
+  * template.env
+
 2. Run / install oh-my-zsh (with theme)
    - install debian plugin for omz
 3. Get aliasrc file working

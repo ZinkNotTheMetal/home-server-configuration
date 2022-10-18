@@ -10,5 +10,38 @@
     dest: /home/william/git/Southwest.AutomaticCheckIn
     accept_hostkey: yes
   when: not swac_scripts.stat.exists
-# copy scripts and template
-# remove folder
+
+- name: Move shell files
+  copy:
+    src: /home/william/git/Southwest.AutomaticCheckIn/scripts/
+    dest: /home/william/Southwest-Check-In
+  when: not swac_scripts.stat.exists
+
+- name: Move template file
+  copy:
+    src: /home/william/git/Southwest.AutomaticCheckIn/template.env
+    dest: /home/william/Southwest-Check-In/template.env
+  when: not swac_scripts.stat.exists
+
+- name: Move docker-compose file
+  copy:
+    src: /home/william/git/Southwest.AutomaticCheckIn/docker-compose.yml
+    dest: /home/william/Southwest-Check-In/docker-compose.yml
+  when: not swac_scripts.stat.exists
+
+- name: Get all .sh files
+  command: "find /home/Southwest-Check-In/*.sh -type f"
+  register: files_to_execute
+
+- name: Make .sh files executable
+  file:
+    dest: "{{ item }}"
+    mode: a+x
+  with_items:
+    - "{{ files_to_execute.stdout_lines }}"
+
+- name: Remove git files
+  file:
+    path: /home/william/git/Southwest.AutomaticCheckIn
+    state: absent
+  when: not swac_scripts.stat.exists
