@@ -18,24 +18,32 @@
 
 - name: Move shell files
   copy:
-    src: /home/william/git/Southwest.AutomaticCheckIn/scripts
+    src: /home/william/git/Southwest.AutomaticCheckIn/scripts/
     dest: /home/william/Southwest-Check-In
+    remote_src: yes
+  with_fileglob:
+    - "/home/william/git/Southwest.AutomaticCheckIn/scripts/*.sh"
   when: not swac_scripts.stat.exists
 
 - name: Move template file
   copy:
     src: /home/william/git/Southwest.AutomaticCheckIn/template.env
     dest: /home/william/Southwest-Check-In/template.env
+    remote_src: yes
   when: not swac_scripts.stat.exists
 
 - name: Move docker-compose file
   copy:
     src: /home/william/git/Southwest.AutomaticCheckIn/docker-compose.yml
     dest: /home/william/Southwest-Check-In/docker-compose.yml
+    remote_src: yes
   when: not swac_scripts.stat.exists
 
 - name: Get all .sh files
-  command: "find /home/Southwest-Check-In/*.sh -type f"
+  find:
+    paths: /home/Southwest-Check-In
+    patterns: '*.sh'
+    file_type: file
   register: files_to_execute
 
 - name: Make .sh files executable
