@@ -13,4 +13,4 @@
       WATCHTOWER_INCLUDE_RESTARTING: true
       WATCHTOWER_LABEL_ENABLE: true
     labels:
-      - { "com.centurylinklabs.watchtower.enable", "true" }
+      com.centurylinklabs.watchtower.enable: true
