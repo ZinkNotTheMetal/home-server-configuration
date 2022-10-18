@@ -1,9 +1,8 @@
 ---
 - name: Login to docker hub
   docker_login:
-    username: {{ docker_hub_username }}
-    password: {{ docker_hub_password }}
+    username: "{{ docker_hub_username }}"
+    password: "{{ docker_hub_password }}"
     reauthorize: yes
 
 #- name: Pull Southwest Automatic check-in image
-  
