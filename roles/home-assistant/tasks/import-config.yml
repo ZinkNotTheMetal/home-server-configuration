@@ -11,4 +11,5 @@
   git:
     repo: "{{ homeassistant_git }}"
     dest: /docker/home-assistant/config
+    force: yes
     accept_hostkey: yes
