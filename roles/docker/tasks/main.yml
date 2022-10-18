@@ -2,7 +2,7 @@
 - import_tasks: install.yml
 
 - name: Create docker data volume
-  path: /docker
+  path: "/docker"
     state: directory
     mode: '0755'
     owner: root
