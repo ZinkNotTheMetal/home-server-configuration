@@ -7,7 +7,7 @@
     image: nginx
     restart_policy: unless-stopped
     networks:
-      - host
+      - name: host
     pull: true
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"

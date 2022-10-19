@@ -56,11 +56,11 @@
 #        - home-assistant
 #        - application
 #        - home-automation
-    - role: node-red
-      tag:
-        - node-red
-        - application
-        - home-automation
+#    - role: node-red
+#      tag:
+#        - node-red
+#        - application
+#        - home-automation
     - role: nginx
       tag:
         - nginx
