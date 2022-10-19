@@ -15,7 +15,7 @@
     remote_src: true
     src: /home/william/git/Southwest.AutomaticCheckIn/scripts/
     dest: /home/william/Southwest-Check-In/
-    mode: a+x
+    mode: 0755
 
 - name: Move template file
   copy:
