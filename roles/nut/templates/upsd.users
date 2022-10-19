@@ -1,3 +1,5 @@
 [{{ ups_monitor_username }}]
   password = {{ ups_monitor_password }}
   upsmon master
+  actions = SET
+  instcmds = ALL

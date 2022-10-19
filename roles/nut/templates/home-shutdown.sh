@@ -10,6 +10,7 @@ main () {
 
   shutdown_nas
   shutdown_host
+  # shutdown_ups - want to check the timing
 
   log_date "==============================================================================="
   log_date "Complete home-shutdown.sh"
@@ -24,6 +25,11 @@ shutdown_nas () {
 shutdown_host () {
   log_date "Initiated shutdown of $HOSTNAME by user: $USER"
   shutdown -h +1
+}
+
+shutdown_ups () {
+  upsdrvctl stop
+  upsdrvctl shutdown
 }
 
 log_date () {

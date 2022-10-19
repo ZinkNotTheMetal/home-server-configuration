@@ -1,4 +1,11 @@
 ---
+- name: Configure 'standalone' mode
+  become: true
+  replace:
+    path: /etc/nut/nut.conf
+    regexp: (MODE=)(.*)$
+    replace: MODE=standalone
+
 - name: Ensure that the ups.conf is loaded
   become: true
   copy:
