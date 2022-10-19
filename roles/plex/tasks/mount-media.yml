@@ -15,14 +15,14 @@
 
 - name: Mount 'Movies'
   mount:
-    src: {{ nas_ip }}:/volume1/Media/Movies
+    src: "{{ nas_ip }}:/volume1/Media/Movies"
     path: /mnt/nas/movies
     state: mounted
     fstype: nfs
 
 - name: Mount 'TV Shows'
   mount:
-    src: {{ nas_ip }}:volume1/Media/TV\ Shows
+    src: "{{ nas_ip }}:volume1/Media/TV\ Shows"
     path: /mnt/nas/tv
     state: mounted
     fstype: nfs
