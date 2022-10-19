@@ -12,6 +12,9 @@
     - role: gantsign.oh-my-zsh
       users:
         - username: william
+    - role: gantsign.oh-my-zsh
+      users:
+        - username: william
           theme: robbyrussell
           plugins:
             - git
