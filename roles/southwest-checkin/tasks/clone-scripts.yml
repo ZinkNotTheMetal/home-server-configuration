@@ -11,6 +11,7 @@
     state: directory
 
 - name: Move shell files to Southwest directory
+  become: true
   copy:
     remote_src: true
     src: /home/william/git/Southwest.AutomaticCheckIn/scripts/
