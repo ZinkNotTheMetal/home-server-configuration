@@ -18,7 +18,7 @@ main () {
 
 shutdown_nas () {
   log_date "Initiated shutdown of Synology NAS by user: $USER"
-  ssh -p {{ nas_ip_ssh_port }} {{ nas_admin_user }}@{{ nas_ip }} poweroff
+  ssh -p {{ nas_ssh_port }} {{ nas_admin_user }}@{{ nas_ip }} poweroff
 }
 
 shutdown_host () {
