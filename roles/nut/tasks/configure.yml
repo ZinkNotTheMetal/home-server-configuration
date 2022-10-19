@@ -30,3 +30,12 @@
     dest: /etc/nut/upsd.conf
     owner: root
     group: root
+
+- name: Ensure that custom shutdown script is loaded
+  become: true
+  template:
+    src: home-shutdown.sh
+    dest: /etc/nut/home-shutdown.sh
+    owner: root
+    group: root
+    mode: ugo=rwx

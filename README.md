@@ -23,11 +23,23 @@
       ssh-copy-id -i ~/.ssh/id_rsa.pub <user>@<ipaddr>
       ```
 
-4. Put your private ssh_key into Github - from step 3, publish your id_rsa.pub into Github
+4. SSH Copy `id_rsa.pub` to the NAS
+   1. Copy RSA token for ssh
 
-5. Generate a private access token for DockerHub and place in dockerhub
+      ```bash
+      ssh-copy-id -i ~/.ssh/id_rsa.pub <user>@<ipaddr> -p <nas_port>
+      ```
 
-6. Run 
-```
-ansible-playbook site.yml
-```
+5. Put your private ssh_key into Github - from step 3, publish your id_rsa.pub into Github
+
+6. Generate a private access token for DockerHub and place in dockerhub
+
+7. Run
+
+   ```bash
+   ansible-playbook site.yml
+   ```
+
+## NAS Configuration
+
+[Enable shutdown](https://andreagx.blogspot.com/2017/11/poweroff-linux-based-nas-synology-ecc.html)

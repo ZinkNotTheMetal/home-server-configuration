@@ -15,4 +15,4 @@
 
 - import_tasks: shell-config.yml
 
-- import_tasks: setup-dev-rules.yml
+- import_tasks: setup-udev-rules.yml
