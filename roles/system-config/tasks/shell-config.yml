@@ -66,11 +66,5 @@
 - name: Customize 'path' for bureau theme in oh-my-zsh
   replace:
     path: /home/william/.oh-my-zsh/themes/bureau.zsh-theme
-    regexp: "(^PATH=\")(.*)$"
+    regexp: "(^_PATH=\")(.*)$"
     replace: "_PATH=\"%{$fg_bold[blue]%}%~%{$reset_color%}\""
-
-- name: Replace '>' with arrow
-  replace:
-    path: /home/william/.oh-my-zsh/themes/bureau.zsh-theme
-    regexp: "(^PROMPT=)(.*)$"
-    replace: "PROMPT='%{$fg[green]%}➡%{$reset_color%} $_LIBERTY '"
