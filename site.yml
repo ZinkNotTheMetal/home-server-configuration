@@ -6,9 +6,9 @@
 #    - role: apt
 #      tag:
 #        - apt
-#    - role: system-config
-#      tag:
-#        - system-config
+    - role: system-config
+      tag:
+        - system-config
     - role: gantsign.oh-my-zsh
       users:
         - username: william

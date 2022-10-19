@@ -32,6 +32,6 @@
   become: true
   copy:
     src: .zshrc
-    dest: /home/william/.config/zshrc
+    dest: /home/william/.zshrc
     owner: root
     group: root
