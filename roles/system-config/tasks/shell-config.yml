@@ -28,10 +28,24 @@
     owner: root
     group: root
 
-- name: Ensure that .zshrc file is loaded
-  become: true
-  copy:
-    src: .zshrc
-    dest: /home/william/.zshrc
-    owner: root
-    group: root
+- name: Add customization to '.zshrc' file
+  blockinfile:
+    path: /home/william/.zshrc
+    marker: # {mark} ANSIBLE MANAGED BLOCK
+    block: |
+      # Use lf to switch directories and bind it to ctrl-o
+      lfcd () {
+        tmp="$(mktemp)"
+        lf -last-dir-path="$tmp" "$@"
+        if [ -f "$tmp" ]; then
+          dir="$(cat "$tmp")"
+          rm -f "$tmp"
+          [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
+        fi
+      }
+      
+      bindkey -s '^o' 'lfcd\n'
+      # Custom WZ Aliases in .config/folder
+      [ -f "$HOME/.config/aliasrc" ] && source "$HOME/.config/aliasrc"
+      # Load ; should be last.
+      source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
