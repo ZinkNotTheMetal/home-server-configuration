@@ -1,7 +1,7 @@
 ---
 - name: "Install 'sudo'"
   become: true
-  become: root
+  become_user: root
   apt:
     name: sudo
     state: latest
