@@ -2,4 +2,7 @@
 - name: "Install 'sudo'"
   become: true
   become_user: root
-  command: apt-get install sudo
+  become_method: runas
+  apt:
+    name: sudo
+    state: latest
