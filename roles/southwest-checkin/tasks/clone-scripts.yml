@@ -6,10 +6,13 @@
     accept_hostkey: yes
 
 - name: Create 'Southwest Check-in' folder
+  become: true
   file:
     path: /home/william/Southwest-Check-In
     mode: "777"
     recurse: yes
+    owner: william
+    group: william
     state: directory
 
 - name: Move '.sh' files to Southwest directory
