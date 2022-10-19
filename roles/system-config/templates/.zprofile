@@ -1,6 +1,6 @@
 # Profile file. Runs on ZSH login. Environmental variables are set here.
 
-export ZDOTDIR="$HOME/.config/zsh"
+export ZDOTDIR="$HOME"
 
 upSeconds="$(/usr/bin/cut -d. -f1 /proc/uptime)"
 secs=$((${upSeconds}%60))
