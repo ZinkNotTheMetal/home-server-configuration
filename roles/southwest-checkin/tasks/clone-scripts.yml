@@ -11,11 +11,12 @@
     state: directory
 
 - name: Move '.sh' files to Southwest directory
+  become: true
   copy:
     remote_src: true
     src: /home/william/git/Southwest.AutomaticCheckIn/scripts/
     dest: /home/william/Southwest-Check-In/
-    mode: 0755
+    mode: a+x
 
 - name: Move template file
   copy:
