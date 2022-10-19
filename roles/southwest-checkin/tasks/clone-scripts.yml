@@ -8,6 +8,8 @@
 - name: Create 'Southwest Check-in' folder
   file:
     path: /home/william/Southwest-Check-In
+    mode: 777
+    recurse: yes
     state: directory
 
 - name: Move '.sh' files to Southwest directory
