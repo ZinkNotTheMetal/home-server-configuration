@@ -2,7 +2,7 @@
 - import_tasks: sudo.yml
 
 - name: Ensure the user '{{ user_name }}' has sudo access
-  sudoers:
+  community.general.sudoers:
     name: "william-user"
     user: "{{ user_name }}"
     state: present
