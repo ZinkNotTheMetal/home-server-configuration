@@ -5,6 +5,7 @@
     path: "/docker/home-assistant/config"
     state: directory
     mode: "0777"
+    recurse: yes
     owner: root
 
 - name: Import HomeAssistant Configuration from git
