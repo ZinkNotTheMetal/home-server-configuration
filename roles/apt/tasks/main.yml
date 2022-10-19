@@ -1,10 +1,10 @@
 ---
 - import_tasks: sudo.yml
 
-- name: "Allow '{{ user_name }}' to be a sudoer"
+- name: "Allow {{ user_name }} to be a sudoer"
   sudoers:
-    name: william-user
-    user: william
+    name: "william-user"
+    user: "{{ user_name }}"
     state: present
     commands: ALL
 
