@@ -13,6 +13,7 @@
 1. Figure out how to shut off synology with NUT
 2. startup / mount configurations
 3. Remove # from home assistant
+4. Figure out nginx and reverse proxy
 
 - name: Update sshd configuration safely, avoid locking yourself out
   ansible.builtin.template:
