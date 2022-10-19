@@ -1,11 +1,18 @@
 ---
+- import_tasks: sudo.yml
+
+- name: Allow '{{ user_name }}' to be a sudoer
+  sudoers:
+    name: william-user
+    user: william
+    state: present
+    commands: ALL
+
 - name: Upgrade the system
   become: true
   apt:
     update_cache: yes
     upgrade: dist
-
-- import_tasks: sudo.yml
 
 - import_tasks: zsh.yml
 
