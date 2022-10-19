@@ -55,7 +55,7 @@
   replace:
     path: /home/william/.oh-my-zsh/themes/bureau.zsh-theme
     regexp: "(_USERNAME=\"\\%{\\$fg_bold\\[white)(.*)$"
-    replace: "  _USERNAME=\"%{$fg_bold[green]%}%n"
+    replace: "_USERNAME=\"%{$fg_bold[green]%}%n"
 
 - name: Customize 'machine name' for bureau theme in oh-my-zsh
   replace:
@@ -67,4 +67,4 @@
   replace:
     path: /home/william/.oh-my-zsh/themes/bureau.zsh-theme
     regexp: "(^PROMPT=)(.*)$"
-    replace: "PROMPT='%{$fg[green]%}➞  %{$reset_color%} $_LIBERTY '"
+    replace: "PROMPT='%{$fg[green]%}➡%{$reset_color%} $_LIBERTY '"
