@@ -8,7 +8,7 @@
 - name: Create 'Southwest Check-in' folder
   file:
     path: /home/william/Southwest-Check-In
-    mode: 777
+    mode: "777"
     recurse: yes
     state: directory
 
@@ -17,7 +17,7 @@
     remote_src: true
     src: /home/william/git/Southwest.AutomaticCheckIn/scripts/
     dest: /home/william/Southwest-Check-In/
-    mode: 777
+    mode: "777"
 
 - name: Move template file
   copy:
