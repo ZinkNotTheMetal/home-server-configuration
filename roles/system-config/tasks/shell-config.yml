@@ -37,7 +37,7 @@
   copy:
     remote_src: yes
     src: /home/william/git/zsh-syntax-highlighting
-    dest: "/home/william/{{ zsh_plugin_location }}/zsh-syntax-highlighting"
+    dest: "/home/william/{{ zsh_plugin_location }}/"
 
 - name: Get 'zsh-autosuggestions' plugin
   git:
@@ -48,12 +48,7 @@
   copy:
     remote_src: yes
     src: /home/william/git/zsh-autosuggestions
-    dest: "/home/william/{{ zsh_plugin_location }}/zsh-autosuggestions"
-
-- name: Get 'zsh-syntax-highlighting' plugin
-  git:
-    repo:
-    dest: ~/.oh-my-zsh/custom/plugins
+    dest: "/home/william/{{ zsh_plugin_location }}/"
 
 - name: Add customization to '.zshrc' file
   blockinfile:
