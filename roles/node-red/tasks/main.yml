@@ -15,7 +15,7 @@
       - "/docker/node-red/config:/data"
       - "/etc/localtime:/etc/localtime:ro"
     env:
-      - TZ: "{{ time_zone }}"
+      TZ: "{{ time_zone }}"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://{{ node_red_container_ip }}:1880"]
       interval: 30s
