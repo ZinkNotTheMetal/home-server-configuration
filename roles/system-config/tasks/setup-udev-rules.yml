@@ -2,8 +2,8 @@
 - name: replace '99-com.rules' file
   become: true
   file:
-    src: "99.rules"
-    dest: "/etc/udev/rules.d/99-com.rules"
+    src: 99-com.rules
+    dest: /etc/udev/rules.d/99-com.rules
     state: hard
     owner: root
     group: root
