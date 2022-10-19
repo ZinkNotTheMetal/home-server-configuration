@@ -4,7 +4,7 @@
   file:
     path: "/docker/nginx"
     state: directory
-    mode: '0755'
+    mode: "0755"
     owner: root
 
 - name: Create nginx includes volume
@@ -12,7 +12,7 @@
   file:
     path: "/docker/nginx/includes"
     state: directory
-    mode: '0755'
+    mode: "0755"
     owner: root
 
 - name: Ensure that proxy.conf is loaded into includes

@@ -1,2 +1,2 @@
 [home_server]
-192.168.86.xx
+192.168.86.21 ansible_user=william

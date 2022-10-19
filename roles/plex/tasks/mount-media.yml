@@ -8,10 +8,14 @@
 - name: Ensure '/mnt/nas' is created
   become: true
   file:
-    path: /mnt/nas
+    path: "{{ item }}"
     state: directory
+    mode: "0755"
     owner: root
     group: root
+  with_items:
+    - "/mnt/nas/movies"
+    - "/mnt/nas/tv"
 
 - name: Mount 'Movies'
   become: true
@@ -25,7 +29,7 @@
 - name: Mount 'TV Shows'
   become: true
   mount:
-    src: "{{ nas_ip }}:volume1/Media/TV\ Shows"
+    src: "{{ nas_ip }}:/volume1/Media/TV\ Shows"
     path: /mnt/nas/tv
     state: mounted
     opts: remount,rw
