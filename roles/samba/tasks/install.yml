@@ -1,0 +1,6 @@
+---
+- name: Install 'samba' - file sharing
+  become: true
+  apt:
+    name: samba
+    state: latest

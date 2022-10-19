@@ -1,2 +1,28 @@
 ---
-#- name: Mount NAS media
+- name: Install 'nfs' - file sharing
+  become: true
+  apt:
+    name: nfs-common
+    state: latest
+
+- name: Ensure '/mnt/nas' is created
+  become: true
+  file:
+    path: /mnt/nas
+    state: directory
+    owner: root
+    group: root
+
+- name: Mount 'Movies'
+  mount:
+    src: {{ nas_ip }}:/volume1/Media/Movies
+    path: /mnt/nas/movies
+    state: mounted
+    fstype: nfs
+
+- name: Mount 'TV Shows'
+  mount:
+    src: {{ nas_ip }}:volume1/Media/TV\ Shows
+    path: /mnt/nas/tv
+    state: mounted
+    fstype: nfs

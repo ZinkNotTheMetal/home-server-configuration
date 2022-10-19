@@ -13,7 +13,10 @@
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "/docker/plex:/config"
+      - "/docker/plex/transcode:/transcode"
       - "/etc/timezone:/etc/timezone:ro"
+      - "/mnt/nas/movies:/Movies"
+      - "/mnt/nas/tv:/TV Shows"
     env:
       PUID: "1000"
       PGID: "1000"
