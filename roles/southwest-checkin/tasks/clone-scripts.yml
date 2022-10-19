@@ -30,7 +30,7 @@
 
 - name: Get all .sh files
   find:
-    paths: /home/william/Southwest-Check-In
+    paths: /home/william/Southwest-Check-In/
     patterns: "*.sh"
     file_type: file
   register: files_to_execute
