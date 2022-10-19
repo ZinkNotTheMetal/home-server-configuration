@@ -37,7 +37,7 @@
   copy:
     remote_src: yes
     src: /home/william/git/zsh-syntax-highlighting
-    dest: "{{ zsh_plugin_location }}/zsh-syntax-highlighting"
+    dest: "/home/william/{{ zsh_plugin_location }}/zsh-syntax-highlighting"
 
 - name: Get 'zsh-autosuggestions' plugin
   git:
@@ -48,7 +48,7 @@
   copy:
     remote_src: yes
     src: /home/william/git/zsh-autosuggestions
-    dest: "{{ zsh_plugin_location }}/zsh-autosuggestions"
+    dest: "/home/william/{{ zsh_plugin_location }}/zsh-autosuggestions"
 
 - name: Get 'zsh-syntax-highlighting' plugin
   git:
