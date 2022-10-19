@@ -14,8 +14,6 @@
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "/docker/home-assistant/config:/config"
       - "/etc/localtime:/etc/localtime:ro"
-#    devices:
-#      - /dev/ttyACM0:/dev/ttyACM0:rwm
     healthcheck:
       test: ["CMD", "curl", "-f", "http://{{ ha_container_ip }}:8123"]
       interval: 30s
@@ -23,5 +21,4 @@
       retries: 6
     labels:
       com.centurylinklabs.watchtower.enable: "true"
-
 # Blog about restarting on failure?? https://chrisschuld.com/2019/09/running-home-assistant-with-docker/
