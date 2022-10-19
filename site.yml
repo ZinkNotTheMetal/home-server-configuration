@@ -3,19 +3,19 @@
   vars_files:
     - "vars.yml"
   roles:
-#    - role: apt
-#      tag:
-#        - apt
-#    - role: system-config
-#      tag:
-#        - system-config
+    #    - role: apt
+    #      tag:
+    #        - apt
+    #    - role: system-config
+    #      tag:
+    #        - system-config
     - role: gantsign.oh-my-zsh
-       users:
-         - username: william
-           theme: robbyrussell
-           plugins:
-             - git
-             - debian
+      users:
+        - username: william
+          theme: robbyrussell
+          plugins:
+            - git
+            - debian
 #    - role: git
 #      tag:
 #        - git
