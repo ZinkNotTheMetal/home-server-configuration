@@ -14,9 +14,7 @@
   copy:
     remote_src: true
     src: /home/william/git/Southwest.AutomaticCheckIn/scripts/
-    dest: home/william/Southwest-Check-In/
-#  with_fileglob:
-#    - "/home/william/git/Southwest.AutomaticCheckIn/scripts *.sh"
+    dest: /home/william/Southwest-Check-In/
 
 - name: Move template file
   copy:
