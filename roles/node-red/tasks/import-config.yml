@@ -6,6 +6,7 @@
     state: directory
     mode: "0777"
     owner: root
+    recurse: yes
 
 - name: Import Node-Red Configuration from git
   git:

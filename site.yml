@@ -6,9 +6,9 @@
 #    - role: apt
 #      tag:
 #        - apt
-    - role: system-config
-      tag:
-        - system-config
+#    - role: system-config
+#      tag:
+#        - system-config
 #    - role: git
 #      tag:
 #        - git
@@ -51,11 +51,11 @@
 #      tag:
 #        - swag
 #        - application
-    - role: home-assistant
-      tag:
-        - home-assistant
-        - application
-        - home-automation
+#    - role: home-assistant
+#      tag:
+#        - home-assistant
+#        - application
+#        - home-automation
     - role: node-red
       tag:
         - node-red
