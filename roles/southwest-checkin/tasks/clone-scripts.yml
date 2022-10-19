@@ -15,6 +15,7 @@
     remote_src: true
     src: /home/william/git/Southwest.AutomaticCheckIn/scripts/
     dest: /home/william/Southwest-Check-In/
+    mode: a+x
 
 - name: Move template file
   copy:
@@ -27,20 +28,6 @@
     src: /home/william/git/Southwest.AutomaticCheckIn/docker-compose.yaml
     dest: /home/william/Southwest-Check-In/docker-compose.yml
     remote_src: yes
-
-- name: Get all .sh files
-  find:
-    paths: /home/william/Southwest-Check-In/
-    patterns: "*.sh"
-    file_type: file
-  register: files_to_execute
-
-- name: Make .sh files executable
-  file:
-    dest: "{{ item }}"
-    mode: a+x
-  with_items:
-    - "{{ files_to_execute.files }}"
 
 - name: Remove git files
   file:
