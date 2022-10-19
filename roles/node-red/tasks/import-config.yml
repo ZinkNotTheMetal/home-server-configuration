@@ -12,4 +12,5 @@
   git:
     repo: "{{ node_red_git }}"
     dest: /docker/node-red/config
+    force: yes
     accept_hostkey: yes
