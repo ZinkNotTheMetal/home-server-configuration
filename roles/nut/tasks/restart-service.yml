@@ -1,8 +1,8 @@
 ---
 - name: Stop 'UPS - NUT' service
   become: true
-  command: upsdvrctl stop
+  command: upsdrvctl stop
 
 - name: Stop 'UPS - NUT' service
   become: true
-  command: upsdvrctl start
+  command: upsdrvctl start
