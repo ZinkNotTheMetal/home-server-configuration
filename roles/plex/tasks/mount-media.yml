@@ -14,6 +14,7 @@
     group: root
 
 - name: Mount 'Movies'
+  become: true
   mount:
     src: "{{ nas_ip }}:/volume1/Media/Movies"
     path: /mnt/nas/movies
@@ -21,6 +22,7 @@
     fstype: nfs
 
 - name: Mount 'TV Shows'
+  beocome: true
   mount:
     src: "{{ nas_ip }}:volume1/Media/TV\ Shows"
     path: /mnt/nas/tv
