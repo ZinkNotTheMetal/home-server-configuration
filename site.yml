@@ -3,9 +3,12 @@
   vars_files:
     - "vars.yml"
   roles:
-    #    - role: apt
-    #      tag:
-    #        - apt
+    - role: apt
+      tag:
+        - apt
+    - role: git
+      tag:
+        - git
     - role: gantsign.oh-my-zsh
       users:
         - username: william
@@ -14,12 +17,11 @@
             plugins:
               - git
               - debian
+              - zsh-syntax-highlighting
+              - zsh-autosuggestions
     - role: system-config
       tag:
         - system-config
-#    - role: git
-#      tag:
-#        - git
 #    - role: docker
 #      tag:
 #        - docker

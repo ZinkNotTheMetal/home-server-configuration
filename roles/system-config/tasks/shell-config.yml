@@ -28,6 +28,21 @@
     owner: root
     group: root
 
+- name: Get 'zsh-syntax-highlighting' plugin
+  git:
+    repo: git@github.com:zsh-users/zsh-syntax-highlighting.git
+    dest: ${ZSH}/plugins/zsh-syntax-highlighting
+
+- name: Get 'zsh-autosuggestions' plugin
+  git:
+    repo: git@github.com:zsh-users/zsh-autosuggestions.git
+    dest: ${ZSH}/plugins/zsh-autosuggestions
+
+- name: Get 'zsh-syntax-highlighting' plugin
+  git:
+    repo:
+    dest: ~/.oh-my-zsh/custom/plugins
+
 - name: Add customization to '.zshrc' file
   blockinfile:
     path: /home/william/.zshrc
@@ -50,21 +65,20 @@
       # Load ; should be last.
       source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
 
-
 - name: Customize 'user name' for bureau theme in oh-my-zsh
   replace:
     path: /home/william/.oh-my-zsh/themes/bureau.zsh-theme
     regexp: "(_USERNAME=\"\\%{\\$fg_bold\\[white)(.*)$"
-    replace: "_USERNAME=\"%{$fg_bold[green]%}%n\""
+    replace: '_USERNAME="%{$fg_bold[green]%}%n"'
 
 - name: Customize 'machine name' for bureau theme in oh-my-zsh
   replace:
     path: /home/william/.oh-my-zsh/themes/bureau.zsh-theme
     regexp: "(^_USERNAME=\"\\$_USERNAME)(.*)$"
-    replace: "_USERNAME=\"$_USERNAME%{$fg_bold[yellow]%}@%m%{$reset_color%}\""
+    replace: '_USERNAME="$_USERNAME%{$fg_bold[yellow]%}@%m%{$reset_color%}"'
 
 - name: Customize 'path' for bureau theme in oh-my-zsh
   replace:
     path: /home/william/.oh-my-zsh/themes/bureau.zsh-theme
-    regexp: "(^_PATH=\")(.*)$"
-    replace: "_PATH=\"%{$fg_bold[blue]%}%~%{$reset_color%}\""
+    regexp: '(^_PATH=")(.*)$'
+    replace: '_PATH="%{$fg_bold[blue]%}%~%{$reset_color%}"'
