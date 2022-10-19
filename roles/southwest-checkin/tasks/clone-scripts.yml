@@ -10,7 +10,6 @@
   file:
     path: /home/william/Southwest-Check-In
     mode: "777"
-    recurse: yes
     owner: william
     group: william
     state: directory
