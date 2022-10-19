@@ -41,6 +41,7 @@ ha_container_ip: <custom_ha_ip>
 plex_container_ip: <custom_plex_ip>
 pi_hole_container_ip: <custom_pi_hole_ip>
 node_red_container_ip: <node_red_ip>
+nas_ip: <nas_ip>
 
 # Oh my zsh
 zsh_plugin_location: /.oh-my-zsh/custom/plugins/

@@ -2,12 +2,8 @@
 - import_tasks: install.yml
 
 - import_tasks: configure.yml
-# install nut
-# put eaton.conf -> ups.conf
-# put upsd.conf -> upsd.conf
-# replace line in files (password)
-#  - ln 3 upsmon
-#  - ln 75 .users
+
+- import_tasks: restart-service.yml
 
 # Guide:
 # - https://docs.technotim.live/posts/NUT-server-guide/
