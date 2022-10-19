@@ -50,7 +50,14 @@
       # Load ; should be last.
       source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
 
-- name: Customize 'bureau' theme in oh-my-zsh
+
+- name: Customize 'user name' for bureau theme in oh-my-zsh
+  replace:
+    path: /home/william/.oh-my-zsh/themes/bureau.zsh-theme
+    regexp: "(_USERNAME=\"\\%{\\$fg_bold\\[white)(.*)$"
+    replace: "  _USERNAME=\"%{$fg_bold[green]%}%n"
+
+- name: Customize 'machine name' for bureau theme in oh-my-zsh
   replace:
     path: /home/william/.oh-my-zsh/themes/bureau.zsh-theme
     regexp: "(^_USERNAME=\"\\$_USERNAME)(.*)$"
