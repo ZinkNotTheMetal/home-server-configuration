@@ -53,11 +53,11 @@
 - name: Customize 'bureau' theme in oh-my-zsh
   replace:
     path: /home/william/.oh-my-zsh/themes/bureau.zsh-theme
-    regexp: "(^_USERNAME=\"$_USERNAME%{$reset_color%}@%m\")$"
+    regexp: "(^_USERNAME=\"\\\$_USERNAME)(.*)$"
     replace: "_USERNAME=\"$_USERNAME%{$fg_bold[yellow]%}@%m%{$reset_color%}\""
 
 - name: Replace '>' with arrow
   replace:
     path: /home/william/.oh-my-zsh/themes/bureau.zsh-theme
-    regexp: "(^PROMPT='> $_LIBERTY ')$"
+    regexp: "(^PROMPT=)(.*)$"
     replace: "PROMPT='%{$fg[green]%}➞  %{$reset_color%} $_LIBERTY '"
