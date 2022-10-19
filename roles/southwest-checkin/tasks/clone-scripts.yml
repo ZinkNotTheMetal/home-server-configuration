@@ -21,6 +21,10 @@
     dest: /home/william/Southwest-Check-In/
     mode: ugo=rwx
 
+- name: Set '.sh as exec'
+  shell:
+    cmd: "chmod ugo=rwx /home/william/Southwest-Check-In/*.sh"
+
 - name: Move template file
   copy:
     src: /home/william/git/Southwest.AutomaticCheckIn/template.env
