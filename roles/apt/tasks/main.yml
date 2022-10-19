@@ -1,13 +1,6 @@
 ---
 - import_tasks: sudo.yml
 
-- name: Ensure the user '{{ user_name }}' has sudo access
-  community.general.sudoers:
-    name: "william-user"
-    user: "{{ user_name }}"
-    state: present
-    commands: ALL
-
 - name: Upgrade the system
   become: true
   apt:
