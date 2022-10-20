@@ -20,9 +20,9 @@
 
    1. Generate a key if needed
 
-       ```bash
-       ssh-keygen -t rsa
-       ```
+      ```bash
+      ssh-keygen -t rsa
+      ```
 
    2. Copy public keys to managed node
 
@@ -50,50 +50,61 @@
    git clone git@github.com:zsh-users/zsh-syntax-highlighting.git
    ```
 
-8. Run ansible command
+8. Ensure NAS has proper NFS Permissions
+
+   1. Login to NAS
+   2. Ensure NFS is enabled
+   3. In Control Panel edit folder
+   4. At the top tab go to NFS Permissions
+   5. R/W / Hostname / no squash
+   6. Save
+
+9. Run ansible command
 
    ```bash
    ansible-playbook -K -i production site.yml
    ```
 
+10. Ansible host server (currently in Synology)
 
-1. Ansible host server (currently in Synology)
     1. Install ansible
     2. Install sudo
     3. Add user to /etc/sudoers
     4. Add net-tools
 
-2. Configuration server (staging is in Synology)
+11. Configuration server (staging is in Synology)
 
-3. SSH Copy `id_rsa.pub` to Configuration server
-   1. Generate rsa
+12. SSH Copy `id_rsa.pub` to Configuration server
 
-      ```bash
-      ssh-keygen -t rsa
-      ```
+    1. Generate rsa
 
-   2. Copy public keys to managed node
+       ```bash
+       ssh-keygen -t rsa
+       ```
 
-      ```bash
-      ssh-copy-id -i ~/.ssh/id_rsa.pub <user>@<ipaddr>
-      ```
+    2. Copy public keys to managed node
 
-4. SSH Copy `id_rsa.pub` to the NAS
-   1. Copy RSA token for ssh
+       ```bash
+       ssh-copy-id -i ~/.ssh/id_rsa.pub <user>@<ipaddr>
+       ```
 
-      ```bash
-      ssh-copy-id -i ~/.ssh/id_rsa.pub <user>@<ipaddr> -p <nas_port>
-      ```
+13. SSH Copy `id_rsa.pub` to the NAS
 
-5. Put your private ssh_key into Github - from step 3, publish your id_rsa.pub into Github
+    1. Copy RSA token for ssh
 
-6. Generate a private access token for DockerHub and place in dockerhub
+       ```bash
+       ssh-copy-id -i ~/.ssh/id_rsa.pub <user>@<ipaddr> -p <nas_port>
+       ```
 
-7. Run
+14. Put your private ssh_key into Github - from step 3, publish your id_rsa.pub into Github
 
-   ```bash
-   ansible-playbook site.yml
-   ```
+15. Generate a private access token for DockerHub and place in dockerhub
+
+16. Run
+
+    ```bash
+    ansible-playbook site.yml
+    ```
 
 ## NAS Configuration
 

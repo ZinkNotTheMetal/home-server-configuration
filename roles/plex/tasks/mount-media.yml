@@ -17,13 +17,17 @@
     - "/mnt/nas/movies"
     - "/mnt/nas/tv"
 
+# Test mount
+#  sudo mount -t nfs 10.10.0.10:/volume1/Media/Movies /mnt/nas/movies
+# Test unmount
+#  sudo umount 10.10.0.10:/backups
 - name: Mount 'Movies'
   become: true
   mount:
     src: "{{ nas_ip }}:/volume1/Media/Movies"
     path: /mnt/nas/movies
     state: mounted
-    opts: remount,rw
+    opts: remount
     fstype: nfs
 
 - name: Mount 'TV Shows'
@@ -32,5 +36,5 @@
     src: "{{ nas_ip }}:/volume1/Media/TV\ Shows"
     path: /mnt/nas/tv
     state: mounted
-    opts: remount,rw
+    opts: remount
     fstype: nfs
