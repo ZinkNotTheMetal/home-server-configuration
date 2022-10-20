@@ -4,10 +4,8 @@ Port {{ ssh_port }}
 #ListenAddress ::
 
 PermitRootLogin no
-#PubkeyAuthentication yes
-
-# Expect .ssh/authorized_keys2 to be disregarded by default in future.
-AuthorizedKeysFile      /etc/ssh/keys/authorized_keys
+PubkeyAuthentication yes
+AuthorizedKeysFile     .ssh/authorized_keys
 # To disable tunneled clear text passwords, change to no here!
 PasswordAuthentication no
 
