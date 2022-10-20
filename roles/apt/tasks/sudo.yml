@@ -1,8 +1,6 @@
 ---
 - name: Ensure /etc/sudoers.d exists
   become: true
-  become_user: root
-  become_method: su
   file:
     path: "/etc/sudoers.d"
     state: directory
@@ -11,8 +9,6 @@
 
 - name: "Configure sudoers"
   become: true
-  become_user: root
-  become_method: su
   copy:
     src: "sudoers"
     dest: "/etc/sudoers.d/sudoers"
@@ -23,8 +19,6 @@
 
 - name: "Install 'sudo'"
   become: true
-  become_user: root
-  become_method: su
   apt:
     name: sudo
     state: latest
