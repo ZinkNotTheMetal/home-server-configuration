@@ -2,6 +2,15 @@
 
 ## Requirements
 
+1. Setup Debian (with {user_name})
+
+2. Run ansible command
+
+   ```bash
+   ansible-playbook -K -i production site.yml
+   ```
+
+
 1. Ansible host server (currently in Synology)
     1. Install ansible
     2. Install sudo

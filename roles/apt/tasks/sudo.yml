@@ -1,11 +1,13 @@
 ---
-- name: "Install 'sudo'"
+- name: Ensure /etc/sudoers.d exists
   become: true
   become_user: root
   become_method: su
-  apt:
-    name: sudo
-    state: latest
+  file:
+    path: "/etc/sudoers.d"
+    state: directory
+    owner: root
+    group: root
 
 - name: Setup user
   become: true
@@ -18,16 +20,6 @@
     groups: ["sudo"]
     state: present
 
-- name: Ensure /etc/sudoers.d exists
-  become: true
-  become_user: root
-  become_method: su
-  file:
-    path: "/etc/sudoers.d"
-    state: directory
-    owner: root
-    group: root
-
 - name: "Configure sudoers"
   become: true
   become_user: root
@@ -39,3 +31,11 @@
     owner: root
     group: root
     validate: "/usr/sbin/visudo -csf %s"
+
+- name: "Install 'sudo'"
+  become: true
+  become_user: root
+  become_method: su
+  apt:
+    name: sudo
+    state: latest
