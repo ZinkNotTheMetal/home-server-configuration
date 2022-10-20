@@ -8,14 +8,20 @@
     state: latest
 
 - name: Setup user
+  become: true
+  become_user: root
+  become_method: su
   user:
     name: "{{ user_name }}"
     shell: /bin/zsh
     comment: "{{ user_full_name }}"
-    groups: [ "sudo" ]
+    groups: ["sudo"]
     state: present
 
 - name: Ensure /etc/sudoers.d exists
+  become: true
+  become_user: root
+  become_method: su
   file:
     path: "/etc/sudoers.d"
     state: directory
@@ -23,6 +29,9 @@
     group: root
 
 - name: "Configure sudoers"
+  become: true
+  become_user: root
+  become_method: su
   copy:
     src: "sudoers"
     dest: "/etc/sudoers.d/sudoers"
