@@ -4,7 +4,13 @@
 
 1. Setup Debian (with {user_name})
 
-2. Run ansible command
+2. With root user add the user to the sudos group
+
+   ```bash
+   usermod -a -G sudo {{ user_name }}
+   ```
+
+3. Run ansible command
 
    ```bash
    ansible-playbook -K -i production site.yml
