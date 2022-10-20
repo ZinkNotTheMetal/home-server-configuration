@@ -10,7 +10,20 @@
    usermod -a -G sudo {{ user_name }}
    ```
 
-3. Run ansible command
+3. Add SSH Key from Ansible server to configured server
+
+   1. Generate a key if needed
+
+       ```bash
+       ssh-keygen -t rsa
+
+   2. Copy public keys to managed node
+
+      ```bash
+      ssh-copy-id -i ~/.ssh/id_rsa.pub <user>@<ipaddr>
+      ```
+
+4. Run ansible command
 
    ```bash
    ansible-playbook -K -i production site.yml

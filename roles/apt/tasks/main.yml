@@ -3,6 +3,8 @@
 
 - name: Upgrade the system
   become: true
+  become_user: root
+  become_method: su
   apt:
     update_cache: yes
     upgrade: dist
