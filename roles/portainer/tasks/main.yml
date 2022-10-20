@@ -1,7 +1,7 @@
 ---
 - name: Run 'Portainer' - Docker Container
   docker_container:
-    name: watchtower
+    name: portainer
     image: portainer/portainer-ce
     restart_policy: unless-stopped
     pull: true
