@@ -23,6 +23,8 @@
       HEALTH_CHECK_HOST: "google.com"
       SELFHEAL: "false"
       LOCAL_NETWORK: "192.168.0.0/16"
+    capabilities:
+      - NET_ADMIN
     ports:
       - 8118:8118
       - 9091:9091
