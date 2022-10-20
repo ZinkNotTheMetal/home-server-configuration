@@ -4,18 +4,25 @@
 
 1. Setup Debian (with {user_name})
 
-2. With root user add the user to the sudos group
+2. Install sudo
+
+   ```bash
+   apt-get install sudo
+   ```
+
+3. With root user add the user to the sudos group
 
    ```bash
    usermod -a -G sudo {{ user_name }}
    ```
 
-3. Add SSH Key from Ansible server to configured server
+4. Add SSH Key from Ansible server to configured server
 
    1. Generate a key if needed
 
        ```bash
        ssh-keygen -t rsa
+       ```
 
    2. Copy public keys to managed node
 
@@ -23,7 +30,27 @@
       ssh-copy-id -i ~/.ssh/id_rsa.pub <user>@<ipaddr>
       ```
 
-4. Run ansible command
+5. Get ssh-key for git
+
+   1. Generate a new key with above keygen command
+
+   2. Put new key into GitHub (SSH Keys under settings)
+
+6. Generate a PAT in dockerhub
+
+   1. Go to account
+   2. Then Security
+   3. Generate a new PAT with the hostname of the machine
+   4. Put into vars.yml
+
+7. Pull any git repository down to verify token
+
+   ```bash
+   cd ~/git
+   git clone git@github.com:zsh-users/zsh-syntax-highlighting.git
+   ```
+
+8. Run ansible command
 
    ```bash
    ansible-playbook -K -i production site.yml
