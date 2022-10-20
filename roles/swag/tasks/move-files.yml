@@ -7,7 +7,7 @@
     mode: "0755"
     owner: root
 
-- name: Change subdomain to home.*
+- name: Change subdomain to 'home.*''
   become: true
   replace:
     path: "{{ docker_host_location }}/nginx/proxy-confs/homeassistant.subdomain.conf.sample"
@@ -55,15 +55,3 @@
   template:
     src: nas.subdomain.conf
     dest: "{{ docker_host_location }}/nginx"
-
-
-proxy-confs/pihole.subdomain.conf.sample
-
-# Should be able to remove!
-- name: Ensure that default.conf is loaded
-  become: true
-  template:
-    src: default.conf
-    dest: /docker/nginx
-    owner: root
-    group: root
