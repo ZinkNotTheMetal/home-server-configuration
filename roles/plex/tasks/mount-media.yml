@@ -27,7 +27,6 @@
     src: "{{ nas_ip }}:/volume1/Media/Movies"
     path: /mnt/nas/movies
     state: mounted
-    opts: remount
     fstype: nfs
 
 - name: Mount 'TV Shows'
@@ -36,5 +35,4 @@
     src: "{{ nas_ip }}:/volume1/Media/TV\ Shows"
     path: /mnt/nas/tv
     state: mounted
-    opts: remount
     fstype: nfs

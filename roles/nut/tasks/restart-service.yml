@@ -1,4 +1,4 @@
 ---
-- name: Stop 'UPS - NUT' service
+- name: Start 'UPS - NUT' service
   become: true
   command: upsdrvctl start
