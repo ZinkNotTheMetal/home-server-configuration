@@ -13,16 +13,14 @@
     ```
 
 2. Finalize - SSH Config
-3. Manually move to all containers
-4. PiHole Setup with google
-5. Port forwarding with google
+3. Manually move to all containers to bridge network
+4. Research if there is a power on config for NAS
+5. Reset dev device if not found?
+6. Setup Google Wifi -> Private DNS
+7. Setup Port fowarding for new Plex Google Wifi
+8. Finalize SSH Configuration
+9. Shutdown Ansible Host Synology
 
-3. SSH?
-4. OpenVPN not working on test env
-
-## TODO
-
-4. Figure out nginx and reverse proxy swag
 
 - name: Update sshd configuration safely, avoid locking yourself out
   ansible.builtin.template:
@@ -37,7 +35,6 @@
 Incase labels get crazy...
 https://stackoverflow.com/questions/62010666/ansible-how-to-set-docker-container-labels-with-dynamic-key-names
 
-Figure out forwarding IPVLAN on Google-Wifi
 
 [Resources]
 
