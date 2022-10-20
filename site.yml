@@ -71,8 +71,3 @@
         - node-red
         - application
         - home-automation
-    - role: nginx
-      tag:
-        - nginx
-        - application
-        - home-automation
