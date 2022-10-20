@@ -7,12 +7,26 @@
     name: sudo
     state: latest
 
-- name: Ensure the user '{{ user_name }}' has sudo access
-  become: true
-  become_user: root
-  become_method: su
-  community.general.sudoers:
-    name: "william-user"
-    user: "{{ user_name }}"
+- name: Setup user
+  user:
+    name: "{{ user_name }}"
+    shell: /bin/zsh
+    comment: "{{ user_full_name }}"
+    groups: [ "sudo" ]
     state: present
-    commands: ALL
+
+- name: Ensure /etc/sudoers.d exists
+  file:
+    path: "/etc/sudoers.d"
+    state: directory
+    owner: root
+    group: root
+
+- name: "Configure sudoers"
+  copy:
+    src: "sudoers"
+    dest: "/etc/sudoers.d/sudoers"
+    mode: 0440
+    owner: root
+    group: root
+    validate: "/usr/sbin/visudo -csf %s"
