@@ -18,7 +18,7 @@
   become: true
   copy:
     src: "{{ docker_host_location }}/nginx/proxy-confs/homeassistant.subdomain.conf.sample"
-    dest: "{{ docker_host_location }}/nginx/ha.subdomain.conf"
+    dest: "{{ docker_host_location }}/nginx/proxy-confs/ha.subdomain.conf"
     remote_src: true
     mode: "0755"
     owner: william
@@ -28,7 +28,7 @@
   become: true
   copy:
     src: "{{ docker_host_location }}/nginx/proxy-confs/portainer.subdomain.conf.sample"
-    dest: "{{ docker_host_location }}/nginx/portainer.subdomain.conf"
+    dest: "{{ docker_host_location }}/nginx/proxy-confs/portainer.subdomain.conf"
     remote_src: true
     mode: "0755"
     owner: william
@@ -38,7 +38,7 @@
   become: true
   copy:
     src: "{{ docker_host_location }}/nginx/proxy-confs/pihole.subdomain.conf.sample"
-    dest: "{{ docker_host_location }}/nginx/pihole.subdomain.conf"
+    dest: "{{ docker_host_location }}/nginx/proxy-confs/pihole.subdomain.conf"
     remote_src: true
     mode: "0755"
     owner: william
@@ -48,10 +48,10 @@
   become: true
   template:
     src: node-red.subdomain.conf
-    dest: "{{ docker_host_location }}/nginx"
+    dest: "{{ docker_host_location }}/nginx/proxy-confs"
 
 - name: Load 'nas.conf'
   become: true
   template:
     src: nas.subdomain.conf
-    dest: "{{ docker_host_location }}/nginx"
+    dest: "{{ docker_host_location }}/nginx/proxy-confs"

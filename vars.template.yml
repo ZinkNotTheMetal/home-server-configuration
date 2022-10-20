@@ -1,34 +1,50 @@
 ---
-time_zone: <time_zone>
+# Server Configuration
 user_name: <user_name>
-docker_hub_username: <docker_hub_user>
-docker_hub_password: <docker_hub_pass>
-location_state_abbr: <current_state_location>
+ssh_port: <ssh_port>
+time_zone:
+  <time_zone>
+  # For weather
+location_state_abbr:
+  <current_state_location>
+  # For SWS & Weather
 location_city: <current_city_location>
+
+# Docker Configuration
+docker_hub_username: <docker_hub_user>
+# Needs to be a PAT (read README)
+docker_hub_password: <docker_hub_pass>
+# Custom networking
 docker_network_ip_outside: <ip range of outside allowed traffic>
 docker_network_ip_inside: <ip range of only inside allowed traffic>
+# Containers need to be within the docker_network_ip_outside range
+ha_container_ip: <custom_ha_ip>
+plex_container_ip: <custom_plex_ip>
+pi_hole_container_ip: <custom_pi_hole_ip>
+node_red_container_ip: <node_red_ip>
 
-# NUT Configuration
-ups_monitor_username: <mon_username>
-ups_monitor_password: <mon_password>
-
-# git links
+# Git links
 southwest_ssh_git: ""
 homeassistant_git: ""
 node_red_git: ""
 
+# NAS Configuration
+nas_ip: <synology_nas_ip>
+nas_ssh_port: <synology_ssh_port>
+nas_admin_user: <synology_user>
+
+# NUT (UPS Tools) Configuration
+ups_monitor_username: <mon_username>
+ups_monitor_password: <mon_password>
+
 # Transmission / Open VPN Configuration
 vpn_provider: <vpn_provider>
-vpn_provider: <vpn_country>
+vpn_country: <vpn_country>
 vpn_username: <vpn_username>
 vpn_password: <vpn_password>
 
 # PiHole Configuration
 pi_hole_password: <pi_hole_web_password>
-
-# Plex Configuration
-# - https://www.plex.tv/claim/ - code expires quickly
-plex_claim_token: <plex_claim_token>
 
 # SWAG - DNS / Certificate Configuration
 dns_to_renew: <dns_to_renew>
@@ -36,16 +52,6 @@ dns_token: <dns_token>
 dns_provider: <dns_provider>
 contact_email: <contact_email>
 
-# Containers need to be within the docker_network_ip_outside range
-ha_container_ip: <custom_ha_ip>
-plex_container_ip: <custom_plex_ip>
-pi_hole_container_ip: <custom_pi_hole_ip>
-node_red_container_ip: <node_red_ip>
-
-# NAS Configuration
-nas_ip: <synology_nas_ip>
-nas_ssh_port: <synology_ssh_port>
-nas_admin_user: <synology_user>
-
 # Oh my zsh
 zsh_plugin_location: /.oh-my-zsh/custom/plugins/
+#==========================================================
