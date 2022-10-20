@@ -1,5 +1,7 @@
 ---
 - name: Update sshd configuration safely, avoid locking yourself out
+  become: true
+  become_user: root
   template:
     src: sshd_config
     dest: /etc/ssh/sshd_config
