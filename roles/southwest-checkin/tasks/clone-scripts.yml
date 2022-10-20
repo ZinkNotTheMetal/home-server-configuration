@@ -21,6 +21,12 @@
     dest: /home/william/Southwest-Check-In/
     mode: ugo=rwx
 
+- name: Replace origin city with current city
+  replace:
+    path: /home/william/Southwest-Check-In/menu-scheduler.sh
+    regexp: "ORIGIN_CITY=\"Nashville\"$"
+    replace: 'ORIGIN_CITY="{{ location_city }}"'
+
 - name: Set '.sh as exec'
   shell:
     cmd: "chmod ugo=rwx /home/william/Southwest-Check-In/*.sh"
