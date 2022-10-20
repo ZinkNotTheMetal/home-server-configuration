@@ -1,0 +1,69 @@
+---
+- name: Create nginx data volume
+  become: true
+  file:
+    path: "{{ docker_host_location }}"
+    state: directory
+    mode: "0755"
+    owner: root
+
+- name: Change subdomain to home.*
+  become: true
+  replace:
+    path: "{{ docker_host_location }}/nginx/proxy-confs/homeassistant.subdomain.conf.sample"
+    regexp: "server_name\ homeassistant.*;$"
+    replace: server_name home.*
+
+- name: Load 'home-assistant.conf'
+  become: true
+  copy:
+    src: "{{ docker_host_location }}/nginx/proxy-confs/homeassistant.subdomain.conf.sample"
+    dest: "{{ docker_host_location }}/nginx/ha.subdomain.conf"
+    remote_src: true
+    mode: "0755"
+    owner: william
+    group: william
+
+- name: Load 'portainer.conf'
+  become: true
+  copy:
+    src: "{{ docker_host_location }}/nginx/proxy-confs/portainer.subdomain.conf.sample"
+    dest: "{{ docker_host_location }}/nginx/portainer.subdomain.conf"
+    remote_src: true
+    mode: "0755"
+    owner: william
+    group: william
+
+- name: Load 'pihole.conf'
+  become: true
+  copy:
+    src: "{{ docker_host_location }}/nginx/proxy-confs/pihole.subdomain.conf.sample"
+    dest: "{{ docker_host_location }}/nginx/pihole.subdomain.conf"
+    remote_src: true
+    mode: "0755"
+    owner: william
+    group: william
+
+- name: Load 'node-red.conf'
+  become: true
+  template:
+    src: node-red.subdomain.conf
+    dest: "{{ docker_host_location }}/nginx"
+
+- name: Load 'nas.conf'
+  become: true
+  template:
+    src: nas.subdomain.conf
+    dest: "{{ docker_host_location }}/nginx"
+
+
+proxy-confs/pihole.subdomain.conf.sample
+
+# Should be able to remove!
+- name: Ensure that default.conf is loaded
+  become: true
+  template:
+    src: default.conf
+    dest: /docker/nginx
+    owner: root
+    group: root

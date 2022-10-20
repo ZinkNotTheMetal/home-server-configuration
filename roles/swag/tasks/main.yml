@@ -1,4 +1,6 @@
 ---
+- import_tasks: move-files.yml
+
 - name: Run 'swag' - Docker Container
   docker_container:
     name: dns-cert-manager
@@ -9,7 +11,7 @@
     pull: true
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
-      - "/docker/dns-cert-manager:/config"
+      - "{{ docker_host_location }}:/config"
       - "/etc/timezone:/etc/timezone:ro"
     env:
       PUID: "1000"

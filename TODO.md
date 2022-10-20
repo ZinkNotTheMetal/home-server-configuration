@@ -1,5 +1,22 @@
 # TODO
 
+1. BIOS Power
+
+    ```text
+    Resolution
+    To set the Intel® NUC to power on whenever a power source is connected:
+
+    Press F2 during boot to enter BIOS Setup.
+    Go to the Power > Secondary Power Settings menu.
+    Set the option for After Power Failure to Power On.
+    Press F10 save changes and exit BIOS.
+    ```
+
+2. Finalize - SSH Config
+3. Manually move to all containers
+4. PiHole Setup with google
+5. Port forwarding with google
+
 3. SSH?
 4. OpenVPN not working on test env
 
