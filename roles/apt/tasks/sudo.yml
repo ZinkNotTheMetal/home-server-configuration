@@ -9,16 +9,11 @@
     owner: root
     group: root
 
-- name: Setup user
+- name: Add user to 'sudo' group
   become: true
   become_user: root
   become_method: su
-  user:
-    name: "{{ user_name }}"
-    shell: /bin/zsh
-    comment: "{{ user_full_name }}"
-    groups: ["sudo"]
-    state: present
+  command: "usermod -a -G sudo {{ user_name }}"
 
 - name: "Configure sudoers"
   become: true
