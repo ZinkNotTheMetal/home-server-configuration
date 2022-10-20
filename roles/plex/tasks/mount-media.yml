@@ -23,6 +23,8 @@
 #  sudo umount 10.10.0.10:/backups
 - name: Mount 'Movies'
   become: true
+  become_user: william
+  become_method: sudo
   mount:
     src: "{{ nas_ip }}:/volume1/Media/Movies"
     path: /mnt/nas/movies
@@ -31,6 +33,8 @@
 
 - name: Mount 'TV Shows'
   become: true
+  become_user: william
+  become_method: sudo
   mount:
     src: "{{ nas_ip }}:/volume1/Media/TV\ Shows"
     path: /mnt/nas/tv
