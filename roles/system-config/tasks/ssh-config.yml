@@ -10,3 +10,11 @@
     mode: '0600'
     validate: /usr/sbin/sshd -t -f %s
     backup: yes
+  
+- name: Ensure that the .zprofile is loaded
+  become: true
+  template:
+    src: .zprofile
+    dest: /home/william/.zprofile
+    owner: root
+    group: root
