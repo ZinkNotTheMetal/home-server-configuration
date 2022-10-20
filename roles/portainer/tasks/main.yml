@@ -6,7 +6,7 @@
     restart_policy: unless-stopped
     pull: true
     networks:
-      - name: bridge
+      - name: curidge
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "/etc/timezone:/etc/timezone:ro"
