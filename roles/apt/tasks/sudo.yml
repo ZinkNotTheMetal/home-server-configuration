@@ -9,12 +9,6 @@
     owner: root
     group: root
 
-- name: Add user to 'sudo' group
-  become: true
-  become_user: root
-  become_method: su
-  command: "usermod -a -G sudo {{ user_name }}"
-
 - name: "Configure sudoers"
   become: true
   become_user: root
