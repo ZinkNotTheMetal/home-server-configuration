@@ -71,3 +71,7 @@
         - node-red
         - application
         - home-automation
+    - role: dokuwiki
+      tag:
+        - dokuwiki
+        - application

@@ -1,21 +1,16 @@
 ---
-- name: Install 'nfs' - file sharing
-  become: true
-  apt:
-    name: nfs-common
-    state: latest
-
 - name: Ensure '/mnt/nas' is created
   become: true
   file:
     path: "{{ item }}"
     state: directory
-    mode: "0755"
+    mode: "0777"
     owner: root
     group: root
   with_items:
     - "/mnt/nas/movies"
     - "/mnt/nas/tv"
+    - "/mnt/nas/plex"
 
 # Test mount
 #  sudo mount -t nfs 10.10.0.10:/volume1/Media/Movies /mnt/nas/movies
@@ -38,5 +33,15 @@
   mount:
     src: "{{ nas_ip }}:/volume1/Media/TV\ Shows"
     path: /mnt/nas/tv
+    state: mounted
+    fstype: nfs
+
+- name: Mount 'Plex' configuration
+  become: true
+  become_user: william
+  become_method: sudo
+  mount:
+    src: "{{ nas_ip }}:/volume1/Plex"
+    path: /mnt/nas/plex
     state: mounted
     fstype: nfs

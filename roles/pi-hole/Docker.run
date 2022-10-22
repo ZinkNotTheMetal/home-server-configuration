@@ -1,0 +1,18 @@
+# Run if you need to run on the bridge network (curidge)
+
+docker run \ 
+ -p '53:53/tcp' \
+ -p '53:53/udp' \
+ -p '7080:80/tcp' \
+ -v "/var/run/docker.sock:/var/run/docker.sock" \
+ -v "/docker/pihole/etc:/etc/pihole" \
+ -v "/docker/pihole/etc-dnsmasq.d:/etc/dnsmasq.d" \
+ -e TZ=America/New_York \
+ -e WEBPASSWORD=<password here> \
+ -l com.centurylinklabs.watchtower.enable=true \ 
+ --network curidge \
+ --cap-add NET_ADMIN \
+ --name pihole \
+ --restart unless-stopped \
+ -d \
+ pihole/pihole

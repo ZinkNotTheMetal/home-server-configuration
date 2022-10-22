@@ -12,7 +12,7 @@
     pull: true
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
-      - "/docker/plex:/config"
+      - "/mnt/nas/plex:/config"
       - "/docker/plex/transcode:/transcode"
       - "/etc/timezone:/etc/timezone:ro"
       - "/mnt/nas/movies:/Movies"

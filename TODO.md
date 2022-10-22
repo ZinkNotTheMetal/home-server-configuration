@@ -1,41 +1,75 @@
+# IF YOU EVER LEAVE TAMPA!!!
+
+- Change the DNS back to ISP in Google Wifi
+
 # TODO
 
-1. BIOS Power
-
-    ```text
-    Resolution
-    To set the Intel® NUC to power on whenever a power source is connected:
-
-    Press F2 during boot to enter BIOS Setup.
-    Go to the Power > Secondary Power Settings menu.
-    Set the option for After Power Failure to Power On.
-    Press F10 save changes and exit BIOS.
-    ```
-
-2. Finalize - SSH Config
-3. Manually move to all containers to bridge network
-4. Research if there is a power on config for NAS
-5. Reset dev device if not found?
-6. Setup Google Wifi -> Private DNS
-7. Setup Port fowarding for new Plex Google Wifi
-8. Finalize SSH Configuration
-9. Shutdown Ansible Host Synology
-
-
-- name: Update sshd configuration safely, avoid locking yourself out
-  ansible.builtin.template:
-  src: etc/ssh/sshd_config.j2
-  dest: /etc/ssh/sshd_config
-  owner: root
-  group: root
-  mode: '0600'
-  validate: /usr/sbin/sshd -t -f %s
-  backup: yes
+1. Reset dev device if not found?
 
 Incase labels get crazy...
 https://stackoverflow.com/questions/62010666/ansible-how-to-set-docker-container-labels-with-dynamic-key-names
 
-
 [Resources]
 
 - [Home Server Ansible Setup](https://github.com/davestephens/ansible-nas)
+
+# New Containers to Setup
+- DocuWiki
+- Overseerr - plex requests 
+- piwigo
+- Mealie - recipes (https://github.com/davestephens/ansible-nas/blob/master/roles/mealie/tasks/main.yml)
+- Workflow stuff? - (n8n) - https://github.com/davestephens/ansible-nas/blob/master/roles/n8n/tasks/main.yml
+
+# Nice to haves
+
+- Authelia (SSO?)
+- Code-Server (VS Code on NUC) - https://docs.linuxserver.io/images/docker-code-server
+- Duplicacy - check pricing and stuff - 
+    * https://github.com/davestephens/ansible-nas/tree/master/roles/duplicacy
+    * https://duplicacy.com/buy.html
+- linuxserver/duplicati (check this vs one above)
+- Tatulli (plex stuff)
+- Paperless
+
+? Glances
+? SMoke Ping
+? Ntop ng
+
+
+
+
+Maybe a fix for swag
+upstream gotify {
+  # Set the port to the one you are using in gotify
+  server 127.0.0.1:1245;
+}
+
+server {
+  listen 80;
+
+  # Here goes your domain / subdomain
+  server_name push.example.com;
+
+  location / {
+    # We set up the reverse proxy
+    proxy_pass         http://gotify;
+    proxy_http_version 1.1;
+
+    # Ensuring it can use websockets
+    proxy_set_header   Upgrade $http_upgrade;
+    proxy_set_header   Connection "upgrade";
+    proxy_set_header   X-Real-IP $remote_addr;
+    proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header   X-Forwarded-Proto http;
+    proxy_redirect     http:// $scheme://;
+
+    # The proxy must preserve the host because gotify verifies the host with the origin
+    # for WebSocket connections
+    proxy_set_header   Host $http_host;
+
+    # These sets the timeout so that the websocket can stay alive
+    proxy_connect_timeout   1m;
+    proxy_send_timeout      1m;
+    proxy_read_timeout      1m;
+  }
+}

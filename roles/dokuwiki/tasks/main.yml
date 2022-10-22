@@ -1,0 +1,20 @@
+---
+- import_tasks: mount-storage.yml
+
+- name: Run 'DokuWiki' Docker Container
+  docker_container:
+    name: wiki
+    image: linuxserver/dokuwiki:latest
+    restart_policy: unless-stopped
+    pull: true
+    networks:
+      - name: port-freedom
+        ipv4_address: "{{ dokuwiki_container_ip }}"
+    volumes:
+      - "/mnt/nas/wiki:/config/dokuwiki/data:rw"
+    env:
+      TZ: "{{ time_zone }}"
+      PUID: 1000
+      PGID: 1000
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"

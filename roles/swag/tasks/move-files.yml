@@ -55,3 +55,20 @@
   template:
     src: nas.subdomain.conf
     dest: "{{ docker_host_location }}/nginx/proxy-confs"
+
+- name: Change subdomain to 'wiki.*''
+  become: true
+  replace:
+    path: "{{ docker_host_location }}/nginx/proxy-confs/dokuwiki.subdomain.conf.sample"
+    regexp: "server_name\ dokuwiki.*;$"
+    replace: server_name wiki.*
+
+- name: Load 'dockuwiki.conf'
+  become: true
+  copy:
+    src: "{{ docker_host_location }}/nginx/proxy-confs/dokuwiki.subdomain.conf.sample"
+    dest: "{{ docker_host_location }}/nginx/proxy-confs/dokuwiki.subdomain.conf"
+    remote_src: true
+    mode: "0755"
+    owner: william
+    group: william
