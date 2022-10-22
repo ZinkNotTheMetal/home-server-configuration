@@ -14,9 +14,14 @@ https://stackoverflow.com/questions/62010666/ansible-how-to-set-docker-container
 - [Home Server Ansible Setup](https://github.com/davestephens/ansible-nas)
 
 # New Containers to Setup
-- DocuWiki
-- Overseerr - plex requests 
 - piwigo
+- mealie
+- Authelia?
+- Plex Requests
+  - CouchPotato / Radar / Sonarr
+- piwigo
+- Workflow stuff? (n8n)
+
 - Mealie - recipes (https://github.com/davestephens/ansible-nas/blob/master/roles/mealie/tasks/main.yml)
 - Workflow stuff? - (n8n) - https://github.com/davestephens/ansible-nas/blob/master/roles/n8n/tasks/main.yml
 

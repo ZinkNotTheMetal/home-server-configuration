@@ -23,6 +23,7 @@ plex_container_ip: <custom_plex_ip>
 pi_hole_container_ip: <custom_pi_hole_ip>
 node_red_container_ip: <node_red_ip>
 doku_wiki_container_ip: <doku_wiki_ip>
+tautulli_container_ip: <tautulli_ip>
 
 # Git links
 southwest_ssh_git: ""

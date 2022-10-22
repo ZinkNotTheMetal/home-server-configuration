@@ -75,3 +75,7 @@
       tag:
         - dokuwiki
         - application
+    - role: tautulli
+      tag:
+        - tautulli
+        - application
