@@ -1,0 +1,6 @@
+---
+- name: Load 'node-red.conf'
+  become: true
+  template:
+    src: node-red.subdomain.conf
+    dest: "{{ docker_host_location }}/nginx/proxy-confs"

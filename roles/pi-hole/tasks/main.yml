@@ -1,4 +1,11 @@
 ---
+- name: Import custom DNS entries
+  become: true
+  template:
+    src: custom.list
+    dest: /docker/pihole/etc/custom.list
+    mode: "0777"
+
 - name: Run 'Pi-Hole' - Docker Container
   docker_container:
     name: pihole

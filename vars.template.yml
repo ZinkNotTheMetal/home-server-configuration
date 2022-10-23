@@ -2,12 +2,10 @@
 # Server Configuration
 user_name: <user_name>
 ssh_port: <ssh_port>
-time_zone:
-  <time_zone>
-  # For weather
-location_state_abbr:
-  <current_state_location>
-  # For SWS & Weather
+time_zone: <time_zone>
+# For weather
+location_state_abbr: <current_state_location>
+# For SWS & Weather
 location_city: <current_city_location>
 
 # Docker Configuration
@@ -24,6 +22,7 @@ pi_hole_container_ip: <custom_pi_hole_ip>
 node_red_container_ip: <node_red_ip>
 doku_wiki_container_ip: <doku_wiki_ip>
 tautulli_container_ip: <tautulli_ip>
+mealie_container_ip: <mealie_ip>
 
 # Git links
 southwest_ssh_git: ""

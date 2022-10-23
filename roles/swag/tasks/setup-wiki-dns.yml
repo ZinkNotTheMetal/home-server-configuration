@@ -1,0 +1,17 @@
+---
+- name: Change subdomain to 'wiki.*''
+  become: true
+  replace:
+    path: "{{ docker_host_location }}/nginx/proxy-confs/dokuwiki.subdomain.conf.sample"
+    regexp: "dokuwiki"
+    replace: wiki.*
+
+- name: Load 'dockuwiki.conf'
+  become: true
+  copy:
+    src: "{{ docker_host_location }}/nginx/proxy-confs/dokuwiki.subdomain.conf.sample"
+    dest: "{{ docker_host_location }}/nginx/proxy-confs/dokuwiki.subdomain.conf"
+    remote_src: true
+    mode: "0755"
+    owner: william
+    group: william
