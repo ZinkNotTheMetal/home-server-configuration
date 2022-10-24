@@ -3,7 +3,7 @@
   become: true
   replace:
     path: "{{ docker_host_location }}/nginx/proxy-confs/dokuwiki.subdomain.conf.sample"
-    regexp: "dokuwiki"
+    regexp: "dokuwiki.*"
     replace: wiki.*
 
 - name: Load 'dockuwiki.conf'

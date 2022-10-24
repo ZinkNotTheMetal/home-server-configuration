@@ -1,6 +1,8 @@
 ---
 - import_tasks: import-config.yml
 
+- import_tasks: setup-dns.yml
+
 - name: Run 'Node-Red' - Docker Container
   docker_container:
     name: node-red

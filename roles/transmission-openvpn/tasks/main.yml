@@ -1,4 +1,13 @@
 ---
+- name: Create docker data volume
+  become: true
+  file:
+    path: "/docker/transmission"
+    state: directory
+    mode: "0777"
+    owner: root
+    recurse: yes
+
 - name: Run 'transmission-openvpn' - Docker Container
   docker_container:
     name: transmission-openvpn

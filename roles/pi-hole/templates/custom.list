@@ -4,3 +4,4 @@
 {{ ansible_ssh_host }} wiki.{{ dns_to_renew }}
 {{ ansible_ssh_host }} tautulli.{{ dns_to_renew}}
 {{ ansible_ssh_host }} mealie.{{ dns_to_renew }}
+{{ ansible_ssh_host }} photos.{{ dns_to_renew }}

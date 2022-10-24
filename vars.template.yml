@@ -23,6 +23,8 @@ node_red_container_ip: <node_red_ip>
 doku_wiki_container_ip: <doku_wiki_ip>
 tautulli_container_ip: <tautulli_ip>
 mealie_container_ip: <mealie_ip>
+piwigo_container_ip: <piwigo_ip>
+piwigo_mysql_ip: <piwigo_ip> # can live in docker_outside
 
 # Git links
 southwest_ssh_git: ""
@@ -52,6 +54,11 @@ dns_to_renew: <dns_to_renew>
 dns_token: <dns_token>
 dns_provider: <dns_provider>
 contact_email: <contact_email>
+
+# Piwigo configuration
+piwigo_mysql_user: <user>
+piwigo_mysql_password: <pass>
+piwigo_root_msql_password: <root pass>
 
 # Oh my zsh
 zsh_plugin_location: /.oh-my-zsh/custom/plugins/

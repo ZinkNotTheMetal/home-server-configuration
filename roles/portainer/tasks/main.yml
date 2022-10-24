@@ -1,4 +1,6 @@
 ---
+- import_tasks: setup-dns.yml
+
 - name: Run 'Portainer' - Docker Container
   docker_container:
     name: portainer

@@ -3,4 +3,4 @@
   become: true
   template:
     src: node-red.subdomain.conf
-    dest: "{{ docker_host_location }}/nginx/proxy-confs"
+    dest: "/docker/dns-cert-manager/nginx/proxy-confs"

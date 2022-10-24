@@ -6,6 +6,8 @@
     dest: /docker/pihole/etc/custom.list
     mode: "0777"
 
+- import_tasks: setup-dns.yml
+
 - name: Run 'Pi-Hole' - Docker Container
   docker_container:
     name: pihole

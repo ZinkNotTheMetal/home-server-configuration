@@ -1,6 +1,8 @@
 ---
 - import_tasks: mount-storage.yml
 
+- import_tasks: setup-dns.yml
+
 - name: Run 'DokuWiki' Docker Container
   docker_container:
     name: wiki

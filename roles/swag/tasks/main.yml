@@ -7,14 +7,7 @@
     mode: "0755"
     owner: root
 
-- import_tasks: setup-ha-dns.yml
-- import_tasks: setup-meals-dns.yml
 - import_tasks: setup-nas-dns.yml
-- import_tasks: setup-node-red-dns.yml
-- import_tasks: setup-pihole-dns.yml
-- import_tasks: setup-portainer-dns.yml
-- import_tasks: setup-tautulli-dns.yml
-- import_tasks: setup-wiki-dns.yml
 
 - name: Run 'swag' - Docker Container
   docker_container:

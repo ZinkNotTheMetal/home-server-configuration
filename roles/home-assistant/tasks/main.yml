@@ -1,6 +1,8 @@
 ---
 - import_tasks: import-config.yml
 
+- import_tasks: setup-dns.yml
+
 - name: Run 'HomeAssistant' - Docker Container
   docker_container:
     name: home-assistant

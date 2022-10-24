@@ -45,6 +45,10 @@
       tag:
         - portainer
         - application
+    - role: swag
+      tag:
+        - swag
+        - application
     - role: transmission-openvpn
       tag:
         - transmission-openvpn
@@ -56,10 +60,6 @@
     - role: plex
       tag:
         - plex
-        - application
-    - role: swag
-      tag:
-        - swag
         - application
     - role: home-assistant
       tag:
@@ -79,3 +79,9 @@
       tag:
         - tautulli
         - application
+        - plex
+    - role: piwigo
+      tag:
+        - photo
+        - application
+        - piwigo
