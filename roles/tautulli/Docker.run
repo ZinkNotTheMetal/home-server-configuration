@@ -1,16 +1,15 @@
-docker run \ 
- -p 7182:8181 \
- -e PUID=1000 \
- -e PGID=1000 \
- -e TZ=America/New_York \
- -v "/var/run/docker.sock:/var/run/docker.sock" \
- -v "/docker/tautulli:/config" \
- -v "/etc/timezone:/etc/timezone:ro" \
- -l com.centurylinklabs.watchtower.enable=true \ 
- --network curidge \
- --name tautulli \
- --restart unless-stopped \
- -d \
- tautulli/tautulli
 
-docker run -p 7182:8181 -e PUID=1000 -e PGID=1000 -e TZ=America/New_York -v "/var/run/docker.sock:/var/run/docker.sock" -v "/docker/tautulli:/config" -v "/etc/timezone:/etc/timezone:ro" -l com.centurylinklabs.watchtower.enable=true --network curidge --name tautulli --restart unless-stopped -d tautulli/tautulli
+
+docker run -d \
+-p 7082:8181 \
+-e PUID=1000 \
+-e PGID=1000 \
+-e TZ=America/New_York \
+-v "/var/run/docker.sock:/var/run/docker.sock" \
+-v "/docker/tautulli:/config" \
+-v "/etc/timezone:/etc/timezone:ro" \
+-l "com.centurylinklabs.watchtower.enable"=true \
+--network curidge \
+--name tautulli \
+--restart unless-stopped \
+tautulli/tautulli

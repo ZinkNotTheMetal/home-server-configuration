@@ -85,3 +85,8 @@
         - photo
         - application
         - piwigo
+    - role: uptime
+      tag:
+        - uptime
+        - application
+        - monitor

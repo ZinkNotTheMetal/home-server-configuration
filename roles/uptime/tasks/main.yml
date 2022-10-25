@@ -1,0 +1,19 @@
+---
+- import_tasks: setup-folder.yml
+
+- name: Run 'Uptime-Kuma' - Docker Container
+  docker_container:
+    name: uptime-kuma
+    image: louislam/uptime-kuma
+    restart_policy: unless-stopped
+    pull: true
+    networks:
+      - name: curidge
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/docker/uptime-kuma:/app/data"
+    ports:
+      - 3001:3001
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"

@@ -3,7 +3,7 @@
 docker run \ 
  -p '53:53/tcp' \
  -p '53:53/udp' \
- -p '7080:80/tcp' \
+ -p '7083:80/tcp' \
  -v "/var/run/docker.sock:/var/run/docker.sock" \
  -v "/docker/pihole/etc:/etc/pihole" \
  -v "/docker/pihole/etc-dnsmasq.d:/etc/dnsmasq.d" \

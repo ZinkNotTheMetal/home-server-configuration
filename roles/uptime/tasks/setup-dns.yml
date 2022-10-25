@@ -1,0 +1,17 @@
+---
+- name: Change subdomain to 'up.*''
+  become: true
+  replace:
+    path: "{{ docker_host_location }}/nginx/proxy-confs/uptime-kuma.subdomain.conf.sample"
+    regexp: "uptime-kuma.*"
+    replace: up.*
+
+- name: Load 'home-assistant.conf'
+  become: true
+  copy:
+    src: "{{ docker_host_location }}/nginx/proxy-confs/uptime-kuma.subdomain.conf.sample"
+    dest: "{{ docker_host_location }}/nginx/proxy-confs/uptime-kuma.subdomain.conf"
+    remote_src: true
+    mode: "0777"
+    owner: william
+    group: william
