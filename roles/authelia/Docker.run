@@ -1,0 +1,11 @@
+docker run -d \
+-p 9090:9091 \
+-e TZ=America/New_York \
+-v /docker/authelia:/config \
+-e PUID=1000 \
+-e PGID=1000 \
+--name authelia \
+--restart unless-stopped \
+-l "com.centurylinklabs.watchtower.enable"=true \
+--network curidge \
+ghcr.io/authelia/authelia

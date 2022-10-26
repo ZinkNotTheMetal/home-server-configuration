@@ -1,6 +1,4 @@
 ---
-- import_tasks: install-dotnet.yml
-
 - import_tasks: clone-scripts.yml
 
 - import_tasks: docker-pull.yml
