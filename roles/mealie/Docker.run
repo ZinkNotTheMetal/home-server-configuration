@@ -12,7 +12,7 @@ docker run -d \
 -e RECIPE_SHOW_ASSETS=true \
 -e RECIPE_DISABLE_COMMENTS=false \
 -e RECIPE_DISABLE_AMOUNT=false \
--e BASE_URL=mealie.zinknotthemetal.duckdns.org
+-e BASE_URL=mealie.zinknotthemetal.duckdns.org \
 -l "com.centurylinklabs.watchtower.enable"=true \
 --network curidge \
 --name mealie \
