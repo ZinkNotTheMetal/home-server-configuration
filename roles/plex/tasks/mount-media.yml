@@ -10,6 +10,7 @@
   with_items:
     - "/mnt/nas/movies"
     - "/mnt/nas/tv"
+    - "/mnt/nas/books"
 
 # Test mount
 #  sudo mount -t nfs 10.10.0.10:/volume1/Media/Movies /mnt/nas/movies
