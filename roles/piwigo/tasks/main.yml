@@ -27,7 +27,7 @@
       MYSQL_DATABASE: piwigo
       MYSQL_USER: "{{ piwigo_mysql_user }}"
       MYSQL_PASSWORD: "{{ piwigo_mysql_password }}"
-      MYSQL_ROOT_PASSWORD: "{{ piwigo_mysql_ip }}"
+      MYSQL_ROOT_PASSWORD: "{{ piwigo_root_mysql_password }}"
     restart_policy: unless-stopped
 
 - name: Piwigo Docker Container

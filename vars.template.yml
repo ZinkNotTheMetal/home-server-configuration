@@ -58,7 +58,7 @@ contact_email: <contact_email>
 # Piwigo configuration
 piwigo_mysql_user: <user>
 piwigo_mysql_password: <pass>
-piwigo_root_msql_password: <root pass>
+piwigo_root_mysql_password: <root pass>
 
 # Oh my zsh
 zsh_plugin_location: /.oh-my-zsh/custom/plugins/

@@ -14,6 +14,8 @@
 
 # Test mount
 #  sudo mount -t nfs 10.10.0.10:/volume1/Media/Movies /mnt/nas/movies
+#  sudo mount -t nfs 10.10.0.10:/volume1/Media/TV\ Shows /mnt/nas/tv
+#  sudo mount -t nfs 10.10.0.10:/volume1/Files/Books /mnt/nas/books
 # Test unmount
 #  sudo umount 10.10.0.10:/backups
 - name: Mount 'Movies'
