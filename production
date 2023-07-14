@@ -1,2 +1,0 @@
-[home_server]
-192.168.86.21 ansible_user=william ansible_port=2882

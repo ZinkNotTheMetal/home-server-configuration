@@ -1,6 +1,0 @@
----
-- name: Load 'node-red.conf'
-  become: true
-  template:
-    src: node-red.subdomain.conf
-    dest: "/docker/dns-cert-manager/nginx/proxy-confs"
