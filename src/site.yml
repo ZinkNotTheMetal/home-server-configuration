@@ -1,0 +1,34 @@
+---
+# Site.yml - also known as the master playbook that will drive the roles
+
+- hosts: all
+  vars_files:
+    - "vars.yml"
+  roles:
+    - role: gantsign.oh-my-zsh
+      users:
+        - username: william
+          oh_my_zsh:
+            theme: bureau
+            plugins:
+              - git
+              - debian
+              - zsh-syntax-highlighting
+              - zsh-autosuggestions
+    - role: common
+      tag:
+        - common
+- hosts: dns-server
+  vars_files:
+    - "vars.yml"
+  roles:
+    - role: dns
+      tag:
+        - dns
+- hosts: docker-server
+  vars_files:
+    - "vars.yml"
+  roles:
+    - role: docker
+      tag:
+        - docker
