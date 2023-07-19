@@ -23,6 +23,7 @@
     fstype: nfs
 
 - name: Create Piwigo Directories
+  become: true
   file:
     path: "{{ item }}"
     state: directory
