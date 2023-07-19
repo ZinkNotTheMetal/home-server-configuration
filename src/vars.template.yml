@@ -46,6 +46,7 @@ docker_network_ip_inside: 192.168.169.0 # ip range of only inside allowed traffi
 ## In Unifi I will create a static route so that I can talk to
 ##  these containers without needing to define ports
 plex_container_ip: 192.168.96.10
+plex_claim_token: xxxxxxxx # https://www.plex.tv/claim/ to get a new token
 node_red_container_ip: 192.168.96.11
 mealie_container_ip: 192.168.96.12
 pi_hole_container_ip: 192.168.96.13
