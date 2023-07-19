@@ -12,6 +12,12 @@ location_city: <current_city_location>
 zsh_plugin_location: /.oh-my-zsh/custom/plugins/
 #####################################################################
 
+# NUT (Network UPS Tools) - used for nut-host
+#####################################################################
+ups_monitor_username: <mon_username>
+ups_monitor_password: <mon_password>
+#####################################################################
+
 # Docker Configuration
 docker_hub_username: <docker_hub_user>
 # Needs to be a PAT (read README)
@@ -39,10 +45,6 @@ node_red_git: ""
 nas_ip: <synology_nas_ip>
 nas_ssh_port: <synology_ssh_port>
 nas_admin_user: <synology_user>
-
-# NUT (UPS Tools) Configuration
-ups_monitor_username: <mon_username>
-ups_monitor_password: <mon_password>
 
 # Transmission / Open VPN Configuration
 vpn_provider: <vpn_provider>
