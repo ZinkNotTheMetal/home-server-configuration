@@ -7,6 +7,8 @@
 ## https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#:~:text=Property%20Value%20%20Country%20code%20%20%20,Africa%2FAlgiers%20%20%20%20%20%20%2B01%3A00%20
 
 - name: Set the {{ time_zone }} timezone
+  become_user: root
+  become: true
   file:
     src: "/usr/share/zoneinfo/{{ time_zone }}"
     dest: "/etc/localtime"
