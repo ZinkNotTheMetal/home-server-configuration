@@ -1,6 +1,18 @@
 ---
 - hosts: all
+  vars_files:
+    - "vars.yml"
   roles:
+    - role: gantsign.oh-my-zsh
+      users:
+        - username: "{{ user_name }}"
+          oh_my_zsh:
+            theme: bureau
+            plugins:
+              - git
+              - debian
+              - zsh-syntax-highlighting
+              - zsh-autosuggestions
     - role: common
       tag:
         - common
