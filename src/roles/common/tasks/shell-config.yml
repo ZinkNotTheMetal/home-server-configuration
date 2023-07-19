@@ -56,7 +56,9 @@
     dest: "/home/{{ user_name }}/{{ zsh_plugin_location }}/"
 
 - name: Delete local git directory
-  file: path /home/{{ user_name }}/zsh-plugins state=absent
+  file:
+    path: /home/{{ user_name }}/zsh-plugins
+    state: absent
 
 - name: Add customization to '.zshrc' file
   blockinfile:
