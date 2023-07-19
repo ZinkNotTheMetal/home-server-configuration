@@ -1,7 +1,7 @@
 {{ nas_ip }} nas.{{ dns_to_renew }}
 {{ pi_hole_container_ip }} pihole.{{ dns_to_renew }}
 {{ ansible_ssh_host }} portainer.{{ dns_to_renew }}
-{{ doku_wiki_container_ip }} wiki.{{ dns_to_renew }}
+{{ dokuwiki_container_ip }} wiki.{{ dns_to_renew }}
 {{ tautulli_container_ip }} tautulli.{{ dns_to_renew}}
 {{ mealie_container_ip }} mealie.{{ dns_to_renew }}
 {{ piwigo_container_ip }} photos.{{ dns_to_renew }}
