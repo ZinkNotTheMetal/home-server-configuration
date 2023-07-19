@@ -56,5 +56,12 @@
     owner: william
     group: william
 
+- name: Change subdomain to 'up.*''
+  become: true
+  replace:
+    path: "{{ cert_manager_folder_location }}/nginx/proxy-confs/uptime-kuma.subdomain.conf.sample"
+    regexp: "uptime-kuma.*"
+    replace: up.*
+
 
 ##################################################################################################

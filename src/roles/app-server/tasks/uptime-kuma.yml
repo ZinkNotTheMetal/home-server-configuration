@@ -26,20 +26,3 @@
       - 3001:3001
     labels:
       com.centurylinklabs.watchtower.enable: "true"
-
-- name: Change subdomain to 'up.*''
-  become: true
-  replace:
-    path: "{{ cert_manager_folder_location }}/nginx/proxy-confs/uptime-kuma.subdomain.conf.sample"
-    regexp: "uptime-kuma.*"
-    replace: up.*
-
-- name: Load 'home-assistant.conf'
-  become: true
-  copy:
-    src: "{{ cert_manager_folder_location }}/nginx/proxy-confs/uptime-kuma.subdomain.conf.sample"
-    dest: "{{ cert_manager_folder_location }}/nginx/proxy-confs/uptime-kuma.subdomain.conf"
-    remote_src: true
-    mode: "0777"
-    owner: william
-    group: william

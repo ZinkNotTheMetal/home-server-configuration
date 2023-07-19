@@ -23,11 +23,9 @@
 
 - import_tasks: portainer.yml
 
+- import_tasks: uptime-kuma.yml
+
 #- import_tasks: swag.yml
-
-#- import_tasks: portainer.yml
-
-#- import_tasks: uptime-kuma.yml
 
 #- import_tasks: plex.yml
 
