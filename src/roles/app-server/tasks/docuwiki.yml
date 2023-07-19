@@ -1,7 +1,7 @@
 ---
 # Description
 # Create and start internal wiki page
-- name: Ensure '/mnt/nas' is created
+- name: Ensure '/mnt/nas/wiki' is created
   become: true
   file:
     path: "/mnt/nas/wiki"
@@ -16,8 +16,6 @@
 #  sudo umount 10.10.0.10:/backups
 - name: Mount 'wiki'
   become: true
-  become_user: william
-  become_method: sudo
   mount:
     src: "{{ nas_ip }}:/volume1/Wiki"
     path: "/mnt/nas/wiki"
