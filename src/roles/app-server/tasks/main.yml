@@ -37,4 +37,4 @@
 
 - import_tasks: piwigo.yml
 
-#- import_tasks: swag.yml
+- import_tasks: swag.yml
