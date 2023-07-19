@@ -8,12 +8,6 @@
     mode: "0755"
     owner: root
 
-- name: Load 'nas.conf'
-  become: true
-  template:
-    src: nas.subdomain.conf
-    dest: "{{ cert_manager_folder_location }}/nginx/proxy-confs"
-
 - name: Run 'swag' - Docker Container
   docker_container:
     name: dns-cert-manager
@@ -116,6 +110,12 @@
     mode: "0755"
     owner: william
     group: william
+
+- name: Load 'nas.conf'
+  become: true
+  template:
+    src: nas.subdomain.conf
+    dest: "{{ cert_manager_folder_location }}/nginx/proxy-confs"
 
 - name: Load 'tautulli.conf'
   become: true
