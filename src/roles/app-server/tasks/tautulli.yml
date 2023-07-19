@@ -10,8 +10,6 @@
       - name: port-freedom
         ipv4_address: "{{ tautulli_container_ip }}"
     pull: true
-    ports:
-      - 80:8181
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "/docker/tautulli:/config"

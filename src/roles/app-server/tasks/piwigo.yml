@@ -18,9 +18,8 @@
   become: true
   mount:
     src: "{{ nas_ip }}:/volume1/Photos"
-    path: /mnt/nas/photos
+    path: "/mnt/nas/photos"
     state: mounted
-    mode: "0777"
     fstype: nfs
 
 - name: Create Piwigo Directories
