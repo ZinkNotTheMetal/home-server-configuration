@@ -20,7 +20,7 @@
   become_method: sudo
   mount:
     src: "{{ nas_ip }}:/volume1/Wiki"
-    path: /mnt/nas/wiki
+    path: "/mnt/nas/wiki"
     state: mounted
     fstype: nfs
 
@@ -37,7 +37,7 @@
       - "/mnt/nas/wiki:/config/dokuwiki/data:rw"
     env:
       TZ: "{{ time_zone }}"
-      PUID: 1000
-      PGID: 1000
+      PUID: "1000"
+      PGID: "1000"
     labels:
       com.centurylinklabs.watchtower.enable: "true"
