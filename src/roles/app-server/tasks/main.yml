@@ -1,10 +1,6 @@
 ---
 # Description: Run all home-server applications
-# We first make sure that docker is running properly
-- name: Docker is running
-  service:
-    name: docker
-    state: started
+- import_tasks: docker-setup.yml
 
 - name: Run 'Watchtower' - Docker Container
   docker_container:
