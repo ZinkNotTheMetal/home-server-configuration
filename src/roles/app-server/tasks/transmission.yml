@@ -41,3 +41,4 @@
       - 9091:9091
     labels:
       com.centurylinklabs.watchtower.enable: "true"
+    container_default_behavior: compatibility

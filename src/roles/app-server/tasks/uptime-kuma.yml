@@ -26,3 +26,4 @@
       - 3001:3001
     labels:
       com.centurylinklabs.watchtower.enable: "true"
+    container_default_behavior: compatibility
