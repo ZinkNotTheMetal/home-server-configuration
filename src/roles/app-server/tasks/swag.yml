@@ -56,12 +56,54 @@
     owner: william
     group: william
 
-- name: Change subdomain to 'up.*''
+- name: Change subdomain to 'up.*'' for uptime-kuma
   become: true
   replace:
     path: "{{ cert_manager_folder_location }}/nginx/proxy-confs/uptime-kuma.subdomain.conf.sample"
     regexp: "uptime-kuma.*"
     replace: up.*
 
+- name: Load 'mealie.conf'
+  become: true
+  copy:
+    src: "{{ cert_manager_folder_location }}/nginx/proxy-confs/mealie.subdomain.conf.sample"
+    dest: "{{ cert_manager_folder_location }}/nginx/proxy-confs/mealie.subdomain.conf"
+    remote_src: true
+    mode: "0755"
+    owner: william
+    group: william
 
+- name: Change subdomain to 'photos.*'' for piwigo
+  become: true
+  replace:
+    path: "{{ cert_manager_folder_location }}/nginx/proxy-confs/piwigo.subdomain.conf.sample"
+    regexp: "piwigo.*"
+    replace: photos.*
+
+- name: Load 'piwigo.conf'
+  become: true
+  copy:
+    src: "{{ cert_manager_folder_location }}/nginx/proxy-confs/piwigo.subdomain.conf.sample"
+    dest: "{{ cert_manager_folder_location }}/nginx/proxy-confs/piwigo.subdomain.conf"
+    remote_src: true
+    mode: "0755"
+    owner: william
+    group: william
+
+- name: Change subdomain to 'wiki.*''
+  become: true
+  replace:
+    path: "{{ cert_manager_folder_location }}/nginx/proxy-confs/dokuwiki.subdomain.conf.sample"
+    regexp: "dokuwiki.*"
+    replace: wiki.*
+
+- name: Load 'dockuwiki.conf'
+  become: true
+  copy:
+    src: "{{ cert_manager_folder_location }}/nginx/proxy-confs/dokuwiki.subdomain.conf.sample"
+    dest: "{{ cert_manager_folder_location }}/nginx/proxy-confs/dokuwiki.subdomain.conf"
+    remote_src: true
+    mode: "0755"
+    owner: william
+    group: william
 ##################################################################################################

@@ -25,24 +25,6 @@
     mode: "0777"
     fstype: nfs
 
-- name: Change subdomain to 'photos.*''
-  become: true
-  replace:
-    path: "{{ cert_manager_folder_location }}/nginx/proxy-confs/piwigo.subdomain.conf.sample"
-    regexp: "piwigo.*"
-    replace: photos.*
-
-- name: Load 'dockuwiki.conf'
-  become: true
-  copy:
-    src: "{{ cert_manager_folder_location }}/nginx/proxy-confs/piwigo.subdomain.conf.sample"
-    dest: "{{ cert_manager_folder_location }}/nginx/proxy-confs/piwigo.subdomain.conf"
-    remote_src: true
-    mode: "0755"
-    owner: william
-    group: william
-
-
 - name: Create Piwigo Directories
   file:
     path: "{{ item }}"

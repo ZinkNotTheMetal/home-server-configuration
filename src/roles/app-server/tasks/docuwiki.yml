@@ -24,24 +24,6 @@
     state: mounted
     fstype: nfs
 
-- name: Change subdomain to 'wiki.*''
-  become: true
-  replace:
-    path: "{{ cert_manager_folder_location }}/nginx/proxy-confs/dokuwiki.subdomain.conf.sample"
-    regexp: "dokuwiki.*"
-    replace: wiki.*
-
-- name: Load 'dockuwiki.conf'
-  become: true
-  copy:
-    src: "{{ cert_manager_folder_location }}/nginx/proxy-confs/dokuwiki.subdomain.conf.sample"
-    dest: "{{ cert_manager_folder_location }}/nginx/proxy-confs/dokuwiki.subdomain.conf"
-    remote_src: true
-    mode: "0755"
-    owner: william
-    group: william
-
-
 - name: Run 'DokuWiki' Docker Container
   docker_container:
     name: wiki
