@@ -1,0 +1,6 @@
+---
+- hosts: nut-host
+  roles:
+    - role: nut-host
+      tag:
+        - nut

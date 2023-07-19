@@ -1,6 +1,0 @@
----
-- name: Ensure 'at' is installed
-  become: true
-  apt:
-    name: at
-    state: latest

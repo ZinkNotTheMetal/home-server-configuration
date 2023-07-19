@@ -1,6 +1,0 @@
----
-- name: "Install 'net-tools'"
-  become: true
-  apt:
-    name: net-tools
-    state: latest

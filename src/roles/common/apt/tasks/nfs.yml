@@ -1,6 +1,0 @@
----
-- name: Install 'nfs' - file sharing
-  become: true
-  apt:
-    name: nfs-common
-    state: latest

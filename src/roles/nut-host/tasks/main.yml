@@ -1,4 +1,6 @@
 ---
+# Description:
+# Install and configure Network UPS Tools (NUT) for host
 - import_tasks: install.yml
 
 - import_tasks: configure.yml

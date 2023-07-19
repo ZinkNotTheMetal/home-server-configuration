@@ -1,0 +1,62 @@
+---
+# Description
+# Create and start internal wiki page
+---
+- name: Ensure '/mnt/nas' is created
+  become: true
+  file:
+    path: "/mnt/nas/wiki"
+    state: directory
+    mode: "0777"
+    owner: root
+    group: root
+
+# Test mount
+#  sudo mount -t nfs 10.10.0.10:/volume1/Media/Movies /mnt/nas/movies
+# Test unmount
+#  sudo umount 10.10.0.10:/backups
+- name: Mount 'wiki'
+  become: true
+  become_user: william
+  become_method: sudo
+  mount:
+    src: "{{ nas_ip }}:/volume1/Wiki"
+    path: /mnt/nas/wiki
+    state: mounted
+    fstype: nfs
+
+- name: Change subdomain to 'wiki.*''
+  become: true
+  replace:
+    path: "{{ docker_host_location }}/nginx/proxy-confs/dokuwiki.subdomain.conf.sample"
+    regexp: "dokuwiki.*"
+    replace: wiki.*
+
+- name: Load 'dockuwiki.conf'
+  become: true
+  copy:
+    src: "{{ docker_host_location }}/nginx/proxy-confs/dokuwiki.subdomain.conf.sample"
+    dest: "{{ docker_host_location }}/nginx/proxy-confs/dokuwiki.subdomain.conf"
+    remote_src: true
+    mode: "0755"
+    owner: william
+    group: william
+
+
+- name: Run 'DokuWiki' Docker Container
+  docker_container:
+    name: wiki
+    image: linuxserver/dokuwiki:latest
+    restart_policy: unless-stopped
+    pull: true
+    networks:
+      - name: port-freedom
+        ipv4_address: "{{ dokuwiki_container_ip }}"
+    volumes:
+      - "/mnt/nas/wiki:/config/dokuwiki/data:rw"
+    env:
+      TZ: "{{ time_zone }}"
+      PUID: 1000
+      PGID: 1000
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"

@@ -1,6 +1,0 @@
----
-- name: Load 'nas.conf'
-  become: true
-  template:
-    src: nas.subdomain.conf
-    dest: "{{ docker_host_location }}/nginx/proxy-confs"

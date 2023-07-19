@@ -1,0 +1,6 @@
+---
+- hosts: app-server
+  roles:
+    - role: app-server
+      tag:
+        - app-server

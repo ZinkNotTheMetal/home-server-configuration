@@ -1,0 +1,96 @@
+---
+# Setup sudoers
+# Description: Replace sudoers so that users can become su with sudo command
+# Replace sudoers file with files/sudoers
+- name: Ensure /etc/sudoers.d exists
+  become: true
+  file:
+    path: "/etc/sudoers.d"
+    state: directory
+    owner: root
+    group: root
+
+- name: "Configure sudoers"
+  become: true
+  copy:
+    src: "sudoers"
+    dest: "/etc/sudoers.d/sudoers"
+    mode: 0440
+    owner: root
+    group: root
+    validate: "/usr/sbin/visudo -csf %s"
+
+- name: "Install 'sudo'"
+  become: true
+  apt:
+    name: sudo
+    state: latest
+
+- name: Upgrade the system
+  become: true
+  apt:
+    update_cache: yes
+    upgrade: dist
+
+- name: Install zsh and shell completions
+  become: true
+  apt:
+    name: ["zsh", "bash-completion"]
+    state: latest
+
+- name: Install htop
+  become: true
+  apt:
+    name: htop
+    state: latest
+
+- name: Install curl
+  become: true
+  apt:
+    name: curl
+    state: latest
+
+- name: "Install 'net-tools'"
+  become: true
+  apt:
+    name: net-tools
+    state: latest
+
+- name: Install 'nfs' - file sharing
+  become: true
+  apt:
+    name: nfs-common
+    state: latest
+
+- name: Ensure 'at' is installed
+  become: true
+  apt:
+    name: at
+    state: latest
+
+- name: "Install git"
+  become: true
+  apt:
+    name: git
+    state: latest
+
+- name: Install NodeJS (stable)
+  become: true
+  apt:
+    name: ["nodejs", "npm"]
+    state: latest
+
+- name: Node version & NPM version
+  shell: "npm -v && node -v"
+  register: versioninfo
+
+- name: Version Info
+  debug:
+    msg: "Version info {{ versioninfo.stdout_lines }}"
+  when: versioninfo is changed
+
+- name: Install 'samba' - file sharing
+  become: true
+  apt:
+    name: samba
+    state: latest

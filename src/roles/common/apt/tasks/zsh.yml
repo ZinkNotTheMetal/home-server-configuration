@@ -1,6 +1,0 @@
----
-- name: Install zsh and shell completions
-  become: true
-  apt:
-    name: ["zsh", "bash-completion"]
-    state: latest

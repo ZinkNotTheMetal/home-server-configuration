@@ -1,0 +1,26 @@
+docker run -d \
+-p 32400:32400/tcp \
+-p 3005:3005/tcp \
+-p 8324:8324/tcp \
+-p 32469:32469/tcp \
+-p 1900:1900/udp \
+-p 32410:32410/udp \
+-p 32412:32412/udp \
+-p 32413:32413/udp \
+-p 32414:32414/udp \
+-v "/var/run/docker.sock:/var/run/docker.sock" \
+-v "/docker/plex:/config" \
+-v "/docker/plex/transcode:/transcode" \
+-v "/etc/timezone:/etc/timezone:ro" \
+-v "/mnt/nas/movies:/Movies" \
+-v "/mnt/nas/tv:/TV" \
+-e TZ=America/New_York \
+-e VERSION=docker \
+-e PUID=1000 \
+-e PGID=1000 \
+-l "com.centurylinklabs.watchtower.enable"=true \
+--network curidge \
+--cap-add NET_ADMIN \
+--restart unless-stopped \
+--name plex \
+lscr.io/linuxserver/plex
