@@ -50,7 +50,7 @@
 - name: Docker is running
   service:
     name: docker
-    state: started
+    state: running
 
 - name: Find physical network adapter
   command: find /sys/class/net -type l -not -lname '*virtual*' -printf '%f\n'
