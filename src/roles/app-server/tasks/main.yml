@@ -19,6 +19,7 @@
       WATCHTOWER_LABEL_ENABLE: "true"
     labels:
       com.centurylinklabs.watchtower.enable: "true"
+    container_default_behavior: compatibility
 
 - import_tasks: portainer.yml
 
