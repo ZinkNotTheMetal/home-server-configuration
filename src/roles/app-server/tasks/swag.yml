@@ -24,10 +24,10 @@
       PUID: "1000"
       PGID: "1000"
       TZ: "{{ time_zone }}"
-      URL: "{{ dns_to_renew }}"
+      URL: "{{ duckdns_url }}"
       SUBDOMAINS: wildcard
       VALIDATION: "{{ dns_provider }}"
-      DUCKDNSTOKEN: "{{ dns_token }}"
+      DUCKDNSTOKEN: "{{ duckdns_token }}"
       EMAIL: "{{ contact_email }}"
     capabilities:
       - NET_ADMIN
