@@ -20,6 +20,7 @@
     labels:
       com.centurylinklabs.watchtower.enable: "true"
 
+- import_tasks: portainer.yml
 
 #- import_tasks: swag.yml
 
