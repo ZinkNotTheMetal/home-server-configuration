@@ -16,6 +16,8 @@
     image: portainer/portainer-ce
     restart_policy: unless-stopped
     pull: true
+    container_default_behavior: compatiblity
+    network_mode: curidge
     networks:
       - name: curidge
     volumes:
