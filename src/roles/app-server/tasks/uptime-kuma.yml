@@ -1,7 +1,6 @@
 ---
 # Description:
 # Uptime kuma running on app-server
-
 - name: Ensure '/docker/uptime-kuma' is created
   become: true
   file:

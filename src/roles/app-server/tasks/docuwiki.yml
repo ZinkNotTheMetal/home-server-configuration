@@ -1,7 +1,6 @@
 ---
 # Description
 # Create and start internal wiki page
----
 - name: Ensure '/mnt/nas' is created
   become: true
   file:
