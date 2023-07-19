@@ -1,7 +1,6 @@
 ---
 # Description:
 # Start & run Plex Media Center
----
 - name: Ensure '/mnt/nas' is created
   become: true
   file:
