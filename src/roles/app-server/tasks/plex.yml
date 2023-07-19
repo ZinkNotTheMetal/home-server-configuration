@@ -50,7 +50,7 @@
       - "/docker/plex/transcode:/transcode"
       - "/etc/timezone:/etc/timezone:ro"
       - "/mnt/nas/movies:/Movies"
-      - "/mnt/nas/tv:/TV Shows"
+      - "/mnt/nas/tv:/TV"
     env:
       PUID: "1000"
       PGID: "1000"
