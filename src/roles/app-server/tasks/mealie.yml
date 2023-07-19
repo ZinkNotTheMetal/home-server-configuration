@@ -21,7 +21,7 @@
       RECIPE_LANDSCAPE_VIEW: "true"
       RECIPE_DISABLE_COMMENTS: "false"
       RECIPE_DISABLE_AMOUNT: "false"
-      BASE_URL: "mealie.{{ dns_to_renew }}"
+      BASE_URL: "mealie.{{ duckdns_url }}"
     restart_policy: unless-stopped
     labels:
       com.centurylinklabs.watchtower.enable: "true"

@@ -63,6 +63,16 @@
     regexp: "uptime-kuma.*"
     replace: up.*
 
+- name: Load 'uptime-kuma.conf'
+  become: true
+  copy:
+    src: "{{ cert_manager_folder_location }}/nginx/proxy-confs/uptime-kuma.subdomain.conf.sample"
+    dest: "{{ cert_manager_folder_location }}/nginx/proxy-confs/uptime-kuma.subdomain.conf"
+    remote_src: true
+    mode: "0755"
+    owner: william
+    group: william
+
 - name: Load 'mealie.conf'
   become: true
   copy:
@@ -102,6 +112,16 @@
   copy:
     src: "{{ cert_manager_folder_location }}/nginx/proxy-confs/dokuwiki.subdomain.conf.sample"
     dest: "{{ cert_manager_folder_location }}/nginx/proxy-confs/dokuwiki.subdomain.conf"
+    remote_src: true
+    mode: "0755"
+    owner: william
+    group: william
+
+- name: Load 'tautulli.conf'
+  become: true
+  copy:
+    src: "{{ cert_manager_folder_location }}/nginx/proxy-confs/tautulli.subdomain.conf.sample"
+    dest: "{{ cert_manager_folder_location }}/nginx/proxy-confs/tautulli.subdomain.conf"
     remote_src: true
     mode: "0755"
     owner: william

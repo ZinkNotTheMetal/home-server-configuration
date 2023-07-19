@@ -29,6 +29,8 @@
 
 - import_tasks: plex.yml
 
+- import_tasks: tautulli.yml
+
 - import_tasks: mealie.yml
 
 - import_tasks: docuwiki.yml

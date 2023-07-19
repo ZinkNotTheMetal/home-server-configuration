@@ -61,6 +61,8 @@
       - name: port-freedom
         ipv4_address: "{{ piwigo_container_ip }}"
     volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "/etc/timezone:/etc/timezone:ro"      
       - "/docker/piwigo/config:/config:rw"
       - "/mnt/nas/photos:/gallery:rw"
     links:
