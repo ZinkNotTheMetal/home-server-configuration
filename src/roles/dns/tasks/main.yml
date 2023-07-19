@@ -10,6 +10,11 @@
 
 - import_tasks: setup-dns.yml
 
+- name: Docker is running
+  service:
+    name: docker
+    state: started
+
 - name: Run 'Pi-Hole' - Docker Container
   docker_container:
     name: pihole

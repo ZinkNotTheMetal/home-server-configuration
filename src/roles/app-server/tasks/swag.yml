@@ -3,7 +3,7 @@
 - name: Create nginx data volume
   become: true
   file:
-    path: "{{ docker_host_location }}"
+    path: "{{ cert_manager_folder_location }}"
     state: directory
     mode: "0755"
     owner: root
@@ -12,7 +12,7 @@
   become: true
   template:
     src: nas.subdomain.conf
-    dest: "{{ docker_host_location }}/nginx/proxy-confs"
+    dest: "{{ cert_manager_folder_location }}/nginx/proxy-confs"
 
 - name: Run 'swag' - Docker Container
   docker_container:
@@ -24,7 +24,7 @@
     pull: true
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
-      - "{{ docker_host_location }}:/config"
+      - "{{ cert_manager_folder_location }}:/config"
       - "/etc/timezone:/etc/timezone:ro"
     env:
       PUID: "1000"

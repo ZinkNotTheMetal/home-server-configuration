@@ -4,8 +4,8 @@
 - name: Load 'tautulli.conf'
   become: true
   copy:
-    src: "{{ docker_host_location }}/nginx/proxy-confs/tautulli.subdomain.conf.sample"
-    dest: "{{ docker_host_location }}/nginx/proxy-confs/tautulli.subdomain.conf"
+    src: "{{ cert_manager_folder_location }}/nginx/proxy-confs/tautulli.subdomain.conf.sample"
+    dest: "{{ cert_manager_folder_location }}/nginx/proxy-confs/tautulli.subdomain.conf"
     remote_src: true
     mode: "0755"
     owner: william

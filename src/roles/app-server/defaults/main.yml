@@ -1,1 +1,1 @@
-docker_host_location: /docker/dns-cert-manager
+cert_manager_folder_location: /docker/dns-cert-manager
