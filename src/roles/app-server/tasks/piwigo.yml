@@ -16,8 +16,6 @@
 #  sudo umount 10.10.0.10:/backups
 - name: Mount 'Photos'
   become: true
-  become_user: '{{ ansible_user }}'
-  become_method: sudo
   mount:
     src: "{{ nas_ip }}:/volume1/Photos"
     path: /mnt/nas/photos
