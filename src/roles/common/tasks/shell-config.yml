@@ -32,17 +32,28 @@
     owner: root
     group: root
 
-- name: Get 'zsh-syntax-highlighting' plugin with apt
-  become: true
-  apt:
-    name: zsh-syntax-highlighting
-    state: latest
+# Get plugins for zsh
+- name: Get 'zsh-syntax-highlighting' plugin from git
+  git:
+    repo: git@github.com:zsh-users/zsh-syntax-highlighting.git
+    dest: "/home/{{ user_name }}/zsh-plugins/zsh-syntax-highlighting"
 
-- name: Get 'zsh-autosuggestions' plugin with apt
-  become: true
-  apt:
-    name: zsh-autosuggestions
-    state: latest
+- name: Get 'zsh-autosuggestions' plugin
+  git:
+    repo: git@github.com:zsh-users/zsh-autosuggestions.git
+    dest: "/home/{{ user_name }}/zsh-plugins/zsh-autosuggestions"
+
+- name: Put 'zsh-syntax-highlighting' plugin in '/home/{{ user_name }}/{{ zsh_plugin_location }}'
+  copy:
+    remote_src: yes
+    src: /home/{{ user_name }}/zsh-plugins/zsh-syntax-highlighting
+    dest: "/home/{{ user_name }}/{{ zsh_plugin_location }}/"
+
+- name: Put 'zsh-autosuggestions' plugin in '/home/{{ user_name }}/{{ zsh_plugin_location }}'
+  copy:
+    remote_src: yes
+    src: /home/{{ user_name }}/zsh-plugins/zsh-autosuggestions
+    dest: "/home/{{ user_name }}/{{ zsh_plugin_location }}/"
 
 - name: Add customization to '.zshrc' file
   blockinfile:
@@ -66,7 +77,7 @@
       # Load ; should be last.
       source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
 
-- name: Customize 'user name' for bureau theme in oh-my-zsh
+- name: Customize '{{ user_name }}' for bureau theme in oh-my-zsh
   replace:
     path: /home/{{ user_name }}/.oh-my-zsh/themes/bureau.zsh-theme
     regexp: "(_USERNAME=\"\\%{\\$fg_bold\\[white)(.*)$"
