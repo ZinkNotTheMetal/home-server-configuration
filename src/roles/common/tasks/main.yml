@@ -15,6 +15,9 @@
     owner: root
     group: root
 
+# Install apps & software with apt
+- import_tasks: apt.yml
+
 ## This configures everything for .zsh and your profile
 ## This requires {{ user_name }} to be your linux login username
 ## Requirements:
@@ -31,11 +34,6 @@
 ## Requirements:
 ## - files/99-com.rules
 - import_tasks: setup-udev-rules.yml
-
-# Install apps & software with apt
-# Requirements:
-# - files/sudoers
-- import_tasks: apt.yml
 
 # Configure samba with template
 # Requirements:

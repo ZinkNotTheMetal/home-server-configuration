@@ -1,43 +1,6 @@
 ---
 # Setup sudoers
 # Description: Replace sudoers so that users can become su with sudo command
-# Replace sudoers file with files/sudoers
-- name: Ensure /etc/sudoers.d exists
-  become: true
-  file:
-    path: "/etc/sudoers.d"
-    state: directory
-    owner: root
-    group: root
-
-- name: "Configure sudoers"
-  become: true
-  copy:
-    src: "sudoers"
-    dest: "/etc/sudoers.d/sudoers"
-    mode: 0440
-    owner: root
-    group: root
-    validate: "/usr/sbin/visudo -csf %s"
-
-- name: "Install 'sudo'"
-  become: true
-  apt:
-    name: sudo
-    state: latest
-
-- name: Upgrade the system
-  become: true
-  apt:
-    update_cache: yes
-    upgrade: dist
-
-- name: Install zsh and shell completions
-  become: true
-  apt:
-    name: ["zsh", "bash-completion"]
-    state: latest
-
 - name: Install htop
   become: true
   apt:
