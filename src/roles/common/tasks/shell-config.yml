@@ -32,27 +32,17 @@
     owner: root
     group: root
 
-- name: Get 'zsh-syntax-highlighting' plugin
-  git:
-    repo: git@github.com:zsh-users/zsh-syntax-highlighting.git
-    dest: "/home/{{ user_name }}/git/zsh-syntax-highlighting"
+- name: Get 'zsh-syntax-highlighting' plugin with apt
+  become: true
+  apt:
+    name: zsh-syntax-highlighting
+    state: latest
 
-- name: Move syntax highlight plugin
-  copy:
-    remote_src: yes
-    src: /home/{{ user_name }}/git/zsh-syntax-highlighting
-    dest: "/home/{{ user_name }}/{{ zsh_plugin_location }}/"
-
-- name: Get 'zsh-autosuggestions' plugin
-  git:
-    repo: git@github.com:zsh-users/zsh-autosuggestions.git
-    dest: "/home/{{ user_name }}/git/zsh-autosuggestions"
-
-- name: Move autosuggestions plugin
-  copy:
-    remote_src: yes
-    src: /home/{{ user_name }}/git/zsh-autosuggestions
-    dest: "/home/{{ user_name }}/{{ zsh_plugin_location }}/"
+- name: Get 'zsh-autosuggestions' plugin with apt
+  become: true
+  apt:
+    name: zsh-autosuggestions
+    state: latest
 
 - name: Add customization to '.zshrc' file
   blockinfile:
