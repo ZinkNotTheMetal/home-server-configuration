@@ -1,0 +1,22 @@
+---
+# Description:
+# Load and configure plex assistant tautulli
+- name: Run 'tautulli' - Docker Container
+  docker_container:
+    name: tautulli
+    image: tautulli/tautulli
+    restart_policy: unless-stopped
+    networks:
+      - name: port-freedom
+        ipv4_address: "{{ tautulli_container_ip }}"
+    pull: true
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "/docker/tautulli:/config"
+      - "/etc/timezone:/etc/timezone:ro"
+    env:
+      PUID: "1000"
+      PGID: "1000"
+      TZ: "{{ time_zone }}"
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"

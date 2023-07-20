@@ -1,0 +1,9 @@
+---
+# Site.yml - also known as the master playbook that will drive the roles
+# Documentation on playbooks
+# https://docs.ansible.com/ansible/latest/tips_tricks/sample_setup.html#sample-playbooks-organized-by-function
+
+- import_playbook: common.yml
+- import_playbook: dns-host.yml
+- import_playbook: nut.yml
+- import_playbook: app-server.yml

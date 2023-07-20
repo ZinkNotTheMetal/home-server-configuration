@@ -1,0 +1,9 @@
+---
+# Configure samba is configured correctly
+- name: Ensure the 'samba' config is loaded
+  become: true
+  template:
+    src: smb.conf
+    dest: /etc/samba/smb.conf
+    owner: root
+    group: root

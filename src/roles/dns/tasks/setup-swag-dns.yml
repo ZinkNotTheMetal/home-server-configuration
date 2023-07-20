@@ -1,0 +1,10 @@
+---
+- name: Load 'pihole.conf'
+  become: true
+  copy:
+    src: "{{ cert_manager_folder_location }}/nginx/proxy-confs/pihole.subdomain.conf.sample"
+    dest: "{{ cert_manager_folder_location }}/nginx/proxy-confs/pihole.subdomain.conf"
+    remote_src: true
+    mode: "0755"
+    owner: william
+    group: william

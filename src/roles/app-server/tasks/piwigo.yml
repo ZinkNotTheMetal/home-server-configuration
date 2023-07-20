@@ -1,0 +1,74 @@
+---
+# Description:
+# Load piwigo to backup photos using open source solution
+- name: Ensure '/mnt/nas/photos' is created
+  become: true
+  file:
+    path: "/mnt/nas/photos"
+    state: directory
+    mode: "0777"
+    owner: root
+    group: root
+
+# Test mount
+#  sudo mount -t nfs 10.10.0.10:/volume1/Media/Movies /mnt/nas/movies
+# Test unmount
+#  sudo umount 10.10.0.10:/backups
+- name: Mount 'Photos'
+  become: true
+  mount:
+    src: "{{ nas_ip }}:/volume1/Photos"
+    path: "/mnt/nas/photos"
+    state: mounted
+    fstype: nfs
+
+- name: Create Piwigo Directories
+  become: true
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: "0777"
+  with_items:
+    - "/docker/piwigo/config"
+    - "/docker/piwigo/data"
+
+- name: Create MySQL container for Piwigo
+  docker_container:
+    name: piwigo-mysql
+    image: mysql:5.7
+    pull: true
+    networks:
+      - name: port-freedom
+        ipv4_address: "{{ piwigo_mysql_ip }}"
+    volumes:
+      - "/docker/piwigo/data/mysql:/var/lib/mysql:rw"
+    env:
+      MYSQL_DATABASE: piwigo
+      MYSQL_USER: "{{ piwigo_mysql_user }}"
+      MYSQL_PASSWORD: "{{ piwigo_mysql_password }}"
+      MYSQL_ROOT_PASSWORD: "{{ piwigo_root_mysql_password }}"
+    restart_policy: unless-stopped
+
+- name: Piwigo Docker Container
+  docker_container:
+    name: piwigo
+    image: linuxserver/piwigo
+    pull: true
+    networks:
+      - name: port-freedom
+        ipv4_address: "{{ piwigo_container_ip }}"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/docker/piwigo/config:/config:rw"
+      - "/mnt/nas/photos:/gallery:rw"
+    links:
+      - piwigo-mysql:db
+    env:
+      TZ: "{{ time_zone }}"
+      PUID: "1000"
+      PGID: "1000"
+      VERSION: "docker"
+    restart_policy: unless-stopped
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"

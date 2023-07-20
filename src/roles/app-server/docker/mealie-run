@@ -1,0 +1,18 @@
+docker run -d \
+-p 7084:80/tcp \
+-v "/var/run/docker.sock:/var/run/docker.sock" \
+-v "/docker/mealie:/app/data:rw" \
+-e TZ=America/New_York \
+-e PUID=1000 \
+-e PGID=1000 \
+-e RECIPE_PUBLIC=true \
+-e RECIPE_SHOW_NUTRITION=true \
+-e RECIPE_SHOW_ASSETS=true \
+-e RECIPE_DISABLE_COMMENTS=false \
+-e RECIPE_DISABLE_AMOUNT=false \
+-e BASE_URL=mealie.zinknotthemetal.duckdns.org \
+-l "com.centurylinklabs.watchtower.enable"=true \
+--network curidge \
+--name mealie \
+--restart unless-stopped \
+hkotel/mealie:latest

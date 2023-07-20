@@ -1,0 +1,20 @@
+---
+# Loads the proper subdomain from nginx
+- name: Run 'Portainer' - Docker Container
+  docker_container:
+    name: portainer
+    image: portainer/portainer-ce
+    restart_policy: unless-stopped
+    pull: true
+    networks:
+      - name: curidge
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+      - "/docker/portainer:/data"
+    ports:
+      - 9000:9000
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
+    container_default_behavior: compatibility

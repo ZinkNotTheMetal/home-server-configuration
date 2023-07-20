@@ -1,0 +1,40 @@
+---
+# Description: Run all home-server applications
+- import_tasks: docker-setup.yml
+
+- name: Run 'Watchtower' - Docker Container
+  docker_container:
+    name: watchtower
+    image: containrrr/watchtower
+    restart_policy: unless-stopped
+    networks:
+      - name: curidge
+    pull: true
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "/etc/timezone:/etc/timezone:ro"
+    env:
+      WATCHTOWER_CLEANUP: "true"
+      WATCHTOWER_INCLUDE_RESTARTING: "true"
+      WATCHTOWER_LABEL_ENABLE: "true"
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
+    container_default_behavior: compatibility
+
+- import_tasks: portainer.yml
+
+- import_tasks: uptime-kuma.yml
+
+- import_tasks: transmission.yml
+
+- import_tasks: plex.yml
+
+- import_tasks: tautulli.yml
+
+- import_tasks: mealie.yml
+
+- import_tasks: docuwiki.yml
+
+- import_tasks: piwigo.yml
+
+- import_tasks: swag.yml

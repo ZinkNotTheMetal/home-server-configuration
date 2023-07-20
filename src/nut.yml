@@ -1,0 +1,8 @@
+---
+- hosts: nut-host
+  vars_files:
+    - "vars.yml"
+  roles:
+    - role: nut-host
+      tag:
+        - nut

@@ -1,0 +1,36 @@
+---
+# Description:
+# Creates a docker container that runs pi-hole on the dns role
+- name: Docker is running
+  service:
+    name: docker
+    state: started
+
+- name: Run 'Pi-Hole' - Docker Container
+  docker_container:
+    name: pihole
+    image: pihole/pihole
+    restart_policy: unless-stopped
+    networks:
+      - name: port-freedom
+        ipv4_address: "{{ pi_hole_container_ip }}"
+    pull: true
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "/docker/pihole/etc:/etc/pihole"
+      - "/docker/pihole/etc-dnsmasq.d:/etc/dnsmasq.d"
+      - "/etc/timezone:/etc/timezone:ro"
+    env:
+      TZ: "{{ time_zone }}"
+      WEBPASSWORD: "{{ pi_hole_password }}"
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
+
+- import_tasks: setup-swag-dns.yml
+
+- name: Import custom DNS entries
+  become: true
+  template:
+    src: custom.list
+    dest: /docker/pihole/etc/custom.list
+    mode: "0777"

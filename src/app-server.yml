@@ -1,0 +1,8 @@
+---
+- hosts: app-server
+  vars_files:
+    - "vars.yml"
+  roles:
+    - role: app-server
+      tag:
+        - app-server
