@@ -1,6 +1,6 @@
 ---
 # Description: Run all home-server applications
-# - import_tasks: docker-setup.yml
+- import_tasks: docker-setup.yml
 
 - name: Run 'Watchtower' - Docker Container
   docker_container:

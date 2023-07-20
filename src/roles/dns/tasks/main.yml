@@ -28,6 +28,7 @@
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "/docker/pihole/etc:/etc/pihole"
       - "/docker/pihole/etc-dnsmasq.d:/etc/dnsmasq.d"
+      - "/etc/timezone:/etc/timezone:ro"
     env:
       TZ: "{{ time_zone }}"
       WEBPASSWORD: "{{ pi_hole_password }}"

@@ -31,7 +31,6 @@
   with_items:
     - "/docker/piwigo/config"
     - "/docker/piwigo/data"
-    - "/mnt/nas/photos"
 
 - name: Create MySQL container for Piwigo
   docker_container:
@@ -60,7 +59,7 @@
         ipv4_address: "{{ piwigo_container_ip }}"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
-      - "/etc/timezone:/etc/timezone:ro"      
+      - "/etc/timezone:/etc/timezone:ro"
       - "/docker/piwigo/config:/config:rw"
       - "/mnt/nas/photos:/gallery:rw"
     links:
