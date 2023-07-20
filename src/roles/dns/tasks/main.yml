@@ -1,13 +1,6 @@
 ---
 # Description:
 # Creates a docker container that runs pi-hole on the dns role
-- name: Import custom DNS entries
-  become: true
-  template:
-    src: custom.list
-    dest: /docker/pihole/etc/custom.list
-    mode: "0777"
-
 - name: Docker is running
   service:
     name: docker
@@ -33,4 +26,11 @@
     labels:
       com.centurylinklabs.watchtower.enable: "true"
 
-- import_tasks: setup-dns.yml
+- import_tasks: setup-swag-dns.yml
+
+- name: Import custom DNS entries
+  become: true
+  template:
+    src: custom.list
+    dest: /docker/pihole/etc/custom.list
+    mode: "0777"
