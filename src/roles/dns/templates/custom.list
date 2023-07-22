@@ -10,3 +10,4 @@
 {{ ha_container_ip }} home.{{ duckdns_url }}
 {{ nr_container_ip }} node-red.{{ duckdns_url }}
 {{ mqtt_container_ip }} mqtt.{{ duckdns_url }}
+{{ portainer_container_ip }} portainer.{{ duckdns_url }}
