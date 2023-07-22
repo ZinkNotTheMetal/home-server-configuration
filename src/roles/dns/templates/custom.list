@@ -7,3 +7,6 @@
 {{ piwigo_container_ip }} photos.{{ duckdns_url }}
 {{ node_red_container_ip }} node-red.{{ duckdns_url }}
 {{ ansible_host }} up.{{ duckdns_url }}
+{{ ha_container_ip }} home.{{ duckdns_url }}
+{{ nr_container_ip }} node-red.{{ duckdns_url }}
+{{ mqtt_container_ip }} mqtt.{{ duckdns_url }}
