@@ -34,7 +34,7 @@
   become: true
   template:
     src: upsmon.conf
-    dest: /etc/nut/upsd.conf
+    dest: /etc/nut/upsmon.conf
     owner: root
     group: root
 
