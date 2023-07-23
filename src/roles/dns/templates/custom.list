@@ -6,7 +6,7 @@
 {{ ansible_host }} mealie.{{ duckdns_url }}
 {{ ansible_host }} photos.{{ duckdns_url }}
 {{ ansible_host }} node-red.{{ duckdns_url }}
-{{ ansible_host }} up.{{ duckdns_url }}
+{{ ansible_host }} uptime.{{ duckdns_url }}
 {{ ansible_host }} home.{{ duckdns_url }}
 {{ ansible_host }} node-red.{{ duckdns_url }}
 {{ ansible_host }} mqtt.{{ duckdns_url }}
