@@ -54,8 +54,8 @@
   become: true
   replace:
     path: "{{ cert_manager_folder_location }}/nginx/proxy-confs/uptime-kuma.subdomain.conf.sample"
-    regexp: "uptime-kuma.*"
-    replace: uptime.*
+    regexp: "uptime-kuma"
+    replace: uptime
 
 - name: Load 'uptime-kuma.conf'
   become: true
@@ -81,8 +81,8 @@
   become: true
   replace:
     path: "{{ cert_manager_folder_location }}/nginx/proxy-confs/piwigo.subdomain.conf.sample"
-    regexp: "piwigo.*"
-    replace: photos.*
+    regexp: "server_name piwigo.*;"
+    replace: server_name photos.*;
 
 - name: Load 'piwigo.conf'
   become: true
@@ -98,8 +98,8 @@
   become: true
   replace:
     path: "{{ cert_manager_folder_location }}/nginx/proxy-confs/dokuwiki.subdomain.conf.sample"
-    regexp: "dokuwiki.*"
-    replace: wiki.*
+    regexp: "server_name dokuwiki.*;"
+    replace: server_name wiki.*;
 
 # TODO @WZ: Change all instances of dokuwiki -> wiki (since that's the container name)
 # - Also change IP to container IP
