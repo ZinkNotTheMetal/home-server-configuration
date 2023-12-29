@@ -10,7 +10,7 @@
 
 - name: Run 'swag' - Docker Container
   docker_container:
-    name: dns-cert-manager
+    name: swag
     image: ghcr.io/linuxserver/swag
     restart_policy: unless-stopped
     networks:
