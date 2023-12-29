@@ -46,3 +46,15 @@
     owner: root
     group: root
     mode: ugo=rwx
+
+# Ensure this has permissions or you will get
+# Access Denied
+- name: Ensure nut user owns all Directories
+  become: true
+  file:
+    path: "/etc/nut"
+    state: directory
+    recurse: yes
+    mode: "0777"
+    owner: nut
+    group: nut
