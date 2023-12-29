@@ -23,16 +23,17 @@
     group: root
 
 
-- name: Create MySQL container for Traccar
+- name: Create database container for Traccar
   docker_container:
-    name: traccar-mysql
-    image: mysql:5.7
+    name: traccar-db
+    image: yobasystems/alpine-mariadb
     pull: true
     networks:
       - name: port-freedom
         ipv4_address: "{{ traccar_db_container_ip }}"
     volumes:
       - "/docker/traccar/data/mysql:/var/lib/mysql:rw"
+      - "/docker/traccar/conf:/etc/mysql/conf.d"
     env:
       MYSQL_DATABASE: traccar
       MYSQL_USER: "{{ traccar_mysql_user }}"
@@ -57,8 +58,6 @@
       - traccar-mysql:db
     env:
       TZ: "{{ time_zone }}"
-      PUID: "1000"
-      PGID: "1000"
       VERSION: "docker"
     restart_policy: unless-stopped
     labels:
