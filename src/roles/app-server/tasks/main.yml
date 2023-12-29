@@ -40,5 +40,3 @@
 - import_tasks: piwigo.yml
 
 - import_tasks: traccar.yml
-
-- import_tasks: esphome.yml
