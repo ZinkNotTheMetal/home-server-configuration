@@ -12,7 +12,7 @@
 
 - name: Run 'Uptime-Kuma' - Docker Container
   docker_container:
-    name: uptime-kuma
+    name: uptime
     image: louislam/uptime-kuma
     restart_policy: unless-stopped
     pull: true
