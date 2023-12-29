@@ -80,6 +80,7 @@
   docker_network:
     name: port-freedom
     driver: ipvlan
+    scope: global
     driver_options:
       parent: "{{ physical_interfaces_cmd.stdout_lines[0] }}"
       ipvlan_mode: l3
