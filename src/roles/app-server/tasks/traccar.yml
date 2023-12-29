@@ -1,0 +1,65 @@
+# Traccar Documentation
+# https://github.com/traccar/traccar-docker?tab=readme-ov-file
+# https://www.traccar.org/documentation/
+
+- name: Create Traccar Directories
+  become: true
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: "0777"
+  with_items:
+    - "/docker/traccar/config"
+    - "/docker/traccar/logs"
+    - "/docker/traccar/data"
+
+# Move traccar template to /docker/traccar/config/
+- name: Ensure the 'traccar' config is loaded
+  become: true
+  template:
+    src: traccar.conf
+    dest: /docker/traccar/config/traccar.conf
+    owner: root
+    group: root
+
+
+- name: Create MySQL container for Traccar
+  docker_container:
+    name: traccar-mysql
+    image: mysql:5.7
+    pull: true
+    networks:
+      - name: port-freedom
+        ipv4_address: "{{ traccar_db_container_ip }}"
+    volumes:
+      - "/docker/traccar/data/mysql:/var/lib/mysql:rw"
+    env:
+      MYSQL_DATABASE: traccar
+      MYSQL_USER: "{{ traccar_mysql_user }}"
+      MYSQL_PASSWORD: "{{ traccar_mysql_password }}"
+      MYSQL_ROOT_PASSWORD: "{{ traccar_root_mysql_password }}"
+    restart_policy: unless-stopped
+
+- name: Traccar Docker Container
+  docker_container:
+    name: traccar
+    image: traccar/traccar
+    pull: true
+    networks:
+      - name: port-freedom
+        ipv4_address: "{{ traccar_container_ip }}"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/docker/traccar/config/traccar.xml:/opt/traccar/conf/traccar.xml:ro"
+      - "/docker/traccar/logs:/opt/traccar/logs:rw"
+    links:
+      - traccar-mysql:db
+    env:
+      TZ: "{{ time_zone }}"
+      PUID: "1000"
+      PGID: "1000"
+      VERSION: "docker"
+    restart_policy: unless-stopped
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"

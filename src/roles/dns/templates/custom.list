@@ -1,9 +1,14 @@
-{{ nas_ip }} nas.{{ duckdns_url }}
-{{ pi_hole_container_ip }} pihole.{{ duckdns_url }}
+{{ ansible_host }} nas.{{ duckdns_url }}
+{{ ansible_host }} pihole.{{ duckdns_url }}
 {{ ansible_host }} portainer.{{ duckdns_url }}
-{{ dokuwiki_container_ip }} wiki.{{ duckdns_url }}
-{{ tautulli_container_ip }} tautulli.{{ duckdns_url}}
-{{ mealie_container_ip }} mealie.{{ duckdns_url }}
-{{ piwigo_container_ip }} photos.{{ duckdns_url }}
-{{ node_red_container_ip }} node-red.{{ duckdns_url }}
-{{ ansible_host }} up.{{ duckdns_url }}
+{{ ansible_host }} wiki.{{ duckdns_url }}
+{{ ansible_host }} tautulli.{{ duckdns_url}}
+{{ ansible_host }} mealie.{{ duckdns_url }}
+{{ ansible_host }} photos.{{ duckdns_url }}
+{{ ansible_host }} node-red.{{ duckdns_url }}
+{{ ansible_host }} uptime.{{ duckdns_url }}
+{{ ansible_host }} home.{{ duckdns_url }}
+{{ ansible_host }} node-red.{{ duckdns_url }}
+{{ ansible_host }} mqtt.{{ duckdns_url }}
+{{ ansible_host }} esp.{{ duckdns_url }}
+{{ ansible_host }} portainer.{{ duckdns_url }}

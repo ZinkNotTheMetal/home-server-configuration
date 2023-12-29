@@ -50,12 +50,12 @@
     owner: william
     group: william
 
-- name: Change subdomain to 'up.*'' for uptime-kuma
+- name: Change subdomain to 'uptime.*'' for uptime-kuma
   become: true
   replace:
     path: "{{ cert_manager_folder_location }}/nginx/proxy-confs/uptime-kuma.subdomain.conf.sample"
     regexp: "uptime-kuma.*"
-    replace: up.*
+    replace: uptime.*
 
 - name: Load 'uptime-kuma.conf'
   become: true
@@ -101,6 +101,8 @@
     regexp: "dokuwiki.*"
     replace: wiki.*
 
+# TODO @WZ: Change all instances of dokuwiki -> wiki (since that's the container name)
+# - Also change IP to container IP
 - name: Load 'dockuwiki.conf'
   become: true
   copy:
@@ -126,4 +128,8 @@
     mode: "0755"
     owner: william
     group: william
+
+# TODO @WZ: Add ESP Home - change to IP since it's on 96 network
+# TODO @WZ: Make tautulli directory 774 for permissions
+# TODO @W: Add node-red config
 ##################################################################################################

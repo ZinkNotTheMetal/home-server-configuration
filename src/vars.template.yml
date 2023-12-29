@@ -54,6 +54,9 @@ tautulli_container_ip: 192.168.96.13
 dokuwiki_container_ip: 192.168.169.10
 piwigo_container_ip: 192.168.169.11
 piwigo_mysql_ip: 192.168.169.12
+traccar_container_ip: 192.168.96.15
+traccar_db_container_ip: 192.168.96.16
+
 
 ## Below I am mounting drives to plex and others
 ## If your path is different you will need to go to docuwiki.yml / piwigo.yml / plex.yaml to change it
@@ -65,6 +68,11 @@ nas_admin_user: <synology_admin_user>
 piwigo_mysql_user: <user>
 piwigo_mysql_password: <pass>
 piwigo_root_mysql_password: <root pass>
+
+## Below is the configuration you will need to setup Traccar (opensource smartphone tracking)
+traccar_mysql_user: <user>
+traccar_mysql_password: <pass>
+traccar_root_mysql_password: <root pass>
 
 ## Below is the configuration you will need for Transmission
 ## Configuration found here:

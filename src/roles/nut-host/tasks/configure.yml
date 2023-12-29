@@ -16,7 +16,7 @@
 
 - name: Ensure that upsd.conf is loaded
   become: true
-  copy:
+  template:
     src: upsd.conf
     dest: /etc/nut/upsd.conf
     owner: root
@@ -34,7 +34,7 @@
   become: true
   template:
     src: upsmon.conf
-    dest: /etc/nut/upsd.conf
+    dest: /etc/nut/upsmon.conf
     owner: root
     group: root
 
