@@ -8,11 +8,11 @@
     networks:
       - name: curidge
     env:
-      NUT_EXPORTER_SERVER: {{ ansible_host }}
+      NUT_EXPORTER_SERVER: "{{ ansible_host }}"
       NUT_EXPORTER_SERVERPORT: 3493
-      NUT_EXPORTER_USERNAME: {{ ups_monitor_username }}
-      NUT_EXPORTER_PASSWORD: {{ ups_monitor_password }}
-      TZ: {{ time_zone }}
+      NUT_EXPORTER_USERNAME: "{{ ups_monitor_username }}"
+      NUT_EXPORTER_PASSWORD: "{{ ups_monitor_password }}"
+      TZ: "{{ time_zone }}"
     ports:
       - 9199:9199
     labels:
