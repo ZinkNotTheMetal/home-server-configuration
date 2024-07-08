@@ -18,7 +18,6 @@
     pull: true
     restart_policy: unless-stopped
     volumes:
-      - "/docker/grafana:/var/lib/grafana"
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
       - "{{ host_grafana_folder_location }}:/var/lib/grafana"
