@@ -46,6 +46,6 @@ scrape_configs:
     static_configs:
       - targets: ["{{ ansible_host }}:9199"]
         labels:
-          ups: "primary"
-        params:
-          ups: ["primary"]
+          ups: "rack_ups"
+    params:
+      ups: [ "rack_ups" ]
