@@ -2,3 +2,5 @@
 - import_tasks: configure.yml
 
 - import_tasks: prometheus-setup.yml
+
+- import_tasks: grafana-setup.yml
