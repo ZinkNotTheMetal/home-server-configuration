@@ -1,0 +1,2 @@
+host_docker_folder_location: /docker/prometheus
+host_grafana_folder_location: /docker/grafana

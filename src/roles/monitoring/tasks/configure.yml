@@ -1,7 +1,15 @@
+- name: Create docker volume (prometheus)
+  become: true
+  file:
+    path: "{{ host_docker_folder_location }}"
+    state: directory
+    mode: "0755"
+    owner: root
+
 - name: Ensure that the prometheus configuration is loaded
   become: true
   copy:
     src: prometheus.yml
-    dest: /docker/promethesus/prometheus.yml
+    dest: "{{ host_docker_folder_location }}/prometheus.yml"
     owner: root
     group: root
