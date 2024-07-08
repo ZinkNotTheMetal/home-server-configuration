@@ -41,7 +41,6 @@
       - "/etc/localtime:/etc/localtime:ro"
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "/docker/portainer:/data"
-    pid: host
     labels:
       com.centurylinklabs.watchtower.enable: "true"
     container_default_behavior: compatibility
