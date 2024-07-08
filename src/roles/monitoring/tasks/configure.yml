@@ -6,6 +6,14 @@
     mode: "0777"
     owner: root
 
+- name: Create docker volume (prometheus data)
+  become: true
+  file:
+    path: "{{ host_docker_folder_location }}/data"
+    state: directory
+    mode: "0777"
+    owner: root
+
 - name: Ensure that the prometheus configuration is loaded
   become: true
   copy:
