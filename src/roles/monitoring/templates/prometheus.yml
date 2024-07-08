@@ -22,8 +22,7 @@ scrape_configs:
     scrape_interval: 60s
     metrics_path: /api/prometheus
     scheme: https
-    authorization:
-      credentials: "{{ ha_prometheus_token }}"
+    bearer_token: "{{ ha_prometheus_token }}"
     static_configs:
       - targets: ["home.keystoneridge.duckdns.org"]
   - job_name: "snmp_synology"
