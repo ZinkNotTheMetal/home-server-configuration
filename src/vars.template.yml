@@ -56,7 +56,7 @@ piwigo_container_ip: 192.168.169.11
 piwigo_mysql_ip: 192.168.169.12
 traccar_container_ip: 192.168.96.15
 traccar_db_container_ip: 192.168.96.16
-
+overseerr_container_ip: 192.168.96.17
 
 ## Below I am mounting drives to plex and others
 ## If your path is different you will need to go to docuwiki.yml / piwigo.yml / plex.yaml to change it

@@ -1,0 +1,25 @@
+- name: Create docker volume (overseerr)
+  become: true
+  file:
+    path: "{{ host_overseerr_folder_location }}"
+    state: directory
+    mode: "0777"
+    owner: root
+
+- name: Run 'Overseerr' - Docker Container
+  docker_container:
+    name: overseerr
+    image: sctx/overseerr
+    pull: true
+    volumes:
+      - "{{ host_overseerr_folder_location }}:/app/config"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+    networks:
+      - name: port-freedom
+        ipv4_address: "{{ overseerr_container_ip }}"
+    env:
+      TZ: "{{ time_zone }}"
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
