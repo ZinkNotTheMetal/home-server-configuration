@@ -8,8 +8,8 @@
     networks:
       - name: curidge
     volumes:
-      - "{{ host_docker_folder_location }}:/etc/prometheus"
-      - "{{ host_docker_folder_location }}/data:/prometheus"
+      - "/docker/prometheus:/etc/prometheus"
+      - "/docker/prometheus/data:/prometheus"
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
@@ -25,7 +25,7 @@
 #This container will collect metrics for the host system
 - name: Run 'node explorer' - Docker Container
   docker_container:
-    container_name: prometheus_node_exporter
+    name: prometheus_node_exporter
     image: quay.io/prometheus/node-exporter
     ports:
       - 9100:9100
