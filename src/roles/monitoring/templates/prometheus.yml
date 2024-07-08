@@ -26,7 +26,8 @@ scrape_configs:
       - targets: ["{{ nas_ip }}"]
     metrics_path: "/snmp"
     params:
-      module: [synology]
+      auth: [synology]
+      module: [if_mib, synology]
     scrape_interval: 10s
     scrape_timeout: 5s
     relabel_configs:
