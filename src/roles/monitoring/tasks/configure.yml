@@ -3,7 +3,7 @@
   file:
     path: "{{ host_docker_folder_location }}"
     state: directory
-    mode: "0755"
+    mode: "0777"
     owner: root
 
 - name: Ensure that the prometheus configuration is loaded
@@ -12,4 +12,5 @@
     src: prometheus.yml
     dest: "{{ host_docker_folder_location }}/prometheus.yml"
     owner: root
+    mode: "0777"
     group: root
