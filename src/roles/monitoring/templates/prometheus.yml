@@ -25,7 +25,7 @@ scrape_configs:
     authorization:
       credentials: "{{ ha_prometheus_token }}"
     static_configs:
-      - targets: ["home.keystoneridge.duckdns.org/api/prometheus"]
+      - targets: ["home.keystoneridge.duckdns.org"]
   - job_name: "snmp_synology"
     static_configs:
       - targets: ["{{ nas_ip }}"]
