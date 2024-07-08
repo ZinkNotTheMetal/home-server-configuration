@@ -1,7 +1,7 @@
 #This container will collect metrics for the host system
 - name: Run 'grafana' - Docker Container
   docker_container:
-    container_name: grafana
+    name: grafana
     image: docker.io/grafana/grafana-oss
     ports:
       - 3091:3000
