@@ -51,7 +51,7 @@
 # Uncomment below to enable cadvisor on an AMD64 Architecture
 - name: Run 'cadvisor' - Docker Container
   docker_container:
-    container_name: cadvisor
+    name: cadvisor
     image: gcr.io/cadvisor/cadvisor
     pull: true
     restart_policy: unless-stopped
