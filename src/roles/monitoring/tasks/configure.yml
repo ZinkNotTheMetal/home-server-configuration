@@ -23,6 +23,14 @@
     mode: "0777"
     group: root
 
+- name: Create docker volume (snmp)
+  become: true
+  file:
+    path: "{{ host_snmp_explorer_location }}"
+    state: directory
+    mode: "0777"
+    owner: root
+
 - name: Ensure that the snmp.yml is loaded
   become: true
   copy:
