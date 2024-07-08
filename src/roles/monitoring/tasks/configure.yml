@@ -1,0 +1,7 @@
+- name: Ensure that the prometheus configuration is loaded
+  become: true
+  copy:
+    src: prometheus.yml
+    dest: /docker/promethesus/prometheus.yml
+    owner: root
+    group: root

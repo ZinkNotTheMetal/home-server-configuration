@@ -1,0 +1,19 @@
+#This container will collect metrics for the host system
+- name: Run 'grafana' - Docker Container
+  docker_container:
+    container_name: grafana
+    image: docker.io/grafana/grafana-oss
+    ports:
+      - 3091:3000
+    networks:
+      - name: curidge
+    pull: true
+    restart_policy: unless-stopped
+    volumes:
+      - "/docker/grafana:/var/lib/grafana"
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+      - "/docker/portainer:/data"
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
+    container_default_behavior: compatibility
