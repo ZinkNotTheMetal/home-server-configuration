@@ -23,7 +23,7 @@ scrape_configs:
   #     - targets: ["cadvisor:31192"]
   - job_name: "snmp_synology"
     static_configs:
-      - targets: ["192.168.86.98"]
+      - targets: ["{{ nas_ip }}"]
     metrics_path: "/snmp"
     params:
       module: [synology]
@@ -35,4 +35,4 @@ scrape_configs:
       - source_labels: [__param_target]
         target_label: instance
       - target_label: __address__
-        replacement: 192.168.86.7:9116 # The SNMP exporter's real hostname:port.
+        replacement: {{ ansible_host }}:9116 # The SNMP exporter's real hostname:port.
