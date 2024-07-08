@@ -1,0 +1,93 @@
+# Installs prometheus on the monitoring machine
+- name: Run 'prometheus' - Docker Container
+  docker_container:
+    name: prometheus
+    image: docker.io/prom/prometheus
+    restart_policy: unless-stopped
+    pull: true
+    networks:
+      - name: curidge
+    volumes:
+      - "{{ host_docker_folder_location }}:/etc/prometheus"
+      - "{{ host_docker_folder_location }}/data:/prometheus"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+      - "/docker/portainer:/data"
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+    ports:
+      - 9090:9090
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
+    container_default_behavior: compatibility
+
+#This container will collect metrics for the host system
+- name: Run 'node explorer' - Docker Container
+  docker_container:
+    name: prometheus_node_exporter
+    image: quay.io/prometheus/node-exporter
+    ports:
+      - 9100:9100
+    networks:
+      - name: curidge
+    command:
+      - "--path.rootfs=/host"
+    pull: true
+    restart_policy: unless-stopped
+    pid_mode: host
+    volumes:
+      - "/:/host:ro,rslave"
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
+    container_default_behavior: compatibility
+
+- name: Run 'snmp explorer' - Docker Container
+  docker_container:
+    name: prometheus_snmp_exporter
+    image: prom/snmp-exporter
+    ports:
+      - 9116:9116
+    networks:
+      - name: curidge
+    pull: true
+    restart_policy: unless-stopped
+    volumes:
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "{{ host_snmp_explorer_location}}/snmp.yml:/etc/snmp_exporter/snmp.yml"
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
+    container_default_behavior: compatibility
+# # The container below collects docker/container metrics
+# # NOTE: This is not compatible with arm architecture such as RaspberryPi or ARM Macs
+# # Uncomment below to enable cadvisor on an AMD64 Architecture
+# - name: Run 'cadvisor' - Docker Container
+#   docker_container:
+#     name: cadvisor
+#     image: gcr.io/cadvisor/cadvisor
+#     pull: true
+#     restart_policy: unless-stopped
+#     ports:
+#       - 31192:8080
+#     networks:
+#       - name: curidge
+#     volumes:
+#       - /:/rootfs:ro
+#       - /var/run:/var/run:ro
+#       - /sys:/sys:ro
+#       - /var/lib/docker/:/var/lib/docker:ro
+#       - /dev/disk/:/dev/disk:ro
+#       - "/var/run/docker.sock:/var/run/docker.sock"
+#       - "/etc/timezone:/etc/timezone:ro"
+#       - "/etc/localtime:/etc/localtime:ro"
+#       - "/docker/portainer:/data"
+#     devices:
+#       - /dev/kmsg
+#     labels:
+#       com.centurylinklabs.watchtower.enable: "true"
+#     container_default_behavior: compatibility

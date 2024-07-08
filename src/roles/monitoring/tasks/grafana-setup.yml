@@ -1,0 +1,26 @@
+- name: Create docker volume (grafana)
+  become: true
+  file:
+    path: "{{ host_grafana_folder_location }}"
+    state: directory
+    mode: "0777"
+    owner: root
+
+# This container will collect displays the metrics from prometheus
+- name: Run 'grafana' - Docker Container
+  docker_container:
+    name: grafana
+    image: docker.io/grafana/grafana-oss
+    ports:
+      - 3091:3000
+    networks:
+      - name: curidge
+    pull: true
+    restart_policy: unless-stopped
+    volumes:
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+      - "{{ host_grafana_folder_location }}:/var/lib/grafana"
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
+    container_default_behavior: compatibility

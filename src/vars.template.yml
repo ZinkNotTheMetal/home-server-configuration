@@ -91,3 +91,6 @@ dns_provider: duckdns #change if it's something else
 contact_email: <email here>
 
 #####################################################################
+
+# Home Assistant Long live tokens
+ha_prometheus_token: <insert long token>

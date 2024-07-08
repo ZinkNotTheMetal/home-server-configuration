@@ -1,0 +1,8 @@
+---
+- hosts: monitoring
+  vars_files:
+    - "vars.yml"
+  roles:
+    - role: monitoring
+      tag:
+        - monitoring
