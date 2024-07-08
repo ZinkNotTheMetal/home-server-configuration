@@ -8,8 +8,8 @@
     networks:
       - name: curidge
     volumes:
-      - "/docker/prometheus:/etc/prometheus"
-      - "/docker/prometheus/data:/prometheus"
+      - "{{ host_docker_folder_location }}:/etc/prometheus"
+      - "{{ host_docker_folder_location }}/data:/prometheus"
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
