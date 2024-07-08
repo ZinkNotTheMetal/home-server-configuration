@@ -35,6 +35,7 @@
       - "--path.rootfs=/host"
     pull: true
     restart_policy: unless-stopped
+    pid_mode: host
     volumes:
       - "/:/host:ro,rslave"
       - "/etc/timezone:/etc/timezone:ro"
