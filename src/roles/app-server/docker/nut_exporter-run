@@ -1,0 +1,11 @@
+docker run -d \
+ -l "com.centrurylinklabs.watchtower.enable"=true \
+ -p 9199:9199 \
+--network curidge \
+--name nut_exporter \
+-e NUT_EXPORTER_SERVER=192.168.86.7 \
+-e NUT_EXPORTER_SERVERPORT=3493 \
+-e NUT_EXPORTER_USERNAME=upsnutmonitor \
+-e NUT_EXPORTER_PASSWORD=x390adfpgm3a0 \
+-e TZ=America/New_York \
+ghcr.io/druggeri/nut_exporter:latest

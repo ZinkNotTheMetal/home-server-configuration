@@ -41,3 +41,11 @@ scrape_configs:
         target_label: instance
       - target_label: __address__
         replacement: {{ ansible_host }}:9116 # The SNMP exporter's real hostname:port.
+  - job_name: rack_ups
+    metrics_path: /ups_metrics
+    static_configs:
+      - targets: ["{{ ansible_host }}:9199"]
+        labels:
+          ups: "primary"
+        params:
+          ups: ["primary"]
