@@ -1,2 +1,3 @@
 host_docker_folder_location: /docker/prometheus
 host_grafana_folder_location: /docker/grafana
+host_snmp_explorer_location: /docker/snmp

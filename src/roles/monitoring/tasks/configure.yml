@@ -22,3 +22,12 @@
     owner: root
     mode: "0777"
     group: root
+
+- name: Ensure that the snmp.yml is loaded
+  become: true
+  copy:
+    src: snmp.yml
+    dest: "{{ host_snmp_explorer_location }}/snmp.yml"
+    owner: root
+    mode: "0777"
+    group: root
