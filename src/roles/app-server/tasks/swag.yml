@@ -125,11 +125,33 @@
     src: "{{ cert_manager_folder_location }}/nginx/proxy-confs/tautulli.subdomain.conf.sample"
     dest: "{{ cert_manager_folder_location }}/nginx/proxy-confs/tautulli.subdomain.conf"
     remote_src: true
-    mode: "0755"
+    mode: "0774"
     owner: william
     group: william
 
-# TODO @WZ: Add ESP Home - change to IP since it's on 96 network
-# TODO @WZ: Make tautulli directory 774 for permissions
-# TODO @W: Add node-red config
+- name: Load 'overseerr.conf'
+  become: true
+  copy:
+    src: "{{ cert_manager_folder_location }}/nginx/proxy-confs/overseerr.subdomain.conf.sample"
+    dest: "{{ cert_manager_folder_location }}/nginx/proxy-confs/overseerr.subdomain.conf"
+    remote_src: true
+    mode: "0755"
+    owner: william
+    group: william
+# - name: Change server for node-red
+#   become: true
+#   replace:
+#     path: "{{ cert_manager_folder_location }}/nginx/proxy-confs/node-red.subdomain.conf.sample"
+#     regexp: "set $upstream_app*"
+#     replace: set $upstream_app {{ node_red_container_ip }}
+
+# - name: Load 'node-red.conf'
+#   become: true
+#   copy:
+#     src: "{{ cert_manager_folder_location }}/nginx/proxy-confs/node-red.subdomain.conf.sample"
+#     dest: "{{ cert_manager_folder_location }}/nginx/proxy-confs/node-red.subdomain.conf.sample"
+#     remote_src: true
+#     mode: "0755"
+#     owner: william
+#     group: william
 ##################################################################################################
