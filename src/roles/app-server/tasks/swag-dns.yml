@@ -31,8 +31,8 @@
   become: true
   replace:
     path: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/tautulli.subdomain.conf"
-    regexp: "set \\$upstream_app*"
-    replace: "set \\$upstream_app {{ tautulli_container_ip }};"
+    regexp: "set \\$upstream_app.*$"
+    replace: "set $upstream_app {{ tautulli_container_ip }};"
 
 - name: Load 'overseerr.conf'
   become: true
@@ -48,7 +48,7 @@
   become: true
   replace:
     path: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/overseerr.subdomain.conf"
-    regexp: "set \\$upstream_app.*"
+    regexp: "set \\$upstream_app.*$"
     replace: "set $upstream_app {{ overseerr_container_ip }};"
 
 - name: Load 'node-red.conf'
@@ -65,8 +65,8 @@
   become: true
   replace:
     path: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/node-red.subdomain.conf"
-    regexp: "set \\$upstream_app*"
-    replace: "set \\$upstream_app {{ node_red_container_ip }};"
+    regexp: "set \\$upstream_app.*$"
+    replace: "set $upstream_app {{ node_red_container_ip }};"
 
 - name: Load 'homarr.conf'
   become: true
