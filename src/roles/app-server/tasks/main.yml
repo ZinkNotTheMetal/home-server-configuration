@@ -18,5 +18,4 @@
 
 - import_tasks: setup-traccar.yml
 
-# Consider replacement with HOMARR
-- import_tasks: setup-uptime-kuma.yml
+- import_tasks: setup-homarr.yml
