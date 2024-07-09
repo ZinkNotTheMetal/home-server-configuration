@@ -1,3 +1,19 @@
+- name: Create docker volume (prometheus)
+  become: true
+  file:
+    path: "{{ host_prometheus_folder_location }}"
+    state: directory
+    mode: "0777"
+    owner: root
+
+- name: Ensure that the prometheus configuration is loaded
+  become: true
+  template:
+    src: prometheus.yml
+    dest: "{{ host_docker_folder_location }}/prometheus.yml"
+    mode: "0777"
+    owner: root
+
 # Installs prometheus on the monitoring machine
 - name: Run 'prometheus' - Docker Container
   docker_container:
@@ -44,6 +60,23 @@
       com.centurylinklabs.watchtower.enable: "true"
     container_default_behavior: compatibility
 
+- name: Create docker volume (snmp)
+  become: true
+  file:
+    path: "{{ host_snmp_explorer_location }}"
+    state: directory
+    mode: "0777"
+    owner: root
+
+- name: Ensure that the snmp.yml is loaded
+  become: true
+  copy:
+    src: snmp.yml
+    dest: "{{ host_snmp_explorer_location }}/snmp.yml"
+    owner: root
+    mode: "0777"
+    group: root
+
 - name: Run 'snmp explorer' - Docker Container
   docker_container:
     name: prometheus_snmp_exporter
@@ -65,28 +98,28 @@
 # # The container below collects docker/container metrics
 # # NOTE: This is not compatible with arm architecture such as RaspberryPi or ARM Macs
 # # Uncomment below to enable cadvisor on an AMD64 Architecture
-# - name: Run 'cadvisor' - Docker Container
-#   docker_container:
-#     name: cadvisor
-#     image: gcr.io/cadvisor/cadvisor
-#     pull: true
-#     restart_policy: unless-stopped
-#     ports:
-#       - 31192:8080
-#     networks:
-#       - name: curidge
-#     volumes:
-#       - /:/rootfs:ro
-#       - /var/run:/var/run:ro
-#       - /sys:/sys:ro
-#       - /var/lib/docker/:/var/lib/docker:ro
-#       - /dev/disk/:/dev/disk:ro
-#       - "/var/run/docker.sock:/var/run/docker.sock"
-#       - "/etc/timezone:/etc/timezone:ro"
-#       - "/etc/localtime:/etc/localtime:ro"
-#       - "/docker/portainer:/data"
-#     devices:
-#       - /dev/kmsg
-#     labels:
-#       com.centurylinklabs.watchtower.enable: "true"
-#     container_default_behavior: compatibility
+- name: Run 'cadvisor' - Docker Container
+  docker_container:
+    name: cadvisor
+    image: gcr.io/cadvisor/cadvisor
+    pull: true
+    restart_policy: unless-stopped
+    ports:
+      - 31192:8080
+    networks:
+      - name: curidge
+    volumes:
+      - "/:/rootfs:ro"
+      - "/var/run:/var/run:ro"
+      - "/sys:/sys:ro"
+      - "/var/lib/docker/:/var/lib/docker:ro"
+      - "/dev/disk/:/dev/disk:ro"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+      - "/docker/portainer:/data"
+    devices:
+      - /dev/kmsg
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
+    container_default_behavior: compatibility
