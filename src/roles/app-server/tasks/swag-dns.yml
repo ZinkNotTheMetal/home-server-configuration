@@ -27,6 +27,13 @@
     owner: william
     group: william
 
+- name: Change server for tautulli
+  become: true
+  replace:
+    path: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/tautulli.subdomain.conf"
+    regexp: "set \\$upstream_app*"
+    replace: "set \\$upstream_app {{ tautulli_container_ip }};"
+
 - name: Load 'overseerr.conf'
   become: true
   copy:
@@ -44,13 +51,6 @@
     regexp: "set \\$upstream_app.*"
     replace: "set $upstream_app {{ overseerr_container_ip }};"
 
-- name: Change server for node-red
-  become: true
-  replace:
-    path: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/node-red.subdomain.conf.sample"
-    regexp: "set $upstream_app*"
-    replace: "set $upstream_app {{ node_red_container_ip }};"
-
 - name: Load 'node-red.conf'
   become: true
   copy:
@@ -60,6 +60,13 @@
     mode: "0755"
     owner: william
     group: william
+
+- name: Change server for node-red
+  become: true
+  replace:
+    path: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/node-red.subdomain.conf"
+    regexp: "set \\$upstream_app*"
+    replace: "set \\$upstream_app {{ node_red_container_ip }};"
 
 - name: Load 'homarr.conf'
   become: true
