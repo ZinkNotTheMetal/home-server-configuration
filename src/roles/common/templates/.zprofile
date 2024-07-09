@@ -14,7 +14,8 @@ read one five fifteen rest < /proc/loadavg
 
 echo "$(tput setaf 2)
 `date +"%A, %e %B %Y, %r"`
-`uname -srmo`$(tput setaf 1)
+`uname -srmo`
+`grep "PRETTY_NAME" /etc/os-release | cut -d '=' -f2 | tr -d '"'`$(tput setaf 1)
 
 Uptime.............: ${UPTIME}
 Memory.............: `cat /proc/meminfo | grep MemFree | awk {'print $2'}`kB (Free) / `cat /proc/meminfo | grep MemTotal | awk {'print $2'}`kB (Total)
