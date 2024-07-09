@@ -1,3 +1,6 @@
+# Overseerr
+# Documentation: https://overseerr.dev
+# Purpose: To keep track of movies I want to watch / rip DVD's from my dad
 - name: Create docker volume (overseerr)
   become: true
   file:

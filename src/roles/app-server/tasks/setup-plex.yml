@@ -1,6 +1,6 @@
----
-# Description:
-# Start & run Plex Media Center
+# Plex
+# Documentation: https://www.plex.tv
+# Purpose: Host Plex media center on my network to watch TV / Movies I have ripped from DVD's
 - name: Ensure '/mnt/nas' is created
   become: true
   file:
@@ -12,6 +12,7 @@
   with_items:
     - "/mnt/nas/movies"
     - "/mnt/nas/tv"
+    - "{{ host_plex_folder_location }}"
 
 # Test mount
 #  sudo mount -t nfs 10.10.0.10:/volume1/Media/Movies /mnt/nas/movies
@@ -47,7 +48,7 @@
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "/mnt/nas/plex:/config"
-      - "/docker/plex/transcode:/transcode"
+      - "{{ host_plex_folder_location }}/transcode:/transcode"
       - "/etc/timezone:/etc/timezone:ro"
       - "/mnt/nas/movies:/Movies"
       - "/mnt/nas/tv:/TV"

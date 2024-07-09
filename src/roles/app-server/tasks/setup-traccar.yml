@@ -1,7 +1,7 @@
-# Traccar Documentation
+# Traccar
+# Documentation: https://www.traccar.org/documentation/
+# Purpose: Host Life360 like application locally for Home Assistant
 # https://github.com/traccar/traccar-docker?tab=readme-ov-file
-# https://www.traccar.org/documentation/
-
 - name: Create Traccar Directories
   become: true
   file:
@@ -9,16 +9,16 @@
     state: directory
     mode: "0777"
   with_items:
-    - "/docker/traccar/config"
-    - "/docker/traccar/logs"
-    - "/docker/traccar/data"
+    - "{{ host_traccar_folder_location }}/config"
+    - "{{ host_traccar_folder_location }}/logs"
+    - "{{ host_traccar_folder_location }}/data"
 
 # Move traccar template to /docker/traccar/config/
 - name: Ensure the 'traccar' config is loaded
   become: true
   template:
     src: traccar.conf
-    dest: /docker/traccar/config/traccar.xml
+    dest: "{{ host_traccar_folder_location }}/config/traccar.xml"
     owner: root
     group: root
 
@@ -32,8 +32,8 @@
       - name: port-freedom
         ipv4_address: "{{ traccar_db_container_ip }}"
     volumes:
-      - "/docker/traccar/data/mysql:/var/lib/mysql:rw"
-      - "/docker/traccar/conf:/etc/mysql/conf.d"
+      - "{{ host_traccar_folder_location }}/data/mysql:/var/lib/mysql:rw"
+      - "{{ host_traccar_folder_location }}/conf:/etc/mysql/conf.d"
     env:
       MYSQL_DATABASE: traccar
       MYSQL_USER: "{{ traccar_mysql_user }}"
@@ -52,8 +52,8 @@
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "/etc/timezone:/etc/timezone:ro"
-      - "/docker/traccar/config/traccar.xml:/opt/traccar/conf/traccar.xml:ro"
-      - "/docker/traccar/logs:/opt/traccar/logs:rw"
+      - "{{ host_traccar_folder_location }}/config/traccar.xml:/opt/traccar/conf/traccar.xml:ro"
+      - "{{ host_traccar_folder_location }}/logs:/opt/traccar/logs:rw"
     links:
       - traccar-mysql:db
     env:

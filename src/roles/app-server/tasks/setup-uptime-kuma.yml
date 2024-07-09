@@ -1,10 +1,10 @@
----
-# Description:
-# Uptime kuma running on app-server
+# Uptime-Kuma
+# Documentation: https://github.com/louislam/uptime-kuma
+# Purpose: To keep track of what is up & running locally vs via internet
 - name: Ensure '/docker/uptime-kuma' is created
   become: true
   file:
-    path: "/docker/uptime-kuma"
+    path: "{{ host_kuma_folder_location }}"
     state: directory
     mode: "0777"
     owner: root
@@ -21,7 +21,7 @@
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "/etc/timezone:/etc/timezone:ro"
-      - "/docker/uptime-kuma:/app/data"
+      - "{{ host_kuma_folder_location }}:/app/data"
     ports:
       - 3001:3001
     labels:

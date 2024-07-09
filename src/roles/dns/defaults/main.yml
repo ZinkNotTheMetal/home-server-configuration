@@ -1,1 +1,2 @@
 cert_manager_folder_location: /docker/dns-cert-manager
+swag_installed: true

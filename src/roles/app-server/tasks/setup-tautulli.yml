@@ -1,6 +1,15 @@
----
-# Description:
-# Load and configure plex assistant tautulli
+# Tautulli
+# Documentation: https://github.com/Tautulli/Tautulli
+# Purpose: Keep statistics on what I watch and how often I watch Plex items
+
+- name: Create 'tautulli' data volume
+  become: true
+  file:
+    path: "{{ host_tautulli_folder_location }}"
+    state: directory
+    mode: "0755"
+    owner: root
+
 - name: Run 'tautulli' - Docker Container
   docker_container:
     name: tautulli
@@ -12,7 +21,7 @@
     pull: true
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
-      - "/docker/tautulli:/config"
+      - "{{ host_tautulli_folder_location }}:/config"
       - "/etc/timezone:/etc/timezone:ro"
     env:
       PUID: "1000"
