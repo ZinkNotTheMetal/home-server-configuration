@@ -8,4 +8,4 @@
     mode: "0755"
     owner: william
     group: william
-  when: "{{ swag_installed }}"
+  when: swag_installed
