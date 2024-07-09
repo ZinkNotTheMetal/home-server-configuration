@@ -154,4 +154,10 @@
 #     mode: "0755"
 #     owner: william
 #     group: william
+
+- name: Restart PiHole for DNS entries
+  docker_container:
+    name: swag
+    state: started
+    restart: true
 ##################################################################################################
