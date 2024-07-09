@@ -9,11 +9,10 @@
       - name: curidge
     volumes:
       - "{{ host_docker_folder_location }}:/etc/prometheus"
-      - "{{ host_docker_folder_location }}/data:/prometheus"
+      - "{{ host_docker_folder_location }}:/prometheus"
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
-      - "/docker/portainer:/data"
     command:
       - "--config.file=/etc/prometheus/prometheus.yml"
     ports:
