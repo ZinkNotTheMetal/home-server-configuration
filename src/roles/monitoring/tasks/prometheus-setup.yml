@@ -6,11 +6,19 @@
     mode: "0777"
     owner: root
 
+- name: Create docker volume (prometheus data)
+  become: true
+  file:
+    path: "{{ host_prometheus_folder_location }}/data"
+    state: directory
+    mode: "0777"
+    owner: root
+
 - name: Ensure that the prometheus configuration is loaded
   become: true
   template:
     src: prometheus.yml
-    dest: "{{ host_docker_folder_location }}/prometheus.yml"
+    dest: "{{ host_prometheus_folder_location }}/prometheus.yml"
     mode: "0777"
     owner: root
 
@@ -24,8 +32,8 @@
     networks:
       - name: curidge
     volumes:
-      - "{{ host_docker_folder_location }}:/etc/prometheus"
-      - "{{ host_docker_folder_location }}:/prometheus"
+      - "{{ host_prometheus_folder_location }}:/etc/prometheus"
+      - "{{ host_prometheus_folder_location }}/data:/prometheus/data"
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
