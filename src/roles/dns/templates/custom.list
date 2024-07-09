@@ -12,3 +12,4 @@
 {{ ansible_host }} esp.{{ duckdns_url }}
 {{ ansible_host }} portainer.{{ duckdns_url }}
 {{ ansible_host }} overseerr.{{ duckdns_url }}
+{{ ansible_host }} homarr.{{ duckdns_url }}
