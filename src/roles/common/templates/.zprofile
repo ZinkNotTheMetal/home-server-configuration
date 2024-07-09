@@ -14,7 +14,7 @@ read one five fifteen rest < /proc/loadavg
 
 echo "$(tput setaf 2)
 `date +"%A, %e %B %Y, %r"
-`$(tput setaf 5)
+`$(tput setaf 3)
 `uname -srmo`
 `grep "PRETTY_NAME" /etc/os-release | cut -d '=' -f2 | tr -d '"'`$(tput setaf 6)
  Uptime.............: ${UPTIME}
