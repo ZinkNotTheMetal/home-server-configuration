@@ -37,6 +37,13 @@
     owner: william
     group: william
 
+- name: Change overseerr server for nginx
+  become: true
+  replace:
+    path: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/overseerr.subdomain.conf"
+    regexp: "set \\$upstream_app.*"
+    replace: "set $upstream_app {{ overseerr_container_ip }};"
+
 - name: Change server for node-red
   become: true
   replace:
