@@ -66,7 +66,7 @@
   replace:
     path: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/node-red.subdomain.conf"
     regexp: "set \\$upstream_app.*$"
-    replace: "set $upstream_app {{ node_red_container_ip }};"
+    replace: "set $upstream_app {{ nr_container_ip }};"
 
 - name: Load 'homarr.conf'
   become: true
