@@ -1,0 +1,80 @@
+
+##################################################################################################
+## Load DNS configs below here
+##################################################################################################
+- name: Load 'portainer.conf'
+  become: true
+  copy:
+    src: "{{ cert_manager_folder_location }}/nginx/proxy-confs/portainer.subdomain.conf.sample"
+    dest: "{{ cert_manager_folder_location }}/nginx/proxy-confs/portainer.subdomain.conf"
+    remote_src: true
+    mode: "0755"
+    owner: william
+    group: william
+
+- name: Change subdomain to 'uptime.*'' for uptime-kuma
+  become: true
+  replace:
+    path: "{{ cert_manager_folder_location }}/nginx/proxy-confs/uptime-kuma.subdomain.conf.sample"
+    regexp: "uptime-kuma"
+    replace: uptime
+
+- name: Load 'uptime-kuma.conf'
+  become: true
+  copy:
+    src: "{{ cert_manager_folder_location }}/nginx/proxy-confs/uptime-kuma.subdomain.conf.sample"
+    dest: "{{ cert_manager_folder_location }}/nginx/proxy-confs/uptime-kuma.subdomain.conf"
+    remote_src: true
+    mode: "0755"
+    owner: william
+    group: william
+
+- name: Load 'nas.conf'
+  become: true
+  template:
+    src: nas.subdomain.conf
+    dest: "{{ cert_manager_folder_location }}/nginx/proxy-confs"
+
+- name: Load 'tautulli.conf'
+  become: true
+  copy:
+    src: "{{ cert_manager_folder_location }}/nginx/proxy-confs/tautulli.subdomain.conf.sample"
+    dest: "{{ cert_manager_folder_location }}/nginx/proxy-confs/tautulli.subdomain.conf"
+    remote_src: true
+    mode: "0774"
+    owner: william
+    group: william
+
+- name: Load 'overseerr.conf'
+  become: true
+  copy:
+    src: "{{ cert_manager_folder_location }}/nginx/proxy-confs/overseerr.subdomain.conf.sample"
+    dest: "{{ cert_manager_folder_location }}/nginx/proxy-confs/overseerr.subdomain.conf"
+    remote_src: true
+    mode: "0755"
+    owner: william
+    group: william
+
+- name: Change server for node-red
+  become: true
+  replace:
+    path: "{{ cert_manager_folder_location }}/nginx/proxy-confs/node-red.subdomain.conf.sample"
+    regexp: "set $upstream_app*"
+    replace: "set $upstream_app {{ node_red_container_ip }};"
+
+- name: Load 'node-red.conf'
+  become: true
+  copy:
+    src: "{{ cert_manager_folder_location }}/nginx/proxy-confs/node-red.subdomain.conf.sample"
+    dest: "{{ cert_manager_folder_location }}/nginx/proxy-confs/node-red.subdomain.conf"
+    remote_src: true
+    mode: "0755"
+    owner: william
+    group: william
+
+- name: Restart SWAG after DNS entries changed for DNS entries
+  docker_container:
+    name: swag
+    state: started
+    restart: true
+##################################################################################################

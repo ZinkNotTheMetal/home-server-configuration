@@ -1,0 +1,41 @@
+# SWAG
+# Documentation: https://docs.linuxserver.io/general/swag/
+# Purpose: To setup a certificate / DNS / Reverse proxy to access all applications on the network
+- name: Create SWAG data volume
+  become: true
+  file:
+    path: "{{ host_cert_manager_folder_location }}"
+    state: directory
+    mode: "0755"
+    owner: root
+
+- name: Run 'swag' - Docker Container
+  docker_container:
+    name: swag
+    image: ghcr.io/linuxserver/swag
+    restart_policy: unless-stopped
+    networks:
+      - name: curidge
+    pull: true
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "{{ host_cert_manager_folder_location }}:/config"
+      - "/etc/timezone:/etc/timezone:ro"
+    env:
+      PUID: "1000"
+      PGID: "1000"
+      TZ: "{{ time_zone }}"
+      URL: "{{ duckdns_url }}"
+      SUBDOMAINS: wildcard
+      VALIDATION: "{{ dns_provider }}"
+      DUCKDNSTOKEN: "{{ duckdns_token }}"
+      EMAIL: "{{ contact_email }}"
+    capabilities:
+      - NET_ADMIN
+    ports:
+      - 443:443
+      - 80:80
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
+
+- import_tasks: swag-dns.yml

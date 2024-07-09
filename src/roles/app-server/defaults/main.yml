@@ -1,2 +1,8 @@
-cert_manager_folder_location: /docker/dns-cert-manager
+host_cert_manager_folder_location: /docker/dns-cert-manager
 host_overseerr_folder_location: /docker/overseerr/config
+host_portainer_folder_location: /docker/portainer
+host_kuma_folder_location: /docker/uptime-kuma
+host_transmission_folder_location: /docker/transmission
+host_plex_folder_location: /docker/plex
+host_tautulli_folder_location: /docker/tautulli
+host_traccar_folder_location: /docker/traccar
