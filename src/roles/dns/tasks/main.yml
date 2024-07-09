@@ -42,3 +42,10 @@
     state: started
     restart: true
   when: dnsentry.changed
+
+- name: Restart SWAG for DNS entries
+  docker_container:
+    name: pihole
+    state: started
+    restart: true
+  when: dnsentry.changed
