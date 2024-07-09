@@ -8,7 +8,7 @@
 {{ ansible_host }} node-red.{{ duckdns_url }}
 {{ ansible_host }} uptime.{{ duckdns_url }}
 {{ ansible_host }} home.{{ duckdns_url }}
-{{ ansible_host }} node-red.{{ duckdns_url }}
 {{ ansible_host }} mqtt.{{ duckdns_url }}
 {{ ansible_host }} esp.{{ duckdns_url }}
 {{ ansible_host }} portainer.{{ duckdns_url }}
+{{ ansible_host }} overseerr.{{ duckdns_url }}
