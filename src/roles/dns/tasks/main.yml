@@ -34,9 +34,11 @@
     src: custom.list
     dest: /docker/pihole/etc/custom.list
     mode: "0777"
+  register: dnsentry
 
 - name: Restart PiHole for DNS entries
   docker_container:
     name: pihole
     state: started
     restart: true
+  when: dnsentry.changed
