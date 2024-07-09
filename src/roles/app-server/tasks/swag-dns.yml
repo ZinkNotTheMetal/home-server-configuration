@@ -1,4 +1,3 @@
-
 ##################################################################################################
 ## Load DNS configs below here
 ##################################################################################################
@@ -7,23 +6,6 @@
   copy:
     src: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/portainer.subdomain.conf.sample"
     dest: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/portainer.subdomain.conf"
-    remote_src: true
-    mode: "0755"
-    owner: william
-    group: william
-
-- name: Change subdomain to 'uptime.*'' for uptime-kuma
-  become: true
-  replace:
-    path: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/uptime-kuma.subdomain.conf.sample"
-    regexp: "uptime-kuma"
-    replace: uptime
-
-- name: Load 'uptime-kuma.conf'
-  become: true
-  copy:
-    src: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/uptime-kuma.subdomain.conf.sample"
-    dest: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/uptime-kuma.subdomain.conf"
     remote_src: true
     mode: "0755"
     owner: william
@@ -67,6 +49,16 @@
   copy:
     src: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/node-red.subdomain.conf.sample"
     dest: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/node-red.subdomain.conf"
+    remote_src: true
+    mode: "0755"
+    owner: william
+    group: william
+
+- name: Load 'homarr.conf'
+  become: true
+  copy:
+    src: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/homarr.subdomain.conf.sample"
+    dest: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/homarr.subdomain.conf"
     remote_src: true
     mode: "0755"
     owner: william
