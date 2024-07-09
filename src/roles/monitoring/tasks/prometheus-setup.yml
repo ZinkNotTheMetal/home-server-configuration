@@ -17,6 +17,7 @@
     dest: "{{ host_prometheus_folder_location }}/config/prometheus.yml"
     mode: "0777"
     owner: root
+  register: config
 
 # Installs prometheus on the monitoring machine
 - name: Run 'prometheus' - Docker Container
@@ -40,6 +41,13 @@
     labels:
       com.centurylinklabs.watchtower.enable: "true"
     container_default_behavior: compatibility
+
+- name: Restart prometheus if config changed
+  docker_container:
+    name: prometheus
+    state: started
+    restart: true
+  when: config.changed
 
 #This container will collect metrics for the host system
 - name: Run 'node explorer' - Docker Container
