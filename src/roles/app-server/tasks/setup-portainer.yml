@@ -4,7 +4,7 @@
 - name: Create nginx data volume
   become: true
   file:
-    path: "{{ host_cert_manager_folder_location }}"
+    path: "{{ host_portainer_folder_location }}"
     state: directory
     mode: "0755"
     owner: root
@@ -21,7 +21,7 @@
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
-      - "{{ host_cert_manager_folder_location }}:/data"
+      - "{{ host_portainer_folder_location }}:/data"
     ports:
       - 9000:9000
     labels:
