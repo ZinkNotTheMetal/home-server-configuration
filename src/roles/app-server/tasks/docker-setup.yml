@@ -68,7 +68,7 @@
 - name: Create IPVLAN L3 - Outside
   become: true
   docker_network:
-    name: docker
+    name: docker_ipvlan
     driver: ipvlan
     driver_options:
       parent: "{{ physical_interfaces_cmd.stdout_lines[0] }}"
