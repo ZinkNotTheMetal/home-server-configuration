@@ -4,9 +4,9 @@
 
 - import_tasks: setup-watchtower.yml
 
-# - import_tasks: setup-portainer.yml
+- import_tasks: setup-portainer.yml
 
-# - import_tasks: setup-swag.yml
+- import_tasks: setup-swag.yml
 
 # - import_tasks: setup-transmission.yml
 

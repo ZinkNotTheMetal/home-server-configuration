@@ -65,7 +65,7 @@
   changed_when: false
   check_mode: false
 
-- name: Create IPVLAN L3 - Outside
+- name: Create IPVLAN L3
   become: true
   docker_network:
     name: docker_ipvlan
