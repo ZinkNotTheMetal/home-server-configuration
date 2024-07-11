@@ -60,7 +60,7 @@
     state: started
 
 - name: Find physical network adapter
-  command: find /sys/class/net -type l -not -lname '*virtual*' -not -name 'eno1' -printf '%f\n'
+  command: find /sys/class/net -type l -not -lname '*virtual*' -not -name 'wlp0s20f3' -printf '%f\n'
   register: physical_interfaces_cmd
   changed_when: false
   check_mode: false
