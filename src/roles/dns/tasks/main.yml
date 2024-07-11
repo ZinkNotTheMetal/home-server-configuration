@@ -12,7 +12,7 @@
     image: pihole/pihole
     restart_policy: unless-stopped
     networks:
-      - name: port-freedom
+      - name: docker_ipvlan
         ipv4_address: "{{ pi_hole_container_ip }}"
     pull: true
     volumes:
