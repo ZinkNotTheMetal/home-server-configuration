@@ -79,11 +79,12 @@
 - name: Create IPVLAN L3 - Inside (no network)
   become: true
   docker_network:
-    name: port-freedom
+    name: no-internet
     driver: ipvlan
     driver_options:
       parent: "{{ physical_interfaces_cmd.stdout_lines[0] }}"
       ipvlan_mode: l3
+      com.docker.network.bridge.enable_ip_masquerade: "false"
     ipam_config:
       - subnet: "{{ docker_network_ip_inside }}/24"
 
