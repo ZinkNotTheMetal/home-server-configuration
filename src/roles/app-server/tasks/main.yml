@@ -8,14 +8,14 @@
 
 - import_tasks: setup-swag.yml
 
-# - import_tasks: setup-transmission.yml
+- import_tasks: setup-transmission.yml
 
-# - import_tasks: setup-plex.yml
+- import_tasks: setup-plex.yml
 
-# - import_tasks: setup-tautulli.yml
+- import_tasks: setup-tautulli.yml
 
-# - import_tasks: setup-overseerr.yml
+- import_tasks: setup-overseerr.yml
 
-# - import_tasks: setup-traccar.yml
+- import_tasks: setup-traccar.yml
 
-# - import_tasks: setup-homarr.yml
+- import_tasks: setup-homarr.yml
