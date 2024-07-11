@@ -75,6 +75,7 @@
       ipvlan_mode: l3
     ipam_config:
       - subnet: "{{ docker_network_ip_outside }}/24"
+    internal: yes
 
 - name: Create IPVLAN L3 - Inside (no network)
   become: true
@@ -84,9 +85,9 @@
     driver_options:
       parent: "{{ physical_interfaces_cmd.stdout_lines[0] }}"
       ipvlan_mode: l3
-      com.docker.network.bridge.enable_ip_masquerade: "false"
     ipam_config:
       - subnet: "{{ docker_network_ip_inside }}/24"
+    internal: no
 
 - name: Create custom bridge docker network
   become: true
