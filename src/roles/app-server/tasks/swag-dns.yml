@@ -101,7 +101,7 @@
 - name: Change server for node-red
   become: true
   replace:
-    path: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/node-red.subdomain.conf"
+    path: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/esphome.subdomain.conf"
     regexp: "set \\$upstream_app.*$"
     replace: "set $upstream_app {{ esp_container_ip }};"
 
