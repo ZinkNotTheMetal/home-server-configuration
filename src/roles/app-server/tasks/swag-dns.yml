@@ -98,6 +98,13 @@
     owner: william
     group: william
 
+- name: Change server for node-red
+  become: true
+  replace:
+    path: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/node-red.subdomain.conf"
+    regexp: "set \\$upstream_app.*$"
+    replace: "set $upstream_app {{ esp_container_ip }};"
+
 - name: Restart SWAG after DNS entries changed for DNS entries
   docker_container:
     name: swag
