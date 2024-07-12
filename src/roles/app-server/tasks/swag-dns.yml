@@ -98,12 +98,36 @@
     owner: william
     group: william
 
-- name: Change server for node-red
+- name: Change server for esp-home
   become: true
   replace:
     path: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/esphome.subdomain.conf"
     regexp: "set \\$upstream_app.*$"
     replace: "set $upstream_app {{ esp_container_ip }};"
+
+- name: Load 'zwavejs.conf'
+  become: true
+  copy:
+    src: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/zwavejs2mqtt.subdomain.conf.sample"
+    dest: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/zwavejs.subdomain.conf"
+    remote_src: true
+    mode: "0755"
+    owner: william
+    group: william
+
+- name: Change server for zwavejs
+  become: true
+  replace:
+    path: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/zwavejs.subdomain.conf"
+    regexp: "set \\$upstream_app.*$"
+    replace: "set $upstream_app {{ zwavejs_container_ip }};"
+
+- name: Change url for zwave
+  become: true
+  replace:
+    path: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/zwavejs.subdomain.conf"
+    regexp: "server_name.*$"
+    replace: "server_name zwavejs.*;"
 
 - name: Restart SWAG after DNS entries changed for DNS entries
   docker_container:
