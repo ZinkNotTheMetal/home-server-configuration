@@ -13,7 +13,7 @@
     name: netbootxyz
     image: lscr.io/linuxserver/netbootxyz
     pull: true
-    restart: unless-stopped
+    restart_policy: unless-stopped
     volumes:
       - "{{ host_netboot_folder_location }}/config:/config"
       - "{{ host_netboot_folder_location }}/assets:/assets"
