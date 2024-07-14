@@ -1,0 +1,47 @@
+# # Homarr
+# # Documentation: https://homarr.dev/docs/getting-started/
+# # Purpose: Helpful initial dashboard to keep track of the status of things
+# - name: Create Change Detector Directories
+#   become: true
+#   file:
+#     path: "{{ host_change_detector_folder_location }}/datastore"
+#     state: directory
+#     mode: "0777"
+
+# - name: Run 'Change Detector' - Docker Container
+#   docker_container:
+#     name: change-detector
+#     hostname: changedetection
+#     image: ghcr.io/dgtlmoon/changedetection.io
+#     pull: true
+#     restart: unless-stopped
+#     networks:
+#       - name: docker_ipvlan
+#         ipv4_address: "{{ change_detector_container_ip }}"
+#     environment:
+#       - PLAYWRITE_DRIVER_URL=ws://playwrite-chrome:3000
+#     volumes:
+#       - "{{ host_change_detector_folder_location }}/datastore:/datastore"
+#     depends_on:
+#       playwright-chrome:
+#         condition: service_started
+
+# - name: Run 'Homarr' - Docker Container
+#   docker_container:
+#     name: homarr
+#     image: ghcr.io/ajnart/homarr
+#     restart_policy: unless-stopped
+#     pull: true
+#     networks:
+#       - name: curidge
+#     volumes:
+#       - "/var/run/docker.sock:/var/run/docker.sock"
+#       - "{{ host_homarr_folder_location }}/configs:/app/data/configs"
+#       - "{{ host_homarr_folder_location }}/icons:/app/public/icons"
+#       - "{{ host_homarr_folder_location }}/data:/data"
+#       - "/etc/timezone:/etc/timezone:ro"
+#     ports:
+#       - 7575:7575
+#     labels:
+#       com.centurylinklabs.watchtower.enable: "true"
+#     container_default_behavior: compatibility
