@@ -1,0 +1,31 @@
+- name: Create netboot Directories
+  become: true
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: "0777"
+  with_items:
+    - "{{ host_netboot_folder_location }}/config"
+    - "{{ host_netboot_folder_location }}/assets"
+
+- name: Run 'Netboot' - Docker Container
+  docker_container:
+    name: netbootxyz
+    image: lscr.io/linuxserver/netbootxyz
+    pull: true
+    restart: unless-stopped
+    volumes:
+      - "{{ host_netboot_folder_location }}/config:/config"
+      - "{{ host_netboot_folder_location }}/assets:/assets"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+    networks:
+      - name: docker_ipvlan
+        ipv4_address: "{{ netboot_container_ip }}"
+    env:
+      TZ: "{{ time_zone }}"
+      PUID: "1000"
+      PGID: "1000"
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"

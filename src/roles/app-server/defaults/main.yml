@@ -7,3 +7,4 @@ host_plex_folder_location: /docker/plex
 host_tautulli_folder_location: /docker/tautulli
 host_traccar_folder_location: /docker/traccar
 host_homarr_folder_location: /docker/homarr
+host_netboot_folder_location: /docker/netboot
