@@ -1,0 +1,33 @@
+# Homarr
+# Documentation: https://homarr.dev/docs/getting-started/
+# Purpose: Helpful initial dashboard to keep track of the status of things
+- name: Create Homarr Directories
+  become: true
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: "0777"
+  with_items:
+    - "{{ host_homarr_folder_location }}/configs"
+    - "{{ host_homarr_folder_location }}/icons"
+    - "{{ host_homarr_folder_location }}/data"
+
+- name: Run 'Homarr' - Docker Container
+  docker_container:
+    name: homarr
+    image: ghcr.io/ajnart/homarr
+    restart_policy: unless-stopped
+    pull: true
+    networks:
+      - name: curidge
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "{{ host_homarr_folder_location }}/configs:/app/data/configs"
+      - "{{ host_homarr_folder_location }}/icons:/app/public/icons"
+      - "{{ host_homarr_folder_location }}/data:/data"
+      - "/etc/timezone:/etc/timezone:ro"
+    ports:
+      - 7575:7575
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
+    container_default_behavior: compatibility

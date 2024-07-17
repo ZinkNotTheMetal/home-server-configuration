@@ -20,7 +20,7 @@
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
     networks:
-      - name: port-freedom
+      - name: docker_ipvlan
         ipv4_address: "{{ overseerr_container_ip }}"
     env:
       TZ: "{{ time_zone }}"

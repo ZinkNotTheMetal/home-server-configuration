@@ -1,4 +1,3 @@
-
 ##################################################################################################
 ## Load DNS configs below here
 ##################################################################################################
@@ -7,23 +6,6 @@
   copy:
     src: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/portainer.subdomain.conf.sample"
     dest: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/portainer.subdomain.conf"
-    remote_src: true
-    mode: "0755"
-    owner: william
-    group: william
-
-- name: Change subdomain to 'uptime.*'' for uptime-kuma
-  become: true
-  replace:
-    path: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/uptime-kuma.subdomain.conf.sample"
-    regexp: "uptime-kuma"
-    replace: uptime
-
-- name: Load 'uptime-kuma.conf'
-  become: true
-  copy:
-    src: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/uptime-kuma.subdomain.conf.sample"
-    dest: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/uptime-kuma.subdomain.conf"
     remote_src: true
     mode: "0755"
     owner: william
@@ -45,6 +27,13 @@
     owner: william
     group: william
 
+- name: Change server for tautulli
+  become: true
+  replace:
+    path: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/tautulli.subdomain.conf"
+    regexp: "set \\$upstream_app.*$"
+    replace: "set $upstream_app {{ tautulli_container_ip }};"
+
 - name: Load 'overseerr.conf'
   become: true
   copy:
@@ -55,12 +44,12 @@
     owner: william
     group: william
 
-- name: Change server for node-red
+- name: Change overseerr server for nginx
   become: true
   replace:
-    path: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/node-red.subdomain.conf.sample"
-    regexp: "set $upstream_app*"
-    replace: "set $upstream_app {{ node_red_container_ip }};"
+    path: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/overseerr.subdomain.conf"
+    regexp: "set \\$upstream_app.*$"
+    replace: "set $upstream_app {{ overseerr_container_ip }};"
 
 - name: Load 'node-red.conf'
   become: true
@@ -71,6 +60,74 @@
     mode: "0755"
     owner: william
     group: william
+
+- name: Change server for node-red
+  become: true
+  replace:
+    path: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/node-red.subdomain.conf"
+    regexp: "set \\$upstream_app.*$"
+    replace: "set $upstream_app {{ nr_container_ip }};"
+
+- name: Load 'homarr.conf'
+  become: true
+  copy:
+    src: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/homarr.subdomain.conf.sample"
+    dest: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/homarr.subdomain.conf"
+    remote_src: true
+    mode: "0755"
+    owner: william
+    group: william
+
+- name: Load 'grafana.conf'
+  become: true
+  copy:
+    src: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/grafana.subdomain.conf.sample"
+    dest: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/grafana.subdomain.conf"
+    remote_src: true
+    mode: "0755"
+    owner: william
+    group: william
+
+- name: Load 'esphome.conf'
+  become: true
+  copy:
+    src: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/esphome.subdomain.conf.sample"
+    dest: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/esphome.subdomain.conf"
+    remote_src: true
+    mode: "0755"
+    owner: william
+    group: william
+
+- name: Change server for esp-home
+  become: true
+  replace:
+    path: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/esphome.subdomain.conf"
+    regexp: "set \\$upstream_app.*$"
+    replace: "set $upstream_app {{ esp_container_ip }};"
+
+- name: Load 'zwavejs.conf'
+  become: true
+  copy:
+    src: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/zwavejs2mqtt.subdomain.conf.sample"
+    dest: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/zwavejs.subdomain.conf"
+    remote_src: true
+    mode: "0755"
+    owner: william
+    group: william
+
+- name: Change server for zwavejs
+  become: true
+  replace:
+    path: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/zwavejs.subdomain.conf"
+    regexp: "set \\$upstream_app.*$"
+    replace: "set $upstream_app {{ zwavejs_container_ip }};"
+
+- name: Change url for zwave
+  become: true
+  replace:
+    path: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/zwavejs.subdomain.conf"
+    regexp: "server_name.*$"
+    replace: "server_name zwavejs.*;"
 
 - name: Restart SWAG after DNS entries changed for DNS entries
   docker_container:

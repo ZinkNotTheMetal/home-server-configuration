@@ -12,3 +12,7 @@
 {{ ansible_host }} esp.{{ duckdns_url }}
 {{ ansible_host }} portainer.{{ duckdns_url }}
 {{ ansible_host }} overseerr.{{ duckdns_url }}
+{{ ansible_host }} homarr.{{ duckdns_url }}
+{{ ansible_host }} grafana.{{ duckdns_url }}
+{{ ansible_host }} esphome.{{ duckdns_url }}
+{{ ansible_host }} zwavejs.{{ duckdns_url }}

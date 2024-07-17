@@ -42,7 +42,7 @@
     image: lscr.io/linuxserver/plex
     restart_policy: unless-stopped
     networks:
-      - name: port-freedom
+      - name: docker_ipvlan
         ipv4_address: "{{ plex_container_ip }}"
     pull: true
     volumes:

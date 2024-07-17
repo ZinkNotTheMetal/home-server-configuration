@@ -2,10 +2,17 @@
 - name: Load 'pihole.conf'
   become: true
   copy:
-    src: "{{ cert_manager_folder_location }}/nginx/proxy-confs/pihole.subdomain.conf.sample"
-    dest: "{{ cert_manager_folder_location }}/nginx/proxy-confs/pihole.subdomain.conf"
+    src: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/pihole.subdomain.conf.sample"
+    dest: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/pihole.subdomain.conf"
     remote_src: true
     mode: "0755"
     owner: william
     group: william
   when: swag_installed
+
+- name: Change pihole server for nginx
+  become: true
+  replace:
+    path: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/pihole.subdomain.conf"
+    regexp: "set \\$upstream_app.*"
+    replace: "set $upstream_app {{ pi_hole_container_ip }};"

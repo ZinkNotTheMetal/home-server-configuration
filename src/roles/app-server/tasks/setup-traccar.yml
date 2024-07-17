@@ -29,7 +29,7 @@
     image: yobasystems/alpine-mariadb
     pull: true
     networks:
-      - name: port-freedom
+      - name: docker_ipvlan
         ipv4_address: "{{ traccar_db_container_ip }}"
     volumes:
       - "{{ host_traccar_folder_location }}/data/mysql:/var/lib/mysql:rw"
@@ -47,7 +47,7 @@
     image: traccar/traccar
     pull: true
     networks:
-      - name: port-freedom
+      - name: docker_ipvlan
         ipv4_address: "{{ traccar_container_ip }}"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"

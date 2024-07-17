@@ -12,7 +12,7 @@
     image: pihole/pihole
     restart_policy: unless-stopped
     networks:
-      - name: port-freedom
+      - name: docker_ipvlan
         ipv4_address: "{{ pi_hole_container_ip }}"
     pull: true
     volumes:
@@ -37,6 +37,13 @@
   register: dnsentry
 
 - name: Restart PiHole for DNS entries
+  docker_container:
+    name: pihole
+    state: started
+    restart: true
+  when: dnsentry.changed
+
+- name: Restart SWAG for DNS entries
   docker_container:
     name: pihole
     state: started
