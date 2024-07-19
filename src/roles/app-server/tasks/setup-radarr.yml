@@ -26,7 +26,7 @@
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
       - "{{ host_radarr_folder_location }}/config:/config"
-      - "{{ host_transmission_folder_location }}/completed:/downloads"
+      - "{{ host_transmission_folder_location }}:/downloads"
       - "/mnt/nas/movies:/movies"
     ports:
       - 7878:7878
