@@ -4,7 +4,7 @@
 - name: Create nginx data volume
   become: true
   file:
-    path: "{{ host_radarr_folder_location }}/config"
+    path: "{{ host_prowlarr_folder_location }}/config"
     state: directory
     mode: "0755"
     owner: root
@@ -21,15 +21,14 @@
       PUID: "1000"
       PGID: "1000"
       VERSION: "docker"
+      TZ: "{{ time_zone }}"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
-      - "{{ host_radarr_folder_location }}/config:/config"
-      - "{{ host_transmission_folder_location }}:/data/downloads"
-      - "/mnt/nas/movies:/movies"
+      - "{{ host_prowlarr_folder_location }}/config:/config"
     ports:
-      - 7878:7878
+      - 9696:9696
     labels:
       com.centurylinklabs.watchtower.enable: "true"
     container_default_behavior: compatibility

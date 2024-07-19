@@ -1,0 +1,9 @@
+docker run -d \
+  --name=prowlarr \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  -e TZ=Etc/UTC \
+  -p 9696:9696 \
+  -v /path/to/prowlarr/data:/config \
+  --restart unless-stopped \
+  lscr.io/linuxserver/prowlarr:latest
