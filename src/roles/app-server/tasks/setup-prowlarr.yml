@@ -1,7 +1,7 @@
 # Radarr
 # Documentation: https://docs.linuxserver.io/images/docker-radarr
 # Purpose: To help automate movement of media
-- name: Create nginx data volume
+- name: Create docker volume
   become: true
   file:
     path: "{{ host_prowlarr_folder_location }}/config"
@@ -9,10 +9,10 @@
     mode: "0755"
     owner: root
 
-- name: Run 'Radarr' - Docker Container
+- name: Run 'Prowlarr' - Docker Container
   docker_container:
-    name: radarr
-    image: lscr.io/linuxserver/radarr
+    name: prowlarr
+    image: lscr.io/linuxserver/prowlarr
     restart_policy: unless-stopped
     pull: true
     networks:
