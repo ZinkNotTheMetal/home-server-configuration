@@ -3,7 +3,7 @@
   file:
     path: "{{ host_grafana_folder_location }}"
     state: directory
-    mode: '0777'
+    mode: "0777"
     recurse: yes
     owner: root
 
@@ -19,9 +19,9 @@
     pull: true
     restart_policy: unless-stopped
     env:
-      - GF_SERVER_ROOT_URL: https://grafana.keystoneridge.duckdns.org/grafana
+      GF_SERVER_ROOT_URL: https://grafana.keystoneridge.duckdns.org/grafana
       # Separated by ;
-      - GF_INSTALL_PLUGINS: "grafana-clock-panel"
+      GF_INSTALL_PLUGINS: "grafana-clock-panel"
     healthcheck:
       test: ["CMD", "curl", "-f", "https://grafana.keystoneridge.duckdns.org"]
       interval: 30s
