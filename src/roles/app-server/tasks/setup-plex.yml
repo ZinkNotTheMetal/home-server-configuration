@@ -59,5 +59,8 @@
       PUID: "1000"
       PGID: "1000"
       VERSION: "docker"
+      # To Generate a new Plex Claim Token:
+      #  https://www.plex.tv/claim/
+      PLEX_CLAIM: "{{ plex_claim_token }}"
     labels:
       com.centurylinklabs.watchtower.enable: "true"
