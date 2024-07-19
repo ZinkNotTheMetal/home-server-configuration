@@ -16,3 +16,5 @@
 {{ ansible_host }} grafana.{{ duckdns_url }}
 {{ ansible_host }} esphome.{{ duckdns_url }}
 {{ ansible_host }} zwavejs.{{ duckdns_url }}
+{{ ansible_host }} prowlarr.{{ duckdns_url }}
+{{ ansible_host }} radarr.{{ duckdns_url }}
