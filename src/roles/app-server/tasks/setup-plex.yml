@@ -12,7 +12,8 @@
   with_items:
     - "/mnt/nas/movies"
     - "/mnt/nas/tv"
-    - "{{ host_plex_folder_location }}"
+    - "{{ host_plex_folder_location }}/config"
+    - "{{ host_plex_folder_location }}/transcode"
 
 # Test mount
 #  sudo mount -t nfs 10.10.0.10:/volume1/Media/Movies /mnt/nas/movies
@@ -26,6 +27,7 @@
     src: "{{ nas_ip }}:/volume1/Media/Movies"
     path: /mnt/nas/movies
     state: mounted
+    opts: rw,nolock,soft
     fstype: nfs
 
 - name: Mount 'TV Shows'
@@ -34,6 +36,7 @@
     src: "{{ nas_ip }}:/volume1/Media/TV\ Shows"
     path: /mnt/nas/tv
     state: mounted
+    opts: rw,nolock,soft
     fstype: nfs
 
 - name: Run 'plex' - Docker Container
@@ -56,6 +59,5 @@
       PUID: "1000"
       PGID: "1000"
       VERSION: "docker"
-      PLEX_CLAIM: "{{ plex_claim_token }}"
     labels:
       com.centurylinklabs.watchtower.enable: "true"
