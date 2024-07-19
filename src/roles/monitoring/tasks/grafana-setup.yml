@@ -19,10 +19,10 @@
     pull: true
     restart_policy: unless-stopped
     env:
-      GF_SERVER_ROOT_URL: https://grafana.keystoneridge.duckdns.org/grafana
-      GF_SERVER_DOMIN: keystoneridge.duckdns.org
-      GF_SERVER_SERVE_FROM_SUB_PATH: true
-      GF_SECURITY_COOKIE_SAMESITE: disabled
+      GF_SERVER_ROOT_URL: "https://grafana.keystoneridge.duckdns.org/grafana"
+      GF_SERVER_DOMIN: "keystoneridge.duckdns.org"
+      GF_SERVER_SERVE_FROM_SUB_PATH: "true"
+      GF_SECURITY_COOKIE_SAMESITE: "disabled"
       # Separated by ;
       GF_INSTALL_PLUGINS: "grafana-clock-panel"
     healthcheck:
