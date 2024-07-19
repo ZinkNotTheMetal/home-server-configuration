@@ -17,6 +17,8 @@
       - name: curidge
     pull: true
     restart_policy: unless-stopped
+    env:
+      - GF_SERVER_ROOT_URL: https://grafana.keystoneridge.duckdns.org/grafana
     volumes:
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"

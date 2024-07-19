@@ -1,0 +1,35 @@
+# Radarr
+# Documentation: https://docs.linuxserver.io/images/docker-radarr
+# Purpose: To help automate movement of media
+- name: Create nginx data volume
+  become: true
+  file:
+    path: "{{ host_radarr_folder_location }}/config"
+    state: directory
+    mode: "0755"
+    owner: root
+
+- name: Run 'Radarr' - Docker Container
+  docker_container:
+    name: radarr
+    image: lscr.io/linuxserver/radarr
+    restart_policy: unless-stopped
+    pull: true
+    networks:
+      - name: curidge
+    env:
+      PUID: "1000"
+      PGID: "1000"
+      VERSION: "docker"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+      - "{{ host_radarr_folder_location }}/config:/config"
+      - "{{ host_transmission_folder_location }}/completed:/downloads"
+      - "/mnt/nas/movies:/movies"
+    ports:
+      - 7878:7878
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
+    container_default_behavior: compatibility

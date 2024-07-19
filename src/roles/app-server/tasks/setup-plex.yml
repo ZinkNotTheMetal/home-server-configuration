@@ -47,7 +47,7 @@
     pull: true
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
-      - "/mnt/nas/plex:/config"
+      - "{{ host_plex_folder_location }}/config:/config"
       - "{{ host_plex_folder_location }}/transcode:/transcode"
       - "/etc/timezone:/etc/timezone:ro"
       - "/mnt/nas/movies:/Movies"
