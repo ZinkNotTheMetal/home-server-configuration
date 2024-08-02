@@ -21,3 +21,7 @@
 - import_tasks: setup-homarr.yml
 
 - import_tasks: setup-netboot.yml
+
+- import_tasks: setup-prowlarr.yml
+
+- import_tasks: setup-radarr.yml

@@ -44,7 +44,7 @@
 - name: Traccar Docker Container
   docker_container:
     name: traccar
-    image: traccar/traccar
+    image: traccar/traccar:6.2
     pull: true
     networks:
       - name: docker_ipvlan

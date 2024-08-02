@@ -5,7 +5,8 @@
     state: directory
     owner: root
     group: root
-    mode: 0777
+    mode: "0777"
+    recurse: yes
   loop:
     - "{{ host_prometheus_folder_location }}/data"
     - "{{ host_prometheus_folder_location }}/config"

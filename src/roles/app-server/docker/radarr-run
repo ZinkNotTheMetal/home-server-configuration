@@ -1,0 +1,11 @@
+docker run -d \
+  --name=radarr \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  -e TZ=Etc/UTC \
+  -p 7878:7878 \
+  -v /path/to/radarr/data:/config \
+  -v /path/to/movies:/movies `#optional` \
+  -v /path/to/download-client-downloads:/downloads `#optional` \
+  --restart unless-stopped \
+  lscr.io/linuxserver/radarr:latest

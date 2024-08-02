@@ -4,6 +4,7 @@
     path: "{{ host_grafana_folder_location }}"
     state: directory
     mode: "0777"
+    recurse: yes
     owner: root
 
 # This container will collect displays the metrics from prometheus
@@ -17,6 +18,19 @@
       - name: curidge
     pull: true
     restart_policy: unless-stopped
+    env:
+      GF_SERVER_ROOT_URL: "https://grafana.keystoneridge.duckdns.org/grafana"
+      GF_SERVER_DOMIN: "keystoneridge.duckdns.org"
+      GF_SERVER_SERVE_FROM_SUB_PATH: "true"
+      GF_SECURITY_COOKIE_SAMESITE: "disabled"
+      # Separated by ;
+      GF_INSTALL_PLUGINS: "grafana-clock-panel"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "https://grafana.keystoneridge.duckdns.org"]
+      interval: 30s
+      timeout: 10s
+      retries: 6
+      start_period: 15s
     volumes:
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"

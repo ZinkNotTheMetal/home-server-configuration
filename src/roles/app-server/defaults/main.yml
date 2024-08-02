@@ -8,3 +8,5 @@ host_tautulli_folder_location: /docker/tautulli
 host_traccar_folder_location: /docker/traccar
 host_homarr_folder_location: /docker/homarr
 host_netboot_folder_location: /docker/netboot
+host_radarr_folder_location: /docker/radarr
+host_prowlarr_folder_location: /docker/prowlarr
