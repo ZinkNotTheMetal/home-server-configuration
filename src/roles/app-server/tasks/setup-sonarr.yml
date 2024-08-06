@@ -25,7 +25,7 @@
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
-      - "{{ host_radarr_folder_location }}/config:/config"
+      - "{{ host_sonarr_folder_location }}/config:/config"
       - "{{ host_transmission_folder_location }}:/data"
       - "/mnt/nas/tv:/tv"
     ports:
