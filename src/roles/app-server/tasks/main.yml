@@ -26,4 +26,6 @@
 
 - import_tasks: setup-radarr.yml
 
+- import_tasks: setup-sonarr.yml
+
 - import_tasks: setup-stirling.yml

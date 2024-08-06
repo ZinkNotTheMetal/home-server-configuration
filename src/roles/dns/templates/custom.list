@@ -19,3 +19,4 @@
 {{ ansible_host }} prowlarr.{{ duckdns_url }}
 {{ ansible_host }} radarr.{{ duckdns_url }}
 {{ ansible_host }} pdf.{{ duckdns_url }}
+{{ ansible_host }} sonarr.{{ duckdns_url }}

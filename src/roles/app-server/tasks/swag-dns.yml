@@ -166,6 +166,16 @@
     regexp: "server_name.*$"
     replace: "server_name pdf.*;"
 
+- name: Load 'sonarr.conf'
+  become: true
+  copy:
+    src: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/sonarr.subdomain.conf.sample"
+    dest: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/sonarr.subdomain.conf"
+    remote_src: true
+    mode: "0755"
+    owner: william
+    group: william
+
 - name: Restart SWAG after DNS entries changed for DNS entries
   docker_container:
     name: swag
