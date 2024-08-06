@@ -26,9 +26,9 @@
     ports:
       - 8081:8080
     env:
-      DOCKER_ENABLE_SECURITY: false
-      INSTALL_BOOK_AND_ADVANCED_HTML_OPS: false
-      LANGS: en_US
+      DOCKER_ENABLE_SECURITY: "false"
+      INSTALL_BOOK_AND_ADVANCED_HTML_OPS: "false"
+      LANGS: "en_US"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "/etc/timezone:/etc/timezone:ro"
