@@ -1,0 +1,42 @@
+# Stirling PDF
+# Documentation: https://github.com/Stirling-Tools/Stirling-PDF
+# Purpose: To help with PDF tasks (i.e. signing, splitting, editing)
+
+- name: Create docker volume (Stirling)
+  become: true
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: "0777"
+    owner: root
+    group: root
+  with_items:
+    - "{{ host_stirling_folder_location }}/training-data"
+    - "{{ host_stirling_folder_location }}/config"
+    - "{{ host_stirling_folder_location}}/logs"
+
+- name: Run 'Stirling PDF' - Docker Container
+  docker_container:
+    name: stirling-pdf
+    image: frooodle/s-pdf:latest
+    restart_policy: unless-stopped
+    pull: true
+    networks:
+      - name: curidge
+    ports:
+      - 8081:8080
+    env:
+      DOCKER_ENABLE_SECURITY: false
+      INSTALL_BOOK_AND_ADVANCED_HTML_OPS: false
+      LANGS: en_US
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+      - "{{ host_stirling_folder_location }}/logs:/logs"
+      - "{{ host_stirling_folder_location }}/config:/configs"
+      - "{{ host_stirling_folder_location }}/training-data:/usr/share/tessdata"
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
+    container_default_behavior: compatibility
+  

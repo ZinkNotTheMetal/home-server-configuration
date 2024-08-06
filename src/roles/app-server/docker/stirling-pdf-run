@@ -1,0 +1,31 @@
+docker run -d \
+  -p 8080:8080 \
+  -v ./trainingData:/usr/share/tessdata \
+  -v ./extraConfigs:/configs \
+  -v ./logs:/logs \
+  -e DOCKER_ENABLE_SECURITY=false \
+  -e INSTALL_BOOK_AND_ADVANCED_HTML_OPS=false \
+  -e LANGS=en_US \
+  --name stirling-pdf \
+  frooodle/s-pdf:latest
+
+  Can also add these for customisation but are not required
+
+  -v /location/of/customFiles:/customFiles \
+
+
+version: '3.3'
+services:
+  stirling-pdf:
+    image: frooodle/s-pdf:latest
+    ports:
+      - '8080:8080'
+    volumes:
+      - ./trainingData:/usr/share/tessdata #Required for extra OCR languages
+      - ./extraConfigs:/configs
+#      - ./customFiles:/customFiles/
+#      - ./logs:/logs/
+    environment:
+      - DOCKER_ENABLE_SECURITY=false
+      - INSTALL_BOOK_AND_ADVANCED_HTML_OPS=false
+      - LANGS=en_US
