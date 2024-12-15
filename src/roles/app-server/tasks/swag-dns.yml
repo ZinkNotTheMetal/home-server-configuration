@@ -53,13 +53,9 @@
 
 - name: Load 'node-red.conf'
   become: true
-  copy:
-    src: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/node-red.subdomain.conf.sample"
-    dest: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/node-red.subdomain.conf"
-    remote_src: true
-    mode: "0755"
-    owner: william
-    group: william
+  template:
+    src: node-red.subdomain.conf
+    dest: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs"
 
 - name: Change server for node-red
   become: true
