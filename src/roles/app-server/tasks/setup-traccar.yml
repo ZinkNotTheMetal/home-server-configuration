@@ -68,7 +68,7 @@
       VERSION: "docker"
     healthcheck:
      test: "wget --no-verbose --tries=1 --spider http://localhost:8082 || exit 1"
-     start_interval: 15s
+     start_period: 15s
      interval: 20s
      timeout: 8s
      retries: 5
