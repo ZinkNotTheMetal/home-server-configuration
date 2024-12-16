@@ -7,7 +7,7 @@
   file:
     path: "{{ item }}"
     state: directory
-    mode: "0777"
+    mode: 0777
   with_items:
     - "{{ host_traccar_folder_location }}/config"
     - "{{ host_traccar_folder_location }}/logs"
@@ -66,11 +66,11 @@
     env:
       TZ: "{{ time_zone }}"
       VERSION: "docker"
-    #healthcheck:
-    # test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8082"]
-    # start_period: 15s
-    # interval: 20s
-    # timeout: 8s
-    # retries: 5
+    healthcheck:
+    test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8082"]
+    start_period: 15s
+    interval: 20s
+    timeout: 8s
+    retries: 5
     labels:
       com.centurylinklabs.watchtower.enable: "true"
