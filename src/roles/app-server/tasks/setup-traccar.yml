@@ -56,6 +56,8 @@
     networks:
       - name: docker_ipvlan
         ipv4_address: "{{ traccar_container_ip }}"
+    links:
+      - traccar-db:traccar-db
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "/etc/timezone:/etc/timezone:ro"
