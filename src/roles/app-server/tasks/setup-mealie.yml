@@ -66,10 +66,6 @@
       POSTGRES_DB: "{{ mealie_db_name }}"
     ports:
       - 9925:9000
-    healthcheck:
-      test: ["CMD", "curl", "-kL", "http://localhost:9000"]
-      interval: 15s
-      timeout: 10s
-      retries: 5
+    # Healthcheck built into the container
     labels:
       com.centurylinklabs.watchtower.enable: "true"
