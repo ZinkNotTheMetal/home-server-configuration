@@ -21,7 +21,8 @@
     restart_policy: unless-stopped
     pull: true
     networks:
-      - name: curidge
+      - name: docker_ipvlan
+        ipv4_address: "{{ traccar_db_container_ip }}"
     volumes:
       - "{{ host_traccar_folder_location }}/db-backups:/backups:rw"
       - "{{ host_traccar_folder_location }}/db-data:/data/postgres"
