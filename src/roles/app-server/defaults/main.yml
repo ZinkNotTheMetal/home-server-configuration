@@ -5,6 +5,7 @@ host_kuma_folder_location: /docker/uptime-kuma
 host_transmission_folder_location: /docker/transmission
 host_plex_folder_location: /docker/plex
 host_tautulli_folder_location: /docker/tautulli
+host_postgres_folder_location: /docker/postgres
 host_traccar_folder_location: /docker/traccar
 host_homarr_folder_location: /docker/homarr
 host_netboot_folder_location: /docker/netboot
@@ -12,3 +13,4 @@ host_radarr_folder_location: /docker/radarr
 host_prowlarr_folder_location: /docker/prowlarr
 host_sonarr_folder_location: /docker/sonarr
 host_stirling_folder_location: /docker/stirling-pdf
+host_mealie_folder_location: /docker/mealie
