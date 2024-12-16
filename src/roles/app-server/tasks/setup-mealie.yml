@@ -20,8 +20,6 @@
     pull: true
     networks:
       - name: curidge
-    ports:
-      - 5434:5432
     volumes:
       - "{{ host_mealie_folder_location }}/db-backups:/backups:rw"
       - "{{ host_mealie_folder_location }}/db-data:/data/postgres"
@@ -50,6 +48,8 @@
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "{{ host_mealie_folder_location }}/app:/app/data:rw"
       - "/etc/timezone:/etc/timezone:ro"
+    links:
+      - mealie-db:mealie-db
     env:
       PUID: "1000"
       PGID: "1000"
