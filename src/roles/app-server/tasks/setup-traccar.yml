@@ -47,6 +47,11 @@
     owner: root
     group: root
 
+- name: Recurse chmod fix for traccar db
+  become: true
+  command: |
+    sudo chmod 777 -R {{ host_traccar_folder_location }}/db-data
+
 - name: Traccar Docker Container
   docker_container:
     name: traccar
