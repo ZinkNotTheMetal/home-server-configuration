@@ -62,7 +62,7 @@
       - "{{ host_traccar_folder_location }}/config/traccar.xml:/opt/traccar/conf/traccar.xml:ro"
       - "{{ host_traccar_folder_location }}/logs:/opt/traccar/logs:rw"
     links:
-      - traccar-db:traccar-db
+      - traccar-db:db
     env:
       TZ: "{{ time_zone }}"
       VERSION: "docker"
