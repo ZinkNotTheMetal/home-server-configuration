@@ -6,6 +6,7 @@
   file:
     path: "{{ item }}"
     state: directory
+    recursive: true
     mode: "0777"
   with_items:
     - "{{ host_mealie_folder_location }}/db-backups"
