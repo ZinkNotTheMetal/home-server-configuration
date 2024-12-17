@@ -26,7 +26,7 @@
       # Separated by ;
       GF_INSTALL_PLUGINS: "grafana-clock-panel"
     healthcheck:
-      test: ["CMD", "curl", "-f", "https://grafana.keystoneridge.duckdns.org"]
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
       interval: 30s
       timeout: 10s
       retries: 6
