@@ -30,6 +30,10 @@
       - "/mnt/nas/movies:/movies"
     ports:
       - 7878:7878
+    healthcheck:
+      test: ["CMD", "curl", "-kL", "http://localhost:7878"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
     labels:
       com.centurylinklabs.watchtower.enable: "true"
-    container_default_behavior: compatibility

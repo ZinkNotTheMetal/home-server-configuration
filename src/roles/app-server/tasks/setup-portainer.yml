@@ -12,7 +12,7 @@
 - name: Run 'Portainer' - Docker Container
   docker_container:
     name: portainer
-    image: portainer/portainer-ce
+    image: portainer/portainer-ce:alpine
     restart_policy: unless-stopped
     pull: true
     networks:
@@ -24,6 +24,10 @@
       - "{{ host_portainer_folder_location }}:/data"
     ports:
       - 9000:9000
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider http://localhost:9000/api/system/status || exit 1
+      interval: 15s
+      timeout: 10s
+      retries: 5
     labels:
       com.centurylinklabs.watchtower.enable: "true"
-    container_default_behavior: compatibility

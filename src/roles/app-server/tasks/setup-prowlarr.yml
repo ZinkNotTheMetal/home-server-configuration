@@ -29,6 +29,10 @@
       - "{{ host_prowlarr_folder_location }}/config:/config"
     ports:
       - 9696:9696
+    healthcheck:
+      test: ["CMD", "curl", "-kL", "http://localhost:9696"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
     labels:
       com.centurylinklabs.watchtower.enable: "true"
-    container_default_behavior: compatibility
