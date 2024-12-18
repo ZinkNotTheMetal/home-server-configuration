@@ -69,6 +69,16 @@
       POSTGRES_PASSWORD: "{{ mealie_db_password }}"
       POSTGRES_SERVER: "mealie-db"
       POSTGRES_DB: "{{ mealie_db_name }}"
+      # OIDC Settings - Comment out if not using (Authentik)
+      OIDC_AUTH_ENABLED: "true"
+      OIDC_PROVIDER_NAME: "Authentik"
+      OIDC_SIGNUP_ENABLED: "true"
+      OIDC_CONFIGURATION_URL: "{{ oidc_mealie_config_url }}" #.well-known/openid-config
+      OIDC_CLIENT_ID: "{{ oidc_mealie_client_id }}" # Secret found in authentik
+      OIDC_AUTO_REDIRECT: "true"
+      OIDC_REMEMBER_ME: "true"
+      OIDC_ADMIN_GROUP: "mealie_admins"
+      OIDC_USER_GROUP: "mealie_users"
     ports:
       - 9925:9000
     # Healthcheck built into the container
