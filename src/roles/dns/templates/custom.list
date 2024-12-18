@@ -20,3 +20,4 @@
 {{ ansible_host }} radarr.{{ duckdns_url }}
 {{ ansible_host }} pdf.{{ duckdns_url }}
 {{ ansible_host }} sonarr.{{ duckdns_url }}
+{{ ansible_host }} authentik.{{ duckdns_url }}
