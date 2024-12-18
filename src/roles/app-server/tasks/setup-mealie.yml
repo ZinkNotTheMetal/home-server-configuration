@@ -72,10 +72,11 @@
       # OIDC Settings - Comment out if not using (Authentik)
       OIDC_AUTH_ENABLED: "true"
       OIDC_PROVIDER_NAME: "Authentik"
+      OIDC_AUTO_REDIRECT: "true"
       OIDC_SIGNUP_ENABLED: "true"
       OIDC_CONFIGURATION_URL: "{{ oidc_mealie_config_url }}" #.well-known/openid-config
-      OIDC_CLIENT_ID: "{{ oidc_mealie_client_id }}" # Secret found in authentik
-      OIDC_AUTO_REDIRECT: "true"
+      OIDC_CLIENT_ID: "{{ oidc_mealie_client_id }}" # Found in authentik
+      OIDC_CLIENT_SECRET: "{{ oidc_mealie_client_secret }}" # Found in authentik
       OIDC_REMEMBER_ME: "true"
       OIDC_ADMIN_GROUP: "mealie_admins"
       OIDC_USER_GROUP: "mealie_users"
