@@ -18,8 +18,8 @@
     networks:
       - name: curidge
     env:
-      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
-      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+      PGADMIN_DEFAULT_EMAIL: "{{ pgadmin_default_email }}"
+      PGADMIN_DEFAULT_PASSWORD: "{{pgadmin_default_password }}"
     volumes:
       - "{{ host_pgadmin_folder_location }}/config:/var/lib/pgadmin"
     ports:
