@@ -6,8 +6,13 @@
   file:
     path: "{{ host_prowlarr_folder_location }}/config"
     state: directory
-    mode: "0755"
+    mode: 0777
     owner: root
+
+- name: Recurse chmod
+  become: true
+  command: |
+    sudo chmod 777 -R {{ host_prowlarr_folder_location }}
 
 - name: Run 'Prowlarr' - Docker Container
   docker_container:

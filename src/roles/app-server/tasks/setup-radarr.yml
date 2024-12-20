@@ -9,6 +9,11 @@
     mode: "0755"
     owner: root
 
+- name: Recurse chmod
+  become: true
+  command: |
+    sudo chmod 777 -R {{ host_radarr_folder_location }}
+
 - name: Run 'Radarr' - Docker Container
   docker_container:
     name: radarr

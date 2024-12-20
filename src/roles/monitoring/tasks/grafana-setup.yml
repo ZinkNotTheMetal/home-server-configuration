@@ -7,6 +7,11 @@
     recurse: yes
     owner: root
 
+- name: Recurse chmod
+  become: true
+  command: |
+    sudo chmod 777 -R {{ host_grafana_folder_location }}
+
 # This container will collect displays the metrics from prometheus
 - name: Run 'grafana' - Docker Container
   docker_container:

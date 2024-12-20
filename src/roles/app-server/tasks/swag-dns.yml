@@ -182,6 +182,16 @@
     regexp: "set \\$upstream_app.*$"
     replace: "set $upstream_app {{ nr_container_ip }};"
 
+- name: Load 'pgadmin.conf'
+  become: true
+  copy:
+    src: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/pgadmin.subdomain.conf.sample"
+    dest: "{{ host_cert_manager_folder_location }}/nginx/proxy-confs/pgadmin.subdomain.conf"
+    remote_src: true
+    mode: "0755"
+    owner: william
+    group: william  
+
 - name: Restart SWAG after DNS entries changed for DNS entries
   docker_container:
     name: swag

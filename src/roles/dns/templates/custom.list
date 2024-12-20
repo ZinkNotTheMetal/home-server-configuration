@@ -21,3 +21,6 @@
 {{ ansible_host }} pdf.{{ duckdns_url }}
 {{ ansible_host }} sonarr.{{ duckdns_url }}
 {{ ansible_host }} authentik.{{ duckdns_url }}
+{{ ansible_host }} traccar.{{ duckdns_url }}
+{{ ansible_host }} transmission.{{ duckdns_url }}
+{{ ansible_host }} pgadmin.{{ duckdns_url }}

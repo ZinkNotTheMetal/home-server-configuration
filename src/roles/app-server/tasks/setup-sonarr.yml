@@ -9,7 +9,7 @@
     mode: "0755"
     owner: root
 
-- name: Recurse chmod fix for traccar db
+- name: Recurse chmod fix for sonarr
   become: true
   command: |
     sudo chmod 777 -R {{ host_sonarr_folder_location }}/config

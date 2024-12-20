@@ -10,6 +10,8 @@
 
 - import_tasks: setup-transmission.yml
 
+- import_tasks: setup-pgadmin.yml
+
 - import_tasks: setup-plex.yml
 
 - import_tasks: setup-tautulli.yml
