@@ -10,6 +10,12 @@
   with_items:
     - "{{ host_pgadmin_folder_location }}"
 
+- name: Load 'pgadmin.conf'
+  become: true
+  template:
+    src: pgadmin.conf
+    dest: "{{ host_pgadmin_folder_location }}/config.py"
+
 - name: Run 'pgadmin' - Docker Container
   docker_container:
     name: pgadmin
@@ -23,7 +29,7 @@
       PGADMIN_DEFAULT_PASSWORD: "{{ pgadmin_default_password }}"
     volumes:
       - "{{ host_pgadmin_folder_location }}:/var/lib/pgadmin"
-      - "{{ host_pgadmin_folder_location }}/config.py:/pgadmin4/config.py"
+      - "{{ host_pgadmin_folder_location }}/config.py:/pgadmin4/config.py:rw"
     ports:
       - 5050:80
     healthcheck:
