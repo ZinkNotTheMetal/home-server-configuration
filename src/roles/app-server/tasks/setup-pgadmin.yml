@@ -9,7 +9,6 @@
     mode: "0777"
   with_items:
     - "{{ host_pgadmin_folder_location }}"
-    - "{{ host_pgadmin_folder_location }}/pgadmin4"
 
 - name: Run 'pgadmin' - Docker Container
   docker_container:
@@ -24,7 +23,7 @@
       PGADMIN_DEFAULT_PASSWORD: "{{ pgadmin_default_password }}"
     volumes:
       - "{{ host_pgadmin_folder_location }}:/var/lib/pgadmin"
-      - "{{ host_pgadmin_folder_location }}/pgadmin4:/pgadmin4"
+      - "{{ host_pgadmin_folder_location }}/config.py:/pgadmin4/config.py"
     ports:
       - 5050:80
     healthcheck:
