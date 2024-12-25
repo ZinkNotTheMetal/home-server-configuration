@@ -4,7 +4,7 @@
 - name: Create docker volume
   become: true
   file:
-    path: "{{ host_pgadmin_folder_location }}/config"
+    path: "{{ host_pgadmin_folder_location }}/pgadmin"
     state: directory
     mode: 0777
     owner: root
@@ -21,6 +21,7 @@
       PGADMIN_DEFAULT_EMAIL: "{{ pgadmin_default_email }}"
       PGADMIN_DEFAULT_PASSWORD: "{{ pgadmin_default_password }}"
     volumes:
+      - "{{ host_pgadmin_folder_location }}/pgadmin:/var/lib/pgadmin"
     ports:
       - 5050:80
     healthcheck:
