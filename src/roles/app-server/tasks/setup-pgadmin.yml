@@ -16,6 +16,11 @@
     src: pgadmin.conf
     dest: "{{ host_pgadmin_folder_location }}/config.py"
 
+- name: Recurse chmod
+  become: true
+  command: |
+    sudo chmod 777 -R {{ host_pgadmin_folder_location }}
+
 - name: Run 'pgadmin' - Docker Container
   docker_container:
     name: pgadmin
