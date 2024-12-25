@@ -39,9 +39,13 @@
       - "--config.file=/etc/prometheus/prometheus.yml"
     ports:
       - 9090:9090
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider http://localhost:9090/query || exit 1
+      interval: 15s
+      timeout: 10s
+      retries: 5
     labels:
       com.centurylinklabs.watchtower.enable: "true"
-    container_default_behavior: compatibility
 
 - name: Restart prometheus if config changed
   docker_container:
@@ -55,8 +59,6 @@
   docker_container:
     name: prometheus_node_exporter
     image: quay.io/prometheus/node-exporter
-    ports:
-      - 9100:9100
     networks:
       - name: curidge
     command:
@@ -69,9 +71,15 @@
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
       - "/var/run/docker.sock:/var/run/docker.sock"
+    ports:
+      - 9100:9100
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider http://localhost:9100 || exit 1
+      interval: 15s
+      timeout: 10s
+      retries: 5
     labels:
       com.centurylinklabs.watchtower.enable: "true"
-    container_default_behavior: compatibility
 
 - name: Create docker volume (snmp)
   become: true
@@ -105,9 +113,14 @@
       - "/etc/localtime:/etc/localtime:ro"
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "{{ host_snmp_explorer_location}}/snmp.yml:/etc/snmp_exporter/snmp.yml"
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider http://localhost:9116 || exit 1
+      interval: 15s
+      timeout: 10s
+      retries: 5
     labels:
       com.centurylinklabs.watchtower.enable: "true"
-    container_default_behavior: compatibility
+
 # # The container below collects docker/container metrics
 # # NOTE: This is not compatible with arm architecture such as RaspberryPi or ARM Macs
 # # Uncomment below to enable cadvisor on an AMD64 Architecture
@@ -133,6 +146,6 @@
       - "/docker/portainer:/data"
     devices:
       - /dev/kmsg
+    # Healhcheck built into container
     labels:
       com.centurylinklabs.watchtower.enable: "true"
-    container_default_behavior: compatibility

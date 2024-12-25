@@ -7,13 +7,38 @@
   file:
     path: "{{ item }}"
     state: directory
-    mode: "0777"
+    mode: 0777
   with_items:
     - "{{ host_traccar_folder_location }}/config"
     - "{{ host_traccar_folder_location }}/logs"
-    - "{{ host_traccar_folder_location }}/data"
+    - "{{ host_traccar_folder_location }}/db-data"
+    - "{{ host_traccar_folder_location }}/db-backups"
 
-# Move traccar template to /docker/traccar/config/
+- name: Run 'Traccar DB' - Docker Container
+  docker_container:
+    name: traccar-db
+    image: postgres:17-alpine
+    restart_policy: unless-stopped
+    pull: true
+    networks:
+      - name: docker_ipvlan
+        ipv4_address: "{{ traccar_db_container_ip }}"
+    volumes:
+      - "{{ host_traccar_folder_location }}/db-backups:/backups:rw"
+      - "{{ host_traccar_folder_location }}/db-data:/data/postgres"
+    env:
+      POSTGRES_USER: "{{ traccar_db_user }}"
+      POSTGRES_PASSWORD: "{{ traccar_db_password }}"
+      POSTGRES_DB: "{{ traccar_db_name }}"
+      PGDATA: /data/postgres
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 20s
+      timeout: 8s
+      retries: 5
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
+
 - name: Ensure the 'traccar' config is loaded
   become: true
   template:
@@ -22,43 +47,35 @@
     owner: root
     group: root
 
-
-- name: Create database container for Traccar
-  docker_container:
-    name: traccar-db
-    image: yobasystems/alpine-mariadb
-    pull: true
-    networks:
-      - name: docker_ipvlan
-        ipv4_address: "{{ traccar_db_container_ip }}"
-    volumes:
-      - "{{ host_traccar_folder_location }}/data/mysql:/var/lib/mysql:rw"
-      - "{{ host_traccar_folder_location }}/conf:/etc/mysql/conf.d"
-    env:
-      MYSQL_DATABASE: traccar
-      MYSQL_USER: "{{ traccar_mysql_user }}"
-      MYSQL_PASSWORD: "{{ traccar_mysql_password }}"
-      MYSQL_ROOT_PASSWORD: "{{ traccar_root_mysql_password }}"
-    restart_policy: unless-stopped
+- name: Recurse chmod fix for traccar db
+  become: true
+  command: |
+    sudo chmod 777 -R {{ host_traccar_folder_location }}/db-data
 
 - name: Traccar Docker Container
   docker_container:
     name: traccar
-    image: traccar/traccar:6.2
+    image: traccar/traccar:6-alpine
     pull: true
+    restart_policy: unless-stopped
     networks:
       - name: docker_ipvlan
         ipv4_address: "{{ traccar_container_ip }}"
+    links:
+      - traccar-db:traccar-db
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "/etc/timezone:/etc/timezone:ro"
       - "{{ host_traccar_folder_location }}/config/traccar.xml:/opt/traccar/conf/traccar.xml:ro"
       - "{{ host_traccar_folder_location }}/logs:/opt/traccar/logs:rw"
-    links:
-      - traccar-mysql:db
     env:
       TZ: "{{ time_zone }}"
       VERSION: "docker"
-    restart_policy: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8082"]
+      start_period: 5s
+      interval: 20s
+      timeout: 10s
+      retries: 5
     labels:
       com.centurylinklabs.watchtower.enable: "true"

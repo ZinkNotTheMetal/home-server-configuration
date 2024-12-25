@@ -7,6 +7,11 @@
     recurse: yes
     owner: root
 
+- name: Recurse chmod
+  become: true
+  command: |
+    sudo chmod 777 -R {{ host_grafana_folder_location }}
+
 # This container will collect displays the metrics from prometheus
 - name: Run 'grafana' - Docker Container
   docker_container:
@@ -25,8 +30,19 @@
       GF_SECURITY_COOKIE_SAMESITE: "disabled"
       # Separated by ;
       GF_INSTALL_PLUGINS: "grafana-clock-panel"
+      # OIDC Configuration:
+      GF_AUTH_GENERIC_OAUTH_ENABLED: "true"
+      GF_AUTH_OAUTH_AUTO_LOGIN: "true"
+      GF_AUTH_GENERIC_OAUTH_ROLE_ATTRIBUTE_PATH: "contains(groups, 'Grafana Admins') && 'Admin' || contains(groups, 'Grafana Editors') && 'Editor' || 'Viewer'"
+      GF_AUTH_GENERIC_OAUTH_CLIENT_ID: "{{ oidc_grafana_client_id }}"
+      GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET: "{{ oidc_grafana_client_secret }}"
+      GF_AUTH_GENERIC_OAUTH_SCOPES: "openid profile email"
+      GF_AUTH_GENERIC_OAUTH_AUTH_URL: "{{ oidc_grafana_auth_url }}"
+      GF_AUTH_GENERIC_OAUTH_TOKEN_URL: "{{ oidc_grafana_token_url }}"
+      GF_AUTH_GENERIC_OAUTH_API_URL: "{{ oidc_grafana_api_url }}"
+      GF_AUTH_SIGNOUT_REDIRECT_URL: "{{ oidc_grafana_redirect_url }}"
     healthcheck:
-      test: ["CMD", "curl", "-f", "https://grafana.keystoneridge.duckdns.org"]
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
       interval: 30s
       timeout: 10s
       retries: 6
@@ -37,4 +53,3 @@
       - "{{ host_grafana_folder_location }}:/var/lib/grafana"
     labels:
       com.centurylinklabs.watchtower.enable: "true"
-    container_default_behavior: compatibility

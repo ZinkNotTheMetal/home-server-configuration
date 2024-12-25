@@ -1,23 +1,23 @@
-# Radarr
-# Documentation: https://docs.linuxserver.io/images/docker-radarr
-# Purpose: To help automate movement of media
+# Sonarr
+# Documentation: https://github.com/linuxserver/docker-sonarr
+# Purpose: To help automate movement of tv show media
 - name: Create docker volume
   become: true
   file:
-    path: "{{ host_radarr_folder_location }}/config"
+    path: "{{ host_sonarr_folder_location }}/config"
     state: directory
     mode: "0755"
     owner: root
 
-- name: Recurse chmod
+- name: Recurse chmod fix for sonarr
   become: true
   command: |
-    sudo chmod 777 -R {{ host_radarr_folder_location }}
+    sudo chmod 777 -R {{ host_sonarr_folder_location }}/config
 
-- name: Run 'Radarr' - Docker Container
+- name: Run 'Sonarr' - Docker Container
   docker_container:
-    name: radarr
-    image: lscr.io/linuxserver/radarr
+    name: sonarr
+    image: lscr.io/linuxserver/sonarr
     restart_policy: unless-stopped
     pull: true
     networks:
@@ -30,13 +30,13 @@
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
-      - "{{ host_radarr_folder_location }}/config:/config"
+      - "{{ host_sonarr_folder_location }}/config:/config"
       - "{{ host_transmission_folder_location }}:/data"
-      - "/mnt/nas/movies:/movies"
+      - "/mnt/nas/tv:/tv"
     ports:
-      - 7878:7878
+      - 8989:8989
     healthcheck:
-      test: ["CMD", "curl", "-kL", "http://localhost:7878"]
+      test: ["CMD", "curl", "-kL", "http://localhost:8989"]
       interval: 15s
       timeout: 10s
       retries: 5

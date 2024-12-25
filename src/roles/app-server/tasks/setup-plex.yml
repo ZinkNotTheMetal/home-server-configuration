@@ -62,5 +62,11 @@
       # To Generate a new Plex Claim Token:
       #  https://www.plex.tv/claim/
       PLEX_CLAIM: "{{ plex_claim_token }}"
+    healthcheck:
+      test: curl --connect-timeout 15 --silent --show-error --fail http://localhost:32400/identity
+      interval: 1m00s
+      timeout: 15s
+      retries: 3
+      start_period: 1m00s
     labels:
       com.centurylinklabs.watchtower.enable: "true"
