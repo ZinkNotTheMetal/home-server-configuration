@@ -8,8 +8,8 @@
     state: directory
     mode: "0777"
   with_items:
-    - "{{ host_netboot_folder_location }}"
-    - "{{ host_netboot_folder_location }}/pgadmin4"
+    - "{{ host_pgadmin_folder_location }}"
+    - "{{ host_pgadmin_folder_location }}/pgadmin4"
 
 - name: Run 'pgadmin' - Docker Container
   docker_container:
