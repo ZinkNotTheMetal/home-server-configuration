@@ -21,7 +21,6 @@
       PGADMIN_DEFAULT_EMAIL: "{{ pgadmin_default_email }}"
       PGADMIN_DEFAULT_PASSWORD: "{{ pgadmin_default_password }}"
     volumes:
-      - "{{ host_pgadmin_folder_location }}/config:/pgadmin4"
     ports:
       - 5050:80
     healthcheck:
