@@ -1,5 +1,6 @@
 {
   "yaml.schemas": {
     "https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible.json": "file:///Users/william/Work/Personal/home-server-configuration/src/roles/common/tasks/setup-udev-rules.yml"
-  }
+  },
+  "cSpell.words": ["curidge", "PGDATA", "SIGNUP"]
 }

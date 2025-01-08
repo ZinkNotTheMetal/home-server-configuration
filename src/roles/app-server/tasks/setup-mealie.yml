@@ -49,6 +49,7 @@
     networks:
       - name: curidge
     pull: true
+    privileged: true
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "{{ host_mealie_folder_location }}/app:/app/data:rw"
@@ -63,7 +64,7 @@
       RECIPE_PUBLIC: "true"
       RECIPE_SHOW_ASSETS: "true"
       BASE_URL: "{{ mealie_url }}"
-      # Database Setetings
+      # Database Settings
       DB_ENGINE: "postgres"
       POSTGRES_USER: "{{ mealie_db_user }}"
       POSTGRES_PASSWORD: "{{ mealie_db_password }}"
