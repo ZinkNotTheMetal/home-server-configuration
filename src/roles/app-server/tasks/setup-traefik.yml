@@ -35,16 +35,11 @@
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "/etc/timezone:/etc/timezone:ro"
       - "{{ host_traefik_folder_location }}/config/traefik.conf:/etc/traefik/traefik.yaml:ro"
-      - "{{ host_traefik_folder_location}}/certs:/var/traefik/certs:rw"
+      - "{{ host_traefik_folder_location}}/certs:/certs:rw"
     env:
       TZ: "{{ time_zone }}"
       VERSION: "docker"
+      CF_API_EMAIL: "{{ contact_email }}"
       CF_DNS_API_TOKEN: "{{ cf_dns_api_token }}"
-    healthcheck:
-      test: traefik healthcheck --ping
-      start_period: 5s
-      interval: 20s
-      timeout: 10s
-      retries: 5
     labels:
       com.centurylinklabs.watchtower.enable: "true"

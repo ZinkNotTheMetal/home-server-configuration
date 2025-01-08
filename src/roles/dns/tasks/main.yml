@@ -36,7 +36,7 @@
       traefik.http.routers.pihole_http.entrypoints: "web"
       traefik.http.routers.pihole_http.rule: "Host(`pihole.zinkzone.tech`)"
       traefik.http.routers.pihole.tls: "true"
-      traefik.http.routers.pihole.tls.certresolver: "cloudflare"
+      traefik.http.routers.pihole.tls.certresolver: "letencrypt"
       traefik.http.middlewares.pihole-admin.addprefix.prefix: "/admin"
       traefik.http.services.pihole.loadBalancer.server.port: "80"
 

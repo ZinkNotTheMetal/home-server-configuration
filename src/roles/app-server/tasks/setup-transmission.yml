@@ -48,7 +48,7 @@
       traefik.http.routers.transmission.rule: "Host(`transmission.zinkzone.tech`)"
       traefik.http.routers.transmission.service: "transmission"
       traefik.http.services.transmission.loadBalancer.server.port: "9091"
+      traefik.http.routers.transmission.tls.certresolver: "letencrypt"
 
       traefik.http.routers.transmission_http.entrypoints: "web"
       traefik.http.routers.transmission_http.rule: "Host(`transmission.zinkzone.tech`)"
-      traefik.http.routers.transmission_http.tls.certresolver: "cloudflare"
