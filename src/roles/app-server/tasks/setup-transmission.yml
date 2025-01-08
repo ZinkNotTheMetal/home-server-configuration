@@ -17,6 +17,7 @@
     restart_policy: unless-stopped
     networks:
       - name: curidge
+    privileged: true
     pull: true
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
@@ -41,4 +42,13 @@
       - 9091:9091
     labels:
       com.centurylinklabs.watchtower.enable: "true"
-    container_default_behavior: compatibility
+      traefik.enable: "true"
+      traefik.http.routers.transmission.tls: "true"
+      traefik.http.routers.transmission.entrypoints: "websecure"
+      traefik.http.routers.transmission.rule: "Host(`transmission.zinkzone.tech`)"
+      traefik.http.routers.transmission.service: "transmission"
+      traefik.http.services.transmission.loadBalancer.server.port: "9091"
+
+      traefik.http.routers.transmission_http.entrypoints: "web"
+      traefik.http.routers.transmission_http.rule: "Host(`transmission.zinkzone.tech`)"
+      traefik.http.routers.transmission_http.tls.certresolver: "cloudflare"
