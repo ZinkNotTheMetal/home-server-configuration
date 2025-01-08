@@ -44,15 +44,9 @@
       com.centurylinklabs.watchtower.enable: "true"
       traefik.enable: "true"
       traefik.http.routers.transmission.tls: "true"
-      traefik.http.routers.transmission.entrypoints: "websecure"
+      traefik.http.routers.transmission.entrypoints: "websecure,web"
       traefik.http.routers.transmission.rule: "Host(`transmission.zinkzone.tech`)"
       traefik.http.routers.transmission.service: "transmission"
       traefik.http.services.transmission.loadBalancer.server.port: "9091"
+      traefik.http.services.transmission.loadBalancer.server.scheme: http
       traefik.http.routers.transmission.tls.certresolver: "letencrypt"
-
-      traefik.http.routers.transmission_http.entrypoints: "web"
-      traefik.http.routers.transmission_http.rule: "Host(`transmission.zinkzone.tech`)"
-
-      traefik.http.routers.transmission.middlewares: "transmission"
-      traefik.http.middlewares.transmission.addprefix.prefix: "/transmission/web"
-
