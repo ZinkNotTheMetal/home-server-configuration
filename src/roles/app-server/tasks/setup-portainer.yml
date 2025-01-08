@@ -16,14 +16,13 @@
     restart_policy: unless-stopped
     pull: true
     networks:
-      - name: curidge
+      - name: docker_ipvlan
+        ipv4_address: "{{ portainer_container_ip }}"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
       - "{{ host_portainer_folder_location }}:/data"
-    ports:
-      - 9000:9000
     healthcheck:
       test: wget --no-verbose --tries=1 --spider http://localhost:9000/api/system/status || exit 1
       interval: 15s
@@ -33,6 +32,8 @@
       com.centurylinklabs.watchtower.enable: "true"
       traefik.enable: "true"
       traefik.http.routers.portainer.entrypoints: "websecure,web"
+      traefik.http.routers.portainer.tls: "true"
       traefik.http.routers.portainer.rule: "Host(`portainer.zinkzone.tech`)"
       traefik.http.routers.portainer.service: "portainer"
       traefik.http.services.portainer.loadBalancer.server.port: "9000"
+      traefik.http.routers.portainer.tls.certresolver: "letsencrypt"
