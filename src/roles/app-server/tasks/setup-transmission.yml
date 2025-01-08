@@ -52,3 +52,7 @@
 
       traefik.http.routers.transmission_http.entrypoints: "web"
       traefik.http.routers.transmission_http.rule: "Host(`transmission.zinkzone.tech`)"
+
+      traefik.http.routers.transmission.middlewares: "transmission"
+      traefik.http.middlewares.transmission.addprefix.prefix: "/transmission/web"
+
