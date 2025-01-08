@@ -83,4 +83,4 @@
       traefik.http.routers.traccar.service: "traccar"
       traefik.http.services.traccar.loadBalancer.server.port: "8082"
       traefik.http.services.traccar.loadBalancer.server.scheme: http
-      traefik.http.routers.traccar.tls.certresolver: "letencrypt"
+      traefik.http.routers.traccar.tls.certresolver: "letsencrypt"

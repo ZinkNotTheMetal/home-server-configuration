@@ -49,4 +49,4 @@
       traefik.http.routers.transmission.service: "transmission"
       traefik.http.services.transmission.loadBalancer.server.port: "9091"
       traefik.http.services.transmission.loadBalancer.server.scheme: http
-      traefik.http.routers.transmission.tls.certresolver: "letencrypt"
+      traefik.http.routers.transmission.tls.certresolver: "letsencrypt"
