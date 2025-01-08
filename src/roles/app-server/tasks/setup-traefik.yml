@@ -11,14 +11,14 @@
     mode: 0777
   with_items:
     - "{{ host_traefik_folder_location }}/config"
+    - "{{ host_traefik_folder_location }}/certs"
 
 - name: Load the traefik configuration file
   become: true
-  copy:
+  template:
     src: traefik.conf
     dest: "{{ host_traefik_folder_location }}/config/traefik.conf"
     owner: root
-    mode: "0777"
     group: root
 
 - name: 'Setup Traefik Reverse Proxy'
@@ -35,9 +35,12 @@
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "/etc/timezone:/etc/timezone:ro"
       - "{{ host_traefik_folder_location }}/config/traefik.conf:/etc/traefik/traefik.yaml:ro"
+      - "{{ host_traefik_folder_location}}/certs:/var/traefik/certs:rw"
     env:
       TZ: "{{ time_zone }}"
       VERSION: "docker"
+      CF_API_EMAIL: "{{ contact_email }}"
+      CF_DNS_API_TOKEN: "{{ cf_dns_api_token dn}}"
     healthcheck:
       test: traefik healthcheck --ping
       start_period: 5s

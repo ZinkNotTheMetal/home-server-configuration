@@ -11,8 +11,10 @@
     "PGDATA",
     "pihole",
     "SIGNUP",
+    "traccar",
     "traefik",
     "WEBPASSWORD",
+    "websecure",
     "zinkzone"
   ]
 }
