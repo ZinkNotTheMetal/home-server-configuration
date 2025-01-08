@@ -8,6 +8,8 @@
 
 # - import_tasks: setup-swag.yml
 
+- import_tasks: setup-traefik.yml
+
 # - import_tasks: setup-transmission.yml
 
 # - import_tasks: setup-plex.yml
@@ -30,6 +32,6 @@
 
 # - import_tasks: setup-stirling.yml
 
-- import_tasks: setup-mealie.yml
+#- import_tasks: setup-mealie.yml
 
 #- import_tasks: setup-pgadmin.yml
