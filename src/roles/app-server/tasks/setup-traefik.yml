@@ -39,7 +39,6 @@
     env:
       TZ: "{{ time_zone }}"
       VERSION: "docker"
-      CF_API_EMAIL: "{{ contact_email }}"
       CF_DNS_API_TOKEN: "{{ cf_dns_api_token }}"
     healthcheck:
       test: traefik healthcheck --ping
