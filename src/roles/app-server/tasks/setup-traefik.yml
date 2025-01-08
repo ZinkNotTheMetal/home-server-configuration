@@ -15,8 +15,8 @@
 - name: Load the traefik configuration file
   become: true
   template:
-    src: traefik.config
-    dest: "{{ host_traefik_folder_location }}/config/traefik.config"
+    src: traefik.conf
+    dest: "{{ host_traefik_folder_location }}/config/traefik.conf"
     owner: root
     group: root
 
@@ -33,7 +33,7 @@
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "/etc/timezone:/etc/timezone:ro"
-      - "{{ host_traefik_folder_location }}/config/traefik.config:/etc/traefik/traefik.yaml:ro"
+      - "{{ host_traefik_folder_location }}/config/traefik.conf:/etc/traefik/traefik.yaml:ro"
     env:
       TZ: "{{ time_zone }}"
       VERSION: "docker"
