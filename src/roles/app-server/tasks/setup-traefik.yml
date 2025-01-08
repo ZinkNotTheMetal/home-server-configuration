@@ -14,10 +14,11 @@
 
 - name: Load the traefik configuration file
   become: true
-  template:
+  copy:
     src: traefik.conf
     dest: "{{ host_traefik_folder_location }}/config/traefik.conf"
     owner: root
+    mode: "0777"
     group: root
 
 - name: 'Setup Traefik Reverse Proxy'
