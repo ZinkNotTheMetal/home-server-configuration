@@ -79,8 +79,8 @@
       OIDC_CLIENT_ID: "{{ oidc_mealie_client_id }}" # Found in authentik
       OIDC_CLIENT_SECRET: "{{ oidc_mealie_client_secret }}" # Found in authentik
       OIDC_REMEMBER_ME: "true"
-      OIDC_ADMIN_GROUP: "mealie_admins"
-      OIDC_USER_GROUP: "mealie_users"
+      OIDC_ADMIN_GROUP: "Mealie Admins"
+      OIDC_USER_GROUP: "Mealie Users"
     ports:
       - 9925:9000
     # Healthcheck built into the container
