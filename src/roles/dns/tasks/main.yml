@@ -33,7 +33,7 @@
   become: true
   copy:
     src: 02-zinkzone-tech.conf
-    dest: "{{ host_pihole_folder_location }}/etc-dnsmasq.d:/etc/dnsmasq.d/02-zinkzone-tech.conf"
+    dest: "{{ host_pihole_folder_location }}/etc-dnsmasq.d/02-zinkzone-tech.conf"
     owner: root
     mode: "0777"
     group: root
