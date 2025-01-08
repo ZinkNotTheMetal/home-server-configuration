@@ -10,7 +10,7 @@
 
 # - import_tasks: setup-swag.yml
 
-# - import_tasks: setup-transmission.yml
+- import_tasks: setup-transmission.yml
 
 - import_tasks: setup-traccar.yml
 
