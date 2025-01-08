@@ -55,6 +55,7 @@
     image: traccar/traccar:6-alpine
     pull: true
     restart_policy: unless-stopped
+    privileged: true
     networks:
       - name: docker_ipvlan
         ipv4_address: "{{ traccar_container_ip }}"
