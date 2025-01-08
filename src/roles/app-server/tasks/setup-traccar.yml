@@ -19,6 +19,7 @@
     name: traccar-db
     image: postgres:17-alpine
     restart_policy: unless-stopped
+    privileged: true
     pull: true
     networks:
       - name: docker_ipvlan
@@ -38,6 +39,14 @@
       retries: 5
     labels:
       com.centurylinklabs.watchtower.enable: "true"
+      traefik.enable: "true"
+      traefik.http.routers.traccar.tls: "true"
+      traefik.http.routers.traccar.entrypoints: "websecure,web"
+      traefik.http.routers.traccar.rule: "Host(`traccar.zinkzone.tech`)"
+      traefik.http.routers.traccar.service: "traccar"
+      traefik.http.services.traccar.loadBalancer.server.port: "8082"
+      traefik.http.services.traccar.loadBalancer.server.scheme: http
+      traefik.http.routers.traccar.tls.certresolver: "letencrypt"
 
 - name: Ensure the 'traccar' config is loaded
   become: true
