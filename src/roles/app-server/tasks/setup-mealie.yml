@@ -18,8 +18,10 @@
     image: postgres:17-alpine
     restart_policy: unless-stopped
     pull: true
+    privileged: true
     networks:
-      - name: curidge
+      - name: docker_ipvlan
+        ipv4_address: "{{ mealie_db_container_ip }}"
     volumes:
       - "{{ host_mealie_folder_location }}/db-backups:/backups:rw"
       - "{{ host_mealie_folder_location }}/db-data:/data/postgres"
