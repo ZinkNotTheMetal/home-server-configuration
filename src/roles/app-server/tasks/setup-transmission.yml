@@ -43,7 +43,6 @@
     labels:
       com.centurylinklabs.watchtower.enable: "true"
       traefik.enable: "true"
-      traefik.docker.network: curidge
       traefik.http.routers.transmission.tls: "true"
       traefik.http.routers.transmission.entrypoints: "websecure,web"
       traefik.http.routers.transmission.rule: "Host(`transmission.zinkzone.tech`)"
