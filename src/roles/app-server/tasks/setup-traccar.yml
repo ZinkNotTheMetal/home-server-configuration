@@ -78,9 +78,8 @@
     labels:
       com.centurylinklabs.watchtower.enable: "true"
       traefik.enable: "true"
-      traefik.http.routers.traccar.tls: "true"
       traefik.http.routers.traccar.entrypoints: "websecure,web"
+      traefik.http.routers.traccar.tls: "true"
       traefik.http.routers.traccar.rule: "Host(`traccar.zinkzone.tech`)"
       traefik.http.routers.traccar.service: "traccar"
       traefik.http.services.traccar.loadBalancer.server.port: "8082"
-      traefik.http.routers.traccar.tls.certresolver: "letsencrypt"
