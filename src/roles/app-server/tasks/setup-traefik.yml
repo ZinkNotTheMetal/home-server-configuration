@@ -32,6 +32,8 @@
       - name: docker_ipvlan
         ipv4_address: "{{ traefik_container_ip }}"
       - name: curidge
+        endpoint_config:
+          gateway: null
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "/etc/timezone:/etc/timezone:ro"
