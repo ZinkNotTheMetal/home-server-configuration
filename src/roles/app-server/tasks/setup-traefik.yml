@@ -21,6 +21,14 @@
     owner: root
     group: root
 
+- name: Load the traefik configuration file
+  become: true
+  copy:
+    src: traefik.middleware.conf
+    dest: "{{ host_traefik_folder_location }}/config/middlewares-authentik.yaml"
+    owner: root
+    group: root
+
 - name: "Setup Traefik Reverse Proxy"
   docker_container:
     name: traefik
