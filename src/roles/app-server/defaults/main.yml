@@ -14,3 +14,4 @@ host_sonarr_folder_location: /docker/sonarr
 host_stirling_folder_location: /docker/stirling-pdf
 host_mealie_folder_location: /docker/mealie
 host_pgadmin_folder_location: /docker/pgadmin
+host_traefik_folder_location: /docker/traefik
