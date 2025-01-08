@@ -12,6 +12,7 @@
     "pihole",
     "SIGNUP",
     "traefik",
-    "WEBPASSWORD"
+    "WEBPASSWORD",
+    "zinkzone"
   ]
 }
