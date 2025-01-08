@@ -11,14 +11,15 @@
     name: pihole
     image: pihole/pihole
     restart_policy: unless-stopped
+    privileged: true
     networks:
       - name: docker_ipvlan
         ipv4_address: "{{ pi_hole_container_ip }}"
     pull: true
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
-      - "/docker/pihole/etc:/etc/pihole"
-      - "/docker/pihole/etc-dnsmasq.d:/etc/dnsmasq.d"
+      - "{{ host_pihole_folder_location }}/etc:/etc/pihole"
+      - "{{ host_pihole_folder_location }}/etc-dnsmasq.d:/etc/dnsmasq.d"
       - "/etc/timezone:/etc/timezone:ro"
     env:
       TZ: "{{ time_zone }}"
