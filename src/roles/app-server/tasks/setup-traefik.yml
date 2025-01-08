@@ -21,7 +21,7 @@
     owner: root
     group: root
 
-- name: 'Setup Traefik Reverse Proxy'
+- name: "Setup Traefik Reverse Proxy"
   docker_container:
     name: traefik
     image: traefik:v3
@@ -40,7 +40,7 @@
       TZ: "{{ time_zone }}"
       VERSION: "docker"
       CF_API_EMAIL: "{{ contact_email }}"
-      CF_DNS_API_TOKEN: "{{ cf_dns_api_token dn}}"
+      CF_DNS_API_TOKEN: "{{ cf_dns_api_token }}"
     healthcheck:
       test: traefik healthcheck --ping
       start_period: 5s
