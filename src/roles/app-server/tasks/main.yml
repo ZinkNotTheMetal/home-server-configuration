@@ -2,7 +2,7 @@
 # Description: Run all home-server applications
 # - import_tasks: docker-setup.yml
 
-# - import_tasks: setup-traefik.yml
+- import_tasks: setup-traefik.yml
 
 #- import_tasks: setup-watchtower.yml
 
