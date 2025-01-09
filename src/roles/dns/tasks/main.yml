@@ -9,7 +9,7 @@
 - name: Run 'Pi-Hole' - Docker Container
   docker_container:
     name: pihole
-    image: pihole/pihole
+    image: pihole/pihole:latest
     restart_policy: unless-stopped
     privileged: true
     networks:

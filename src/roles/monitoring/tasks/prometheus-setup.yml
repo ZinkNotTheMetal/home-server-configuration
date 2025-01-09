@@ -114,11 +114,11 @@
 
 - name: Run 'snmp explorer' - Docker Container
   docker_container:
-    name: prometheus_snmp_exporter
+    name: nas_snmp_exporter
     image: prom/snmp-exporter
     networks:
       - name: docker_ipvlan
-        ipv4_address: "{{ snmp_explorer_ip }}"
+        ipv4_address: "{{ nas_snmp_explorer_ip }}"
     privileged: true
     pull: true
     restart_policy: unless-stopped
@@ -137,7 +137,7 @@
       traefik.enable: "true"
       traefik.http.routers.snmp_explorer.entrypoints: "websecure,web"
       traefik.http.routers.snmp_explorer.tls: "true"
-      traefik.http.routers.snmp_explorer.rule: "Host(`snmp.zinkzone.tech`)"
+      traefik.http.routers.snmp_explorer.rule: "Host(`nas-snmp.zinkzone.tech`)"
       traefik.http.routers.snmp_explorer.service: "snmp_explorer"
       traefik.http.services.snmp_explorer.loadBalancer.server.port: "9116"
       traefik.http.routers.snmp_explorer.tls.certresolver: "letsencrypt"      

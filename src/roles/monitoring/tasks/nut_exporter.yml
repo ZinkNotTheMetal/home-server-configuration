@@ -1,7 +1,7 @@
 # Installs prometheus on the monitoring machine
 - name: Run 'nut exporter' - Docker Container
   docker_container:
-    name: nut_ups_data_exporter
+    name: rack_ups_data_exporter
     image: ghcr.io/druggeri/nut_exporter
     restart_policy: unless-stopped
     pull: true
