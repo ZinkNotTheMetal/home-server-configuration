@@ -14,7 +14,7 @@
   become: true
   template:
     src: pgadmin.conf.env
-    dest: "{{ host_pgadmin_folder_location }}/.env"
+    dest: "{{ host_pgadmin_folder_location }}/pgadmin.conf"
     owner: root
     group: root
 
@@ -29,7 +29,7 @@
       - name: docker_ipvlan
         ipv4_address: "{{ pgadmin_container_ip }}"
     env_file:
-      - "{{ host_pgadmin_folder_location }}/.env"
+      - "{{ host_pgadmin_folder_location }}/pgadmin.conf"
     healthcheck:
       test:
         [
