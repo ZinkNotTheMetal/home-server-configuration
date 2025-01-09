@@ -1,26 +1,6 @@
 # pgAdmin
 # Documentation: https://www.pgadmin.org/docs/pgadmin4/latest/container_deployment.html
 # Purpose: Database web client for connecting to Postgres databases
-- name: Create docker volume for pgadmin directories
-  become: true
-  file:
-    path: "{{ item }}"
-    state: directory
-    mode: "0777"
-  with_items:
-    - "{{ host_pgadmin_folder_location }}"
-
-- name: Load 'pgadmin.conf'
-  become: true
-  template:
-    src: pgadmin.conf
-    dest: "{{ host_pgadmin_folder_location }}/config_local.py"
-
-- name: Recurse chmod
-  become: true
-  command: |
-    sudo chmod 777 -R {{ host_pgadmin_folder_location }}
-
 - name: Run 'pgadmin' - Docker Container
   docker_container:
     name: pgadmin
