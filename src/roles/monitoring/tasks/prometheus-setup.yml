@@ -27,8 +27,10 @@
     image: docker.io/prom/prometheus
     restart_policy: unless-stopped
     pull: true
+    privileged: true
     networks:
-      - name: curidge
+      - name: docker_ipvlan
+        ipv4_address: "{{ prometheus_container_ip }}"
     volumes:
       - "{{ host_prometheus_folder_location }}/config:/etc/prometheus"
       - "{{ host_prometheus_folder_location }}/data:/prometheus/data"
@@ -37,8 +39,6 @@
       - "/etc/localtime:/etc/localtime:ro"
     command:
       - "--config.file=/etc/prometheus/prometheus.yml"
-    ports:
-      - 9090:9090
     healthcheck:
       test: wget --no-verbose --tries=1 --spider http://localhost:9090/query || exit 1
       interval: 15s
@@ -46,6 +46,13 @@
       retries: 5
     labels:
       com.centurylinklabs.watchtower.enable: "true"
+      traefik.enable: "true"
+      traefik.http.routers.prometheus.entrypoints: "websecure,web"
+      traefik.http.routers.prometheus.tls: "true"
+      traefik.http.routers.prometheus.rule: "Host(`prometheus.zinkzone.tech`)"
+      traefik.http.routers.prometheus.service: "prometheus"
+      traefik.http.services.prometheus.loadBalancer.server.port: "9090"
+      traefik.http.routers.prometheus.tls.certresolver: "letsencrypt"
 
 - name: Restart prometheus if config changed
   docker_container:
@@ -60,10 +67,12 @@
     name: prometheus_node_exporter
     image: quay.io/prometheus/node-exporter
     networks:
-      - name: curidge
+      - name: docker_ipvlan
+        ipv4_address: "{{ nuc8_node_explorer_ip }}"
     command:
       - "--path.rootfs=/host"
     pull: true
+    privileged: true
     restart_policy: unless-stopped
     pid_mode: host
     volumes:
@@ -71,8 +80,6 @@
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
       - "/var/run/docker.sock:/var/run/docker.sock"
-    ports:
-      - 9100:9100
     healthcheck:
       test: wget --no-verbose --tries=1 --spider http://localhost:9100 || exit 1
       interval: 15s
@@ -80,6 +87,13 @@
       retries: 5
     labels:
       com.centurylinklabs.watchtower.enable: "true"
+      traefik.enable: "true"
+      traefik.http.routers.node_explorer_nuc8.entrypoints: "websecure,web"
+      traefik.http.routers.node_explorer_nuc8.tls: "true"
+      traefik.http.routers.node_explorer_nuc8.rule: "Host(`nuc8-node.zinkzone.tech`)"
+      traefik.http.routers.node_explorer_nuc8.service: "node_explorer_nuc8"
+      traefik.http.services.node_explorer_nuc8.loadBalancer.server.port: "9100"
+      traefik.http.routers.node_explorer_nuc8.tls.certresolver: "letsencrypt"      
 
 - name: Create docker volume (snmp)
   become: true
@@ -102,10 +116,10 @@
   docker_container:
     name: prometheus_snmp_exporter
     image: prom/snmp-exporter
-    ports:
-      - 9116:9116
     networks:
-      - name: curidge
+      - name: docker_ipvlan
+        ipv4_address: "{{ snmp_explorer_ip }}"
+    privileged: true
     pull: true
     restart_policy: unless-stopped
     volumes:
@@ -120,6 +134,13 @@
       retries: 5
     labels:
       com.centurylinklabs.watchtower.enable: "true"
+      traefik.enable: "true"
+      traefik.http.routers.snmp_explorer.entrypoints: "websecure,web"
+      traefik.http.routers.snmp_explorer.tls: "true"
+      traefik.http.routers.snmp_explorer.rule: "Host(`snmp.zinkzone.tech`)"
+      traefik.http.routers.snmp_explorer.service: "snmp_explorer"
+      traefik.http.services.snmp_explorer.loadBalancer.server.port: "9116"
+      traefik.http.routers.snmp_explorer.tls.certresolver: "letsencrypt"      
 
 # # The container below collects docker/container metrics
 # # NOTE: This is not compatible with arm architecture such as RaspberryPi or ARM Macs
@@ -130,10 +151,10 @@
     image: gcr.io/cadvisor/cadvisor
     pull: true
     restart_policy: unless-stopped
-    ports:
-      - 31192:8080
     networks:
-      - name: curidge
+      - name: docker_ipvlan
+        ipv4_address: "{{ cadvisor_ip }}"
+    privileged: true
     volumes:
       - "/:/rootfs:ro"
       - "/var/run:/var/run:ro"
@@ -146,6 +167,13 @@
       - "/docker/portainer:/data"
     devices:
       - /dev/kmsg
-    # Healhcheck built into container
+    # Healthcheck built into container
     labels:
       com.centurylinklabs.watchtower.enable: "true"
+      traefik.enable: "true"
+      traefik.http.routers.cadvisor.entrypoints: "websecure,web"
+      traefik.http.routers.cadvisor.tls: "true"
+      traefik.http.routers.cadvisor.rule: "Host(`cadvisor.zinkzone.tech`)"
+      traefik.http.routers.cadvisor.service: "cadvisor"
+      traefik.http.services.cadvisor.loadBalancer.server.port: "8080"
+      traefik.http.routers.cadvisor.tls.certresolver: "letsencrypt"     

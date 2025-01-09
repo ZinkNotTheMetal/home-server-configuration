@@ -6,15 +6,21 @@
     restart_policy: unless-stopped
     pull: true
     networks:
-      - name: curidge
+      - name: docker_ipvlan
+        ipv4_address: "{{ rack_nut_ups_container_ip }}"
+    privileged: true
     env:
       NUT_EXPORTER_SERVER: "{{ ansible_host }}"
       NUT_EXPORTER_SERVERPORT: "3493"
       NUT_EXPORTER_USERNAME: "{{ ups_monitor_username }}"
       NUT_EXPORTER_PASSWORD: "{{ ups_monitor_password }}"
       TZ: "{{ time_zone }}"
-    ports:
-      - 9199:9199
     labels:
       com.centurylinklabs.watchtower.enable: "true"
-    container_default_behavior: compatibility
+      traefik.enable: "true"
+      traefik.http.routers.rack_nut_ups.entrypoints: "websecure,web"
+      traefik.http.routers.rack_nut_ups.tls: "true"
+      traefik.http.routers.rack_nut_ups.rule: "Host(`rack-ups.{{ domain_name }}`)"
+      traefik.http.routers.rack_nut_ups.service: "rack_nut_ups"
+      traefik.http.services.rack_nut_ups.loadBalancer.server.port: "9199"
+      traefik.http.routers.rack_nut_ups.tls.certresolver: "letsencrypt"

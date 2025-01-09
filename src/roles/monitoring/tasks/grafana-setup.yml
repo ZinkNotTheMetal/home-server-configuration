@@ -17,15 +17,15 @@
   docker_container:
     name: grafana
     image: docker.io/grafana/grafana-oss
-    ports:
-      - 3091:3000
     networks:
-      - name: curidge
+      - name: docker_ipvlan
+        ipv4_address: "{{ grafana_container_ip }}"
     pull: true
     restart_policy: unless-stopped
+    privileged: true
     env:
-      GF_SERVER_ROOT_URL: "https://grafana.keystoneridge.duckdns.org/grafana"
-      GF_SERVER_DOMIN: "keystoneridge.duckdns.org"
+      GF_SERVER_ROOT_URL: "https://grafana.{{ domain_name }}/grafana"
+      GF_SERVER_DOMAIN: "{{ domain_name }}"
       GF_SERVER_SERVE_FROM_SUB_PATH: "true"
       GF_SECURITY_COOKIE_SAMESITE: "disabled"
       # Separated by ;
@@ -53,3 +53,10 @@
       - "{{ host_grafana_folder_location }}:/var/lib/grafana"
     labels:
       com.centurylinklabs.watchtower.enable: "true"
+      traefik.enable: "true"
+      traefik.http.routers.grafana.entrypoints: "websecure,web"
+      traefik.http.routers.grafana.tls: "true"
+      traefik.http.routers.grafana.rule: "Host(`grafana.zinkzone.tech`)"
+      traefik.http.routers.grafana.service: "grafana"
+      traefik.http.services.grafana.loadBalancer.server.port: "3000"
+      traefik.http.routers.grafana.tls.certresolver: "letsencrypt"
