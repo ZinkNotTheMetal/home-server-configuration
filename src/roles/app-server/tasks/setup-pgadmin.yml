@@ -28,15 +28,14 @@
     restart_policy: unless-stopped
     pull: true
     networks:
-      - name: curidge
+      - name: docker_ipvlan
+        ipv4_address: "{{ pgadmin_container_ip }}"
     env:
       PGADMIN_DEFAULT_EMAIL: "{{ pgadmin_default_email }}"
       PGADMIN_DEFAULT_PASSWORD: "{{ pgadmin_default_password }}"
-    volumes:
-      - "{{ host_pgadmin_folder_location }}:/var/lib/pgadmin"
-      - "{{ host_pgadmin_folder_location }}/config_local.py:/pgadmin4/config_local.py:rw"
-    ports:
-      - 5050:80
+      PGADMIN_CONFIG_OAUTH2_AUTO_CREATE_USER: "true"
+      PGADMIN_CONFIG_AUTHENTICATION_SOURCES: ['oauth2', 'internal']
+      PGADMIN_CONFIG_OAUTH2_CONFIG: "[{'OAUTH2_NAME' : 'authentik','OAUTH2_DISPLAY_NAME' : 'Authentik','OAUTH2_CLIENT_ID' : '{{ oidc_pgadmin_client_id }}', 'OAUTH2_CLIENT_SECRET' : '{{ oidc_pgadmin_client_secret }}', 'OAUTH2_TOKEN_URL' : '{{ oidc_pgadmin_token_url }}', 'OAUTH2_AUTHORIZATION_URL' : '{{ oidc_pgadmin_auth_url }}','OAUTH2_API_BASE_URL' : '{{ oidc_pgadmin_base_url }}', 'OAUTH2_USERINFO_ENDPOINT' : '{{ oidc_pgadmin_userinfo_url }}', 'OAUTH2_SERVER_METADATA_URL' : '{{ oidc_pgadmin_metadata_url }}', 'OAUTH2_SCOPE' : 'openid email profile', 'OAUTH2_ICON' : 'fa-shield', 'OAUTH2_BUTTON_COLOR' : '#FD4A2C'}]"
     healthcheck:
       test:
         [
@@ -52,3 +51,10 @@
       retries: 5
     labels:
       com.centurylinklabs.watchtower.enable: "true"
+      traefik.enable: "true"
+      traefik.http.routers.pgadmin.entrypoints: "websecure,web"
+      traefik.http.routers.pgadmin.tls: "true"
+      traefik.http.routers.pgadmin.rule: "Host(`pgadmin.zinkzone.tech`)"
+      traefik.http.routers.pgadmin.service: "pgadmin"
+      traefik.http.services.pgadmin.loadBalancer.server.port: "80"
+      traefik.http.routers.pgadmin.tls.certresolver: "letsencrypt"
