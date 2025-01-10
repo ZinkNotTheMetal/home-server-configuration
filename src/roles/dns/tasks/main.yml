@@ -27,13 +27,16 @@
     labels:
       com.centurylinklabs.watchtower.enable: "true"
       traefik.enable: "true"
-      traefik.http.routers.pihole.entrypoints: "websecure,web"
+      traefik.http.routers.pihole.entrypoints: "websecure"
       traefik.http.routers.pihole.tls: "true"
       traefik.http.routers.pihole.rule: "Host(`pihole.{{ domain_name }}`)"
       traefik.http.routers.pihole.service: "pihole"
       traefik.http.services.pihole.loadBalancer.server.port: "80"
       traefik.http.middlewares.pihole-admin.addprefix.prefix: "/admin"
       traefik.http.routers.pihole.tls.certresolver: "letsencrypt"
+      traefik.http.routers.pihole_http.entrypoints: "web"
+      traefik.http.routers.pihole_http.rule: "Host(`pihole.zinkzone.tech`)"
+      traefik.http.routers.pihole_http.middlewares: "redirect-to-https"
 
 - import_tasks: setup-swag-dns.yml
 
