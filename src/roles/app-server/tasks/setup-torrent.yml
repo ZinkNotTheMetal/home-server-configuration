@@ -1,0 +1,59 @@
+- name: Ensure 'mount folder' is created
+  become: true
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: "0777"
+    owner: root
+    group: root
+  with_items:
+    - "/mnt/nas/torrent"
+    - "{{ host_qbittorrent_folder_location }}"
+
+# Test mount
+#  sudo mount -t nfs 10.10.0.10:/volume1/Media/Movies /mnt/nas/movies
+#  sudo mount -t nfs 10.10.0.10:/volume1/Media/TV\ Shows /mnt/nas/tv
+#  sudo mount -t nfs 10.10.0.10:/volume1/Files/Books /mnt/nas/books
+# Test unmount
+#  sudo umount 10.10.0.10:/backups
+- name: Mount 'Torrent Data' to mount folder
+  become: true
+  mount:
+    src: "{{ nas_ip }}:/volume1/Files/Torrent-Data"
+    path: /mnt/nas/torrent
+    state: mounted
+    opts: rw,nolock,soft
+    fstype: nfs
+
+- name: Run 'qbittorrent' - Docker Container
+  docker_container:
+    name: 'qbittorrent'
+    image: j4ym0/pia-qbittorrent
+    restart_policy: unless-stopped
+    privileged: true
+    networks:
+      - name: docker_ipvlan
+        ipv4_address: "{{ torrent_container_ip }}"
+    pull: true
+    volumes:
+      - "/mnt/nas/torrent:/downloads"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "/etc/timezone:/etc/timezone:ro"
+    env:
+      USER: "{{ vpn_username }}"
+      PASSWORD: "{{ vpn_password }}"
+      REGION: "{{ vpn_region }}"
+      TZ: "{{ time_zone }}"
+    capabilities:
+      - NET_ADMIN
+    ports:
+      - 8888:8888
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
+      traefik.enable: "true"
+      traefik.http.routers.torrent.entrypoints: "websecure,web"
+      traefik.http.routers.torrent.tls: "true"
+      traefik.http.routers.torrent.rule: "Host(`torrent.zinkzone.tech`)"
+      traefik.http.routers.torrent.service: "torrent"
+      traefik.http.services.torrent.loadBalancer.server.port: "8888"
+      traefik.http.routers.torrent.tls.certresolver: "letsencrypt"

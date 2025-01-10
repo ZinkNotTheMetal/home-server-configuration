@@ -27,6 +27,7 @@
     "PGDATA",
     "pihole",
     "prowlarr",
+    "qbittorrent",
     "radarr",
     "redirections",
     "rootfs",

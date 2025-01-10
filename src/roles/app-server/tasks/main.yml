@@ -8,8 +8,6 @@
 
 #- import_tasks: setup-portainer.yml
 
-# - import_tasks: setup-swag.yml
-
 # - import_tasks: setup-traccar.yml
 
 # - import_tasks: setup-plex.yml
@@ -26,7 +24,7 @@
 
 # - import_tasks: setup-sonarr.yml
 
-- import_tasks: setup-transmission.yml
+- import_tasks: setup-torrent.yml
 
 # - import_tasks: setup-stirling.yml
 

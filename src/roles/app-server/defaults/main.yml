@@ -6,7 +6,6 @@ host_transmission_folder_location: /docker/transmission
 host_plex_folder_location: /docker/plex
 host_tautulli_folder_location: /docker/tautulli
 host_traccar_folder_location: /docker/traccar
-host_homarr_folder_location: /docker/homarr
 host_netboot_folder_location: /docker/netboot
 host_radarr_folder_location: /docker/radarr
 host_prowlarr_folder_location: /docker/prowlarr
@@ -15,3 +14,4 @@ host_stirling_folder_location: /docker/stirling-pdf
 host_mealie_folder_location: /docker/mealie
 host_pgadmin_folder_location: /docker/pgadmin
 host_traefik_folder_location: /docker/traefik
+host_qbittorrent_folder_location: /docker/qbittorrent

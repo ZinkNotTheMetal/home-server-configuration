@@ -1,6 +1,34 @@
 # Transmission
 # Documentation: https://transmissionbt.com
-# Purpose: To dowload Linux ISOs such as Debian & Mint
+# Purpose: To download Linux ISOs such as Debian & Mint
+
+- name: Ensure 'mount folder' is created
+  become: true
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: "0777"
+    owner: root
+    group: root
+  with_items:
+    - "/mnt/nas/transmission"
+
+# Test mount
+#  sudo mount -t nfs 10.10.0.10:/volume1/Media/Movies /mnt/nas/movies
+#  sudo mount -t nfs 10.10.0.10:/volume1/Media/TV\ Shows /mnt/nas/tv
+#  sudo mount -t nfs 10.10.0.10:/volume1/Files/Books /mnt/nas/books
+# Test unmount
+#  sudo umount 10.10.0.10:/backups
+- name: Mount 'Transmission Data' to mount folder
+  become: true
+  mount:
+    src: "{{ nas_ip }}:/volume1/Media/Movies"
+    path: /mnt/nas/movies
+    state: mounted
+    opts: rw,nolock,soft
+    fstype: nfs
+
+
 - name: Create docker data volume
   become: true
   file:
