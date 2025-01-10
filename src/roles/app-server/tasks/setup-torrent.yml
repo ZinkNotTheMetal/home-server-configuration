@@ -42,7 +42,7 @@
     env:
       USER: "{{ vpn_username }}"
       PASSWORD: "{{ vpn_password }}"
-      REGION: "{{ vpn_region }}"
+      # REGION: "{{ vpn_region }}"
       TZ: "{{ time_zone }}"
     capabilities:
       - NET_ADMIN
