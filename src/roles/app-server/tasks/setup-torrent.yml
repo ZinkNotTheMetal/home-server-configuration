@@ -27,7 +27,7 @@
 
 - name: Run 'qbittorrent' - Docker Container
   docker_container:
-    name: 'pia-torrent'
+    name: "pia-torrent"
     image: j4ym0/pia-qbittorrent
     restart_policy: unless-stopped
     privileged: true
@@ -47,10 +47,9 @@
       TZ: "{{ time_zone }}"
       LOCAL_NETWORK: "192.168.0.0/16"
       PORT_FORWARDING: "true"
+      CSRFPROTECTION: "true"
     capabilities:
       - NET_ADMIN
-    devices:
-      - "/dev/net/tun"
     labels:
       com.centurylinklabs.watchtower.enable: "true"
       traefik.enable: "true"
