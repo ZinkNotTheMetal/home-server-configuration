@@ -16,9 +16,7 @@
     image: haugene/transmission-openvpn
     restart_policy: unless-stopped
     networks:
-      - name: docker_ipvlan
-        ipv4_address: "{{ transmission_container_ip }}"
-    privileged: true
+      - name: curidge
     pull: true
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
@@ -38,13 +36,7 @@
       LOCAL_NETWORK: "192.168.0.0/16"
     capabilities:
       - NET_ADMIN
+    ports:
+      - 9091:9091
     labels:
       com.centurylinklabs.watchtower.enable: "true"
-      traefik.enable: "true"
-      traefik.http.routers.transmission.tls: "true"
-      traefik.http.routers.transmission.entrypoints: "websecure,web"
-      traefik.http.routers.transmission.rule: "Host(`transmission.zinkzone.tech`)"
-      traefik.http.routers.transmission.service: "transmission"
-      traefik.http.services.transmission.loadBalancer.server.port: "9091"
-      traefik.http.services.transmission.loadBalancer.server.scheme: http
-      traefik.http.routers.transmission.tls.certresolver: "letsencrypt"
