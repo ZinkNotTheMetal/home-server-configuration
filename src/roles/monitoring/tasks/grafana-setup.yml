@@ -19,7 +19,7 @@
     restart_policy: unless-stopped
     privileged: true
     env:
-      GF_SERVER_ROOT_URL: "https://grafana.{{ domain_name }}/grafana"
+      GF_SERVER_ROOT_URL: "https://grafana.{{ domain_name }}"
       GF_SERVER_DOMAIN: "{{ domain_name }}"
       GF_SERVER_SERVE_FROM_SUB_PATH: "true"
       GF_SECURITY_COOKIE_SAMESITE: "disabled"
