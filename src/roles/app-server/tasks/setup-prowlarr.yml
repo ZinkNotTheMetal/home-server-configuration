@@ -9,19 +9,16 @@
     mode: 0777
     owner: root
 
-- name: Recurse chmod
-  become: true
-  command: |
-    sudo chmod 777 -R {{ host_prowlarr_folder_location }}
-
 - name: Run 'Prowlarr' - Docker Container
   docker_container:
     name: prowlarr
     image: lscr.io/linuxserver/prowlarr
     restart_policy: unless-stopped
     pull: true
+    privileged: true
     networks:
-      - name: curidge
+      - name: docker_ipvlan
+        ipv4_address: "{{ prowlarr_container_ip }}"
     env:
       PUID: "1000"
       PGID: "1000"
@@ -32,8 +29,6 @@
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
       - "{{ host_prowlarr_folder_location }}/config:/config"
-    ports:
-      - 9696:9696
     healthcheck:
       test: ["CMD", "curl", "-kL", "http://localhost:9696"]
       interval: 15s
@@ -41,3 +36,10 @@
       retries: 5
     labels:
       com.centurylinklabs.watchtower.enable: "true"
+      traefik.enable: "true"
+      traefik.http.routers.prowlarr.entrypoints: "websecure,web"
+      traefik.http.routers.prowlarr.tls: "true"
+      traefik.http.routers.prowlarr.rule: "Host(`prowlarr.zinkzone.tech`)"
+      traefik.http.routers.prowlarr.service: "prowlarr"
+      traefik.http.services.prowlarr.loadBalancer.server.port: "9696"
+      traefik.http.routers.prowlarr.tls.certresolver: "letsencrypt"

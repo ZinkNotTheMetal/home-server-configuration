@@ -10,7 +10,7 @@
 
 # - import_tasks: setup-swag.yml
 
-- import_tasks: setup-transmission.yml
+# - import_tasks: setup-transmission.yml
 
 # - import_tasks: setup-traccar.yml
 
@@ -22,9 +22,9 @@
 
 # - import_tasks: setup-homarr.yml
 
-- import_tasks: setup-netboot.yml
+# - import_tasks: setup-netboot.yml
 
-# - import_tasks: setup-prowlarr.yml
+- import_tasks: setup-prowlarr.yml
 
 # - import_tasks: setup-radarr.yml
 
