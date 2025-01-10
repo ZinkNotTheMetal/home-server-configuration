@@ -34,5 +34,5 @@
       traefik.http.routers.tautulli.tls: "true"
       traefik.http.routers.tautulli.rule: "Host(`tautulli.zinkzone.tech`)"
       traefik.http.routers.tautulli.service: "tautulli"
-      traefik.http.services.tautulli.loadBalancer.server.port: "8080"
+      traefik.http.services.tautulli.loadBalancer.server.port: "8181"
       traefik.http.routers.tautulli.tls.certresolver: "letsencrypt"
