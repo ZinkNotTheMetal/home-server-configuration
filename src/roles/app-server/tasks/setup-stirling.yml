@@ -22,9 +22,8 @@
     restart_policy: unless-stopped
     pull: true
     networks:
-      - name: curidge
-    ports:
-      - 8081:8080
+      - name: docker_ipvlan
+        ipv4_address: "{{ stirling_pdf_container_ip }}"
     env:
       DOCKER_ENABLE_SECURITY: "false"
       INSTALL_BOOK_AND_ADVANCED_HTML_OPS: "false"
@@ -43,3 +42,10 @@
       retries: 16
     labels:
       com.centurylinklabs.watchtower.enable: "true"
+      traefik.enable: "true"
+      traefik.http.routers.stirling-pdf.entrypoints: "websecure,web"
+      traefik.http.routers.stirling-pdf.tls: "true"
+      traefik.http.routers.stirling-pdf.rule: "Host(`pdf.zinkzone.tech`)"
+      traefik.http.routers.stirling-pdf.service: "stirling-pdf"
+      traefik.http.services.stirling-pdf.loadBalancer.server.port: "8080"
+      traefik.http.routers.stirling-pdf.tls.certresolver: "letsencrypt"
