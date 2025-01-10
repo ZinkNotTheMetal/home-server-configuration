@@ -9,19 +9,16 @@
     mode: "0755"
     owner: root
 
-- name: Recurse chmod
-  become: true
-  command: |
-    sudo chmod 777 -R {{ host_radarr_folder_location }}
-
 - name: Run 'Radarr' - Docker Container
   docker_container:
     name: radarr
     image: lscr.io/linuxserver/radarr
     restart_policy: unless-stopped
     pull: true
+    privileged: true
     networks:
-      - name: curidge
+      - name: docker_ipvlan
+        ipv4_address: "{{ radarr_container_ip }}"
     env:
       PUID: "1000"
       PGID: "1000"
@@ -33,8 +30,6 @@
       - "{{ host_radarr_folder_location }}/config:/config"
       - "{{ host_transmission_folder_location }}:/data"
       - "/mnt/nas/movies:/movies"
-    ports:
-      - 7878:7878
     healthcheck:
       test: ["CMD", "curl", "-kL", "http://localhost:7878"]
       interval: 15s
@@ -42,3 +37,10 @@
       retries: 5
     labels:
       com.centurylinklabs.watchtower.enable: "true"
+      traefik.enable: "true"
+      traefik.http.routers.radarr.entrypoints: "websecure,web"
+      traefik.http.routers.radarr.tls: "true"
+      traefik.http.routers.radarr.rule: "Host(`radarr.zinkzone.tech`)"
+      traefik.http.routers.radarr.service: "radarr"
+      traefik.http.services.radarr.loadBalancer.server.port: "7878"
+      traefik.http.routers.radarr.tls.certresolver: "letsencrypt"

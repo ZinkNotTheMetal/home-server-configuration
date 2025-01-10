@@ -9,19 +9,16 @@
     mode: "0755"
     owner: root
 
-- name: Recurse chmod fix for sonarr
-  become: true
-  command: |
-    sudo chmod 777 -R {{ host_sonarr_folder_location }}/config
-
 - name: Run 'Sonarr' - Docker Container
   docker_container:
     name: sonarr
     image: lscr.io/linuxserver/sonarr
     restart_policy: unless-stopped
     pull: true
+    privileged: true
     networks:
-      - name: curidge
+      - name: docker_ipvlan
+        ipv4_address: "{{ sonarr_container_ip }}"
     env:
       PUID: "1000"
       PGID: "1000"
@@ -42,3 +39,10 @@
       retries: 5
     labels:
       com.centurylinklabs.watchtower.enable: "true"
+      traefik.enable: "true"
+      traefik.http.routers.sonarr.entrypoints: "websecure,web"
+      traefik.http.routers.sonarr.tls: "true"
+      traefik.http.routers.sonarr.rule: "Host(`sonarr.zinkzone.tech`)"
+      traefik.http.routers.sonarr.service: "sonarr"
+      traefik.http.services.sonarr.loadBalancer.server.port: "8989"
+      traefik.http.routers.sonarr.tls.certresolver: "letsencrypt"
