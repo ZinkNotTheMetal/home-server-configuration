@@ -27,13 +27,10 @@
 
 - name: Run 'qbittorrent' - Docker Container
   docker_container:
-    name: 'qbittorrent'
-    image: bmoorman/qbittorrent:latest
+    name: 'pia-torrent'
+    image: j4ym0/pia-qbittorrent
     restart_policy: unless-stopped
     privileged: true
-    dns:
-      - 1.1.1.1
-      - 1.0.0.1
     networks:
       - name: docker_ipvlan
         ipv4_address: "{{ torrent_container_ip }}"
@@ -44,10 +41,12 @@
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "/etc/timezone:/etc/timezone:ro"
     env:
-      PIA_USER: "{{ vpn_username }}"
-      PIA_PASS: "{{ vpn_password }}"
+      USER: "{{ vpn_username }}"
+      PASSWORD: "{{ vpn_password }}"
+      #REGION: "{{ vpn_region }}"
       TZ: "{{ time_zone }}"
       LOCAL_NETWORK: "192.168.0.0/16"
+      PORT_FORWARDING: "true"
     capabilities:
       - NET_ADMIN
     devices:
@@ -59,5 +58,5 @@
       traefik.http.routers.torrent.tls: "true"
       traefik.http.routers.torrent.rule: "Host(`torrent.zinkzone.tech`)"
       traefik.http.routers.torrent.service: "torrent"
-      traefik.http.services.torrent.loadBalancer.server.port: "8080"
+      traefik.http.services.torrent.loadBalancer.server.port: "8888"
       traefik.http.routers.torrent.tls.certresolver: "letsencrypt"
