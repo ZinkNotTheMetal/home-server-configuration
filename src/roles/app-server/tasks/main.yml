@@ -16,9 +16,9 @@
 
 # - import_tasks: setup-plex.yml
 
-# - import_tasks: setup-tautulli.yml
+- import_tasks: setup-tautulli.yml
 
-# - import_tasks: setup-overseerr.yml
+- import_tasks: setup-overseerr.yml
 
 # - import_tasks: setup-homarr.yml
 
@@ -30,8 +30,8 @@
 
 # - import_tasks: setup-sonarr.yml
 
-# - import_tasks: setup-stirling.yml
+- import_tasks: setup-stirling.yml
 
-#- import_tasks: setup-mealie.yml
+# - import_tasks: setup-mealie.yml
 
-- import_tasks: setup-pgadmin.yml
+# - import_tasks: setup-pgadmin.yml
