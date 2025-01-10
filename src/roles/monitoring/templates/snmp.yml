@@ -15,11 +15,11 @@ auths:
   synology:
     community: public
     security_level: authPriv
-    username: synology_snmp
-    password: .WcmJW%q{S0.jJPj
+    username: {{ nas_snmp_exporter_username }}
+    password: {{ nas_snmp_exporter_password }}
     auth_protocol: SHA
     priv_protocol: AES
-    priv_password: privacy_passw0rd_wz
+    priv_password: {{ nas_snmp_exporter_priv_password }}
     version: 3
 modules:
   if_mib:
