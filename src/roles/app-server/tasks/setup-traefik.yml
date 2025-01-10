@@ -11,6 +11,7 @@
     mode: 0777
   with_items:
     - "{{ host_traefik_folder_location }}/config"
+    - "{{ host_traefik_folder_location }}/config/overrides"
     - "{{ host_traefik_folder_location }}/certs"
 
 - name: Load the traefik configuration file
@@ -29,6 +30,14 @@
     owner: root
     group: root
 
+- name: Load 'nas configuration'
+  become: true
+  copy:
+    src: traefik.nas.conf
+    dest: "{{ host_traefik_folder_location }}/config/overrides/nas.yaml"
+    owner: root
+    group: root
+
 - name: "Setup Traefik Reverse Proxy"
   docker_container:
     name: traefik
@@ -43,6 +52,7 @@
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "/etc/timezone:/etc/timezone:ro"
       - "{{ host_traefik_folder_location }}/config/traefik.conf:/etc/traefik/traefik.yaml:ro"
+      - "{{ host_traefik_folder_location }}/config/overrides:/etc/traefik/overrides:ro"
       - "{{ host_traefik_folder_location}}/certs:/certs:rw"
     env:
       TZ: "{{ time_zone }}"

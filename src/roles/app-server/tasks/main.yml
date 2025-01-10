@@ -24,7 +24,7 @@
 
 # - import_tasks: setup-sonarr.yml
 
-- import_tasks: setup-torrent.yml
+#- import_tasks: setup-transmission.yml
 
 # - import_tasks: setup-stirling.yml
 
