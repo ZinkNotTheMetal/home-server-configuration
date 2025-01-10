@@ -16,7 +16,8 @@
     image: haugene/transmission-openvpn
     restart_policy: unless-stopped
     networks:
-      - name: curidge
+      - name: docker_ipvlan
+        ipv4_address: "{{ transmission_container_ip }}"
     privileged: true
     pull: true
     volumes:
@@ -37,9 +38,6 @@
       LOCAL_NETWORK: "192.168.0.0/16"
     capabilities:
       - NET_ADMIN
-    ports:
-      - 8118:8118
-      - 9091:9091
     labels:
       com.centurylinklabs.watchtower.enable: "true"
       traefik.enable: "true"

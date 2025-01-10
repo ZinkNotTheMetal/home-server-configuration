@@ -34,3 +34,11 @@
       retries: 3
     labels:
       com.centurylinklabs.watchtower.enable: "true"
+      traefik.enable: "true"
+      traefik.http.routers.netboot.tls: "true"
+      traefik.http.routers.netboot.entrypoints: "websecure,web"
+      traefik.http.routers.netboot.rule: "Host(`netboot.zinkzone.tech`)"
+      traefik.http.routers.netboot.service: "transmission"
+      traefik.http.services.netboot.loadBalancer.server.port: "3000"
+      traefik.http.services.netboot.loadBalancer.server.scheme: http
+      traefik.http.routers.netboot.tls.certresolver: "letsencrypt"
