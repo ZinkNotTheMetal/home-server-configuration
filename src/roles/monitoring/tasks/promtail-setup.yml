@@ -16,7 +16,7 @@
   become: true
   copy:
     src: promtail.config
-    dest: "{{ host_promtail_folder_location }}/promtail.config.yaml"
+    dest: "{{ host_promtail_folder_location }}/promtail.config.yml"
     owner: root
     group: root
 

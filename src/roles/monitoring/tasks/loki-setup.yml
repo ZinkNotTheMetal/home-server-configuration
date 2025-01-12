@@ -15,7 +15,7 @@
   become: true
   copy:
     src: loki.config
-    dest: "{{ host_loki_folder_location }}/loki.config.yaml"
+    dest: "{{ host_loki_folder_location }}/loki.config.yml"
     owner: root
     group: root
 
