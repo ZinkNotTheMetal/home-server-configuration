@@ -23,8 +23,8 @@
 
 - name: Run 'Promtail' - Docker Container
   docker_container:
-    name: loki
-    image: grafana/loki:latest
+    name: promtail
+    image: grafana/promtail:latest
     restart_policy: unless-stopped
     pull: true
     privileged: true
