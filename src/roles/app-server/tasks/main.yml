@@ -14,7 +14,7 @@
 
 # - import_tasks: setup-tautulli.yml
 
-# - import_tasks: setup-overseerr.yml
+- import_tasks: setup-overseerr.yml
 
 # - import_tasks: setup-netboot.yml
 
