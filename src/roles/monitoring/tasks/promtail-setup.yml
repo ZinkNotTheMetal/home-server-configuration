@@ -42,3 +42,16 @@
     #  retries: 5
     labels:
       com.centurylinklabs.watchtower.enable: "true"
+
+
+- name: Run test logging container
+  docker_container:
+    name: nginx-test
+    image: nginx
+    pull: true
+    networks:
+      - name: docker_ipvlan
+        ipv4_address: "192.168.144.200"
+    labels:
+      logging: "promtail"
+      logging_jobname: "containerlogs"
