@@ -39,10 +39,3 @@
     #  retries: 5
     labels:
       com.centurylinklabs.watchtower.enable: "true"
-      traefik.enable: "true"
-      traefik.http.routers.loki.entrypoints: "websecure,web"
-      traefik.http.routers.loki.tls: "true"
-      traefik.http.routers.loki.rule: "Host(`loki.zinkzone.tech`)"
-      traefik.http.routers.loki.service: "loki"
-      traefik.http.services.loki.loadBalancer.server.port: "3100"
-      traefik.http.routers.loki.tls.certresolver: "letsencrypt"

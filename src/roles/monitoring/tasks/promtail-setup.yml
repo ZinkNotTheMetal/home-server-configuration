@@ -20,7 +20,6 @@
     owner: root
     group: root
 
-
 - name: Run 'Promtail' - Docker Container
   docker_container:
     name: promtail
@@ -32,6 +31,7 @@
       - name: docker_ipvlan
         ipv4_address: "{{ promtail_container_ip }}"
     volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
       - "/var/log:/var/log"
       - "{{ host_promtail_folder_location }}:/etc/promtail"
     command: -config.file=/etc/promtail/promtail.config.yml
