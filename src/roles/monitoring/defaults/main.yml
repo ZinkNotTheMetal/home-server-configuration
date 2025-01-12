@@ -1,3 +1,5 @@
 host_prometheus_folder_location: /docker/prometheus
 host_grafana_folder_location: /docker/grafana
+host_loki_folder_location: /docker/loki
+host_promtail_folder_location: /docker/promtail
 host_snmp_explorer_location: /docker/snmp

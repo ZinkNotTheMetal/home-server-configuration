@@ -1,0 +1,48 @@
+# Loki
+# Documentation: https://grafana.com/docs/loki/latest/setup/install/docker/
+# Additional: https://technotim.live/posts/grafana-loki/
+# Purpose: store and query logs from all your applications and infrastructure
+- name: Create 'Loki' docker directory
+  become: true
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: "0777"
+  with_items:
+    - "{{ host_loki_folder_location }}"
+
+- name: Load 'Loki' Config
+  become: true
+  copy:
+    src: loki.config
+    dest: "{{ host_loki_folder_location }}/loki.config.yaml"
+    owner: root
+    group: root
+
+- name: Run 'Loki' - Docker Container
+  docker_container:
+    name: loki
+    image: grafana/loki:latest
+    restart_policy: unless-stopped
+    pull: true
+    privileged: true
+    networks:
+      - name: docker_ipvlan
+        ipv4_address: "{{ loki_container_ip }}"
+    volumes:
+      - "{{ host_loki_folder_location }}:/etc/loki"
+    command: -config.file=/etc/loki/loki.config.yml
+    #healthcheck:
+    #  test: ["CMD-SHELL", "pg_isready"]
+    #  interval: 20s
+    #  timeout: 8s
+    #  retries: 5
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
+      traefik.enable: "true"
+      traefik.http.routers.loki.entrypoints: "websecure,web"
+      traefik.http.routers.loki.tls: "true"
+      traefik.http.routers.loki.rule: "Host(`loki.zinkzone.tech`)"
+      traefik.http.routers.loki.service: "loki"
+      traefik.http.services.loki.loadBalancer.server.port: "3100"
+      traefik.http.routers.loki.tls.certresolver: "letsencrypt"

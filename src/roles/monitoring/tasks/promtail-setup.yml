@@ -1,0 +1,44 @@
+# Promtail
+# Documentation: https://grafana.com/docs/loki/latest/send-data/promtail/
+# Additional: https://technotim.live/posts/grafana-loki/
+# Purpose: Collects logs from nodes and sends them to Loki. 
+#          Promtail can also parse logs and extract metric data that Prometheus can scrape.
+- name: Create 'Promtail' docker directory
+  become: true
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: "0777"
+  with_items:
+    - "{{ host_promtail_folder_location }}"
+
+- name: Load 'Promtail' Config
+  become: true
+  copy:
+    src: promtail.config
+    dest: "{{ host_promtail_folder_location }}/promtail.config.yaml"
+    owner: root
+    group: root
+
+
+- name: Run 'Promtail' - Docker Container
+  docker_container:
+    name: loki
+    image: grafana/loki:latest
+    restart_policy: unless-stopped
+    pull: true
+    privileged: true
+    networks:
+      - name: docker_ipvlan
+        ipv4_address: "{{ promtail_container_ip }}"
+    volumes:
+      - "/var/log:/var/log"
+      - "{{ host_promtail_folder_location }}:/etc/promtail"
+    command: -config.file=/etc/promtail/promtail.config.yml
+    #healthcheck:
+    #  test: ["CMD-SHELL", "pg_isready"]
+    #  interval: 20s
+    #  timeout: 8s
+    #  retries: 5
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"

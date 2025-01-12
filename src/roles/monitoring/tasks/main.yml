@@ -1,6 +1,8 @@
 # Description: Run all home-server applications
 - import_tasks: prometheus-setup.yml
 
-- import_tasks: grafana-setup.yml
+- import_tasks: promtail-setup.yml
 
-- import_tasks: nut_exporter.yml
+- import_tasks: loki-setup.yml
+
+- import_tasks: grafana-setup.yml

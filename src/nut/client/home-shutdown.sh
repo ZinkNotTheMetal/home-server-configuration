@@ -1,7 +1,9 @@
 #!/bin/bash
 
+# Fill in proper NAS variables below
+
 main () {
-  log_file="/var/log/nut.log"
+  log_file="/home/william/poweroff.log"
 
   log_date "==============================================================================="
   log_date "Powerdown event recieved from NUT master, initiating shutdown proceedure"
@@ -10,7 +12,6 @@ main () {
 
   shutdown_nas
   shutdown_host
-  # shutdown_ups - want to check the timing
 
   log_date "==============================================================================="
   log_date "Complete home-shutdown.sh"
@@ -19,11 +20,11 @@ main () {
 
 shutdown_nas () {
   log_date "Initiated shutdown of Synology NAS by user: $USER"
-  ssh -p {{ nas_ssh_port }} {{ nas_admin_user }}@{{ nas_ip }} poweroff
+  ssh -p 30122 {{ user_name}}@{{ nas_ip }} poweroff
 }
 
 shutdown_host () {
-  log_date "Initiated shutdown of $HOSTNAME by user: $USER"
+  log_date "Initiated shutdown of $HOSTNAME by UPSMON user: $USER"
   shutdown -h +1
 }
 
