@@ -140,7 +140,7 @@
       traefik.http.routers.snmp_explorer.rule: "Host(`nas-snmp.zinkzone.tech`)"
       traefik.http.routers.snmp_explorer.service: "snmp_explorer"
       traefik.http.services.snmp_explorer.loadBalancer.server.port: "9116"
-      traefik.http.routers.snmp_explorer.tls.certresolver: "letsencrypt"      
+      traefik.http.routers.snmp_explorer.tls.certresolver: "letsencrypt"
 
 # # The container below collects docker/container metrics
 # # NOTE: This is not compatible with arm architecture such as RaspberryPi or ARM Macs
