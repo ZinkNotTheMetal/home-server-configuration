@@ -42,6 +42,8 @@
     #  retries: 5
     labels:
       com.centurylinklabs.watchtower.enable: "true"
+      logging: "promtail"
+      logging_jobname: "containerlogs"
 
 
 - name: Run test logging container
