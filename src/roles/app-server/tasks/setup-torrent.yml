@@ -43,13 +43,14 @@
     env:
       USER: "{{ vpn_username }}"
       PASSWORD: "{{ vpn_password }}"
-      #REGION: "{{ vpn_region }}"
+      REGION: "{{ vpn_region }}"
       TZ: "{{ time_zone }}"
       LOCAL_NETWORK: "192.168.0.0/16"
       PORT_FORWARDING: "true"
       UID: "1000"
       GID: "1000"
       CSRFPROTECTION: "true"
+      LEGACY_IPTABLES: true
     capabilities:
       - NET_ADMIN
     labels:
