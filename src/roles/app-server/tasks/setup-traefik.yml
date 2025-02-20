@@ -54,7 +54,6 @@
       - "{{ host_traefik_folder_location }}/config/traefik.yaml:/etc/traefik/traefik.yaml:ro"
       - "{{ host_traefik_folder_location }}/config/overrides:/etc/traefik/overrides:ro"
       - "{{ host_traefik_folder_location }}/certs:/certs:rw"
-      - "{{ host_traefik_folder_location }}/acme.json:/acme.json"
       - "{{ host_traefik_folder_location }}/logs:/var/log/traefik"
     env:
       TZ: "{{ time_zone }}"

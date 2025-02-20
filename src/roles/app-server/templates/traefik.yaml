@@ -1,9 +1,10 @@
+api:
+  dashboard: true
+  debug: true
+
 global:
   checkNewVersion: false
   sendAnonymousUsage: false
-
-log:
-  level: DEBUG
 
 entryPoints:
   web:
@@ -48,17 +49,15 @@ certificatesResolvers:
       caServer: https://acme-v02.api.letsencrypt.org/directory
       dnsChallenge:
         provider: cloudflare
-        delayBeforeCheck: 10 #Optional to wait x second before checking with the DNS Server
         resolvers:
           - "1.1.1.1:53"
           - "8.8.8.8:53"
 
-api:
-  # Set to false when prod ready
-  insecure: true
-
-  # Set to false when prod ready
-  dashboard: true
+log:
+  level: "INFO"
+  filePath: "/var/log/traefik/traefik.log"
+accessLog:
+  filePath: "/var/log/traefik/access.log"
 
 providers:
   docker:
