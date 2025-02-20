@@ -16,6 +16,10 @@
       - name: docker_ipvlan
         ipv4_address: "{{ pi_hole_container_ip }}"
     pull: true
+    cap_add:
+      # Required if you are using Pi-hole as your DHCP server, else not needed
+      # See Note On Capabilities below
+      - NET_ADMIN    
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "{{ host_pihole_folder_location }}/etc:/etc/pihole"
@@ -24,6 +28,10 @@
     env:
       TZ: "{{ time_zone }}"
       WEBPASSWORD: "{{ pi_hole_password }}"
+      # Set a password to access the web interface. Not setting one will result in a random password being assigned
+      FTLCONF_webserver_api_password: "{{ pi_hole_password }}"
+      # If using Docker's default `bridge` network setting the dns listening mode should be set to 'all'3
+      FTLCONF_dns_listeningMode: "all"
     labels:
       com.centurylinklabs.watchtower.enable: "true"
       traefik.enable: "true"
@@ -32,7 +40,6 @@
       traefik.http.routers.pihole.rule: "Host(`pihole.{{ domain_name }}`)"
       traefik.http.routers.pihole.service: "pihole"
       traefik.http.services.pihole.loadBalancer.server.port: "80"
-      traefik.http.middlewares.pihole.addprefix.prefix: "/admin"
 
 - import_tasks: setup-swag-dns.yml
 
