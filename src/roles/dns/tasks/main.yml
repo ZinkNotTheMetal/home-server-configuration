@@ -19,7 +19,7 @@
     cap_add:
       # Required if you are using Pi-hole as your DHCP server, else not needed
       # See Note On Capabilities below
-      - NET_ADMIN    
+      - NET_ADMIN
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "{{ host_pihole_folder_location }}/etc:/etc/pihole"
@@ -40,8 +40,6 @@
       traefik.http.routers.pihole.rule: "Host(`pihole.{{ domain_name }}`)"
       traefik.http.routers.pihole.service: "pihole"
       traefik.http.services.pihole.loadBalancer.server.port: "80"
-
-- import_tasks: setup-swag-dns.yml
 
 - name: Setup custom DNS - public
   become: true
