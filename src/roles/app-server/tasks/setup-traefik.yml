@@ -17,8 +17,8 @@
 - name: Load the traefik configuration file
   become: true
   template:
-    src: traefik.conf
-    dest: "{{ host_traefik_folder_location }}/config/traefik.conf"
+    src: traefik.yaml
+    dest: "{{ host_traefik_folder_location }}/config/traefik.yaml"
     owner: root
     group: root
 
@@ -51,9 +51,11 @@
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "/etc/timezone:/etc/timezone:ro"
-      - "{{ host_traefik_folder_location }}/config/traefik.conf:/etc/traefik/traefik.yaml:ro"
+      - "{{ host_traefik_folder_location }}/config/traefik.yaml:/etc/traefik/traefik.yaml:ro"
       - "{{ host_traefik_folder_location }}/config/overrides:/etc/traefik/overrides:ro"
-      - "{{ host_traefik_folder_location}}/certs:/certs:rw"
+      - "{{ host_traefik_folder_location }}/certs:/certs:rw"
+      - "{{ host_traefik_folder_location }}/acme.json:/acme.json"
+      - "{{ host_traefik_folder_location }}/logs:/var/log/traefik"
     env:
       TZ: "{{ time_zone }}"
       VERSION: "docker"
@@ -61,3 +63,17 @@
       CF_DNS_API_TOKEN: "{{ cf_dns_api_token }}"
     labels:
       com.centurylinklabs.watchtower.enable: "true"
+      traefik.enable: "true"
+      traefik.http.routers.traefik.entrypoints: "http"
+      traefik.http.routers.traefik.rule: "Host(`traefik-docker.zinkzone.tech`)"
+      traefik.http.middlewares.traefik-https-redirect.redirectscheme.scheme: "https"
+      traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto: "https"
+      traefik.http.routers.traefik.middlewares: "traefik-https-redirect"
+      traefik.http.routers.traefik-secure.entrypoints: https
+      traefik.http.routers.traefik-secure.rule: "Host(`traefik-docker.zinkzone-tech`)"
+      traefik.http.routers.traefik-secure.middlewares: "traefik-auth"
+      traefik.http.routers.traefik-secure.tls: "true"
+      traefik.http.routers.traefik-secure.tls.certresolver: "cloudflare"
+      traefik.http.routers.traefik-secure.tls.domains[0].main: "zinkzone.tech"
+      traefik.http.routers.traefik-secure.tls.domains[0].sans: "*.zinkzone.tech"
+      traefik.http.routers.traefik-secure.service: "api@internal"

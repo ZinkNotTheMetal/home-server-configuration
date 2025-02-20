@@ -1,3 +1,2 @@
 host_cert_manager_folder_location: /docker/dns-cert-manager
 host_pihole_folder_location: /docker/pihole
-swag_installed: true
