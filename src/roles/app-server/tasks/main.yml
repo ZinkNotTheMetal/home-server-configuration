@@ -2,7 +2,7 @@
 # Description: Run all home-server applications
 # - import_tasks: docker-setup.yml
 
-- import_tasks: setup-traefik.yml
+#- import_tasks: setup-traefik.yml
 
 #- import_tasks: setup-watchtower.yml
 
@@ -10,11 +10,11 @@
 
 # - import_tasks: setup-traccar.yml
 
-# - import_tasks: setup-plex.yml
+- import_tasks: setup-plex.yml
 
 # - import_tasks: setup-tautulli.yml
 
-- import_tasks: setup-overseerr.yml
+#- import_tasks: setup-overseerr.yml
 
 # - import_tasks: setup-netboot.yml
 
