@@ -26,6 +26,6 @@
       traefik.http.routers.it_tools.entrypoints: "websecure,web"
       traefik.http.routers.it_tools.rule: "Host(`it.zinkzone.tech`)"
       traefik.http.routers.it_tools.service: "it_tools"
-      traefik.http.services.it_tools.loadBalancer.server.port: "3000"
+      traefik.http.services.it_tools.loadBalancer.server.port: "80"
       traefik.http.services.it_tools.loadBalancer.server.scheme: http
       traefik.http.routers.it_tools.tls.certresolver: "letsencrypt"
