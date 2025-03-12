@@ -27,7 +27,6 @@
     privileged: true
     networks:
       - name: 'host'
-    env_file: "{{ host_ddns_folder_location }}/pgadmin.env"
     volumes:
       - "{{ host_ddns_folder_location }}/config.json:/config.json"
     labels:
