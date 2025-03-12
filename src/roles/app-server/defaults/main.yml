@@ -15,3 +15,4 @@ host_mealie_folder_location: /docker/mealie
 host_pgadmin_folder_location: /docker/pgadmin
 host_traefik_folder_location: /docker/traefik
 host_qbittorrent_folder_location: /docker/qbittorrent
+host_ddns_folder_location: /docker/cloudflare-ddns

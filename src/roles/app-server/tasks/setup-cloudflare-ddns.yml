@@ -1,0 +1,34 @@
+# Cloudflare Dynamic DNS
+# Documentation: https://www.youtube.com/watch?v=gy3Prekt6u8
+# Purpose: Updates Cloudflare DDNS to ensure it has the latest IP address of the home
+- name: Create cloudflare config Directory
+  become: true
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0777
+  with_items:
+    - "{{ host_ddns_folder_location }}"
+
+- name: Load the configuration file for cloudflare
+  become: true
+  template:
+    src: ddns.config.json
+    dest: "{{ host_ddns_folder_location }}/config.json"
+    owner: root
+    group: root
+
+- name: Run 'DDNS' - Docker Container
+  docker_container:
+    name: cloudflare-ddns
+    image: raidowl/cloudflare-ddns:latest
+    restart_policy: unless-stopped
+    pull: true
+    privileged: true
+    networks:
+      - name: 'host'
+    env_file: "{{ host_ddns_folder_location }}/pgadmin.env"
+    volumes:
+      - "{{ host_ddns_folder_location }}/config.json:/config.json"
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
